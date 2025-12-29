@@ -16,128 +16,199 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f5f8ff 0%, #ffffff 100%);
+        }
         .active-tab {
-            background-color: #e0e7ff; 
-            color: #4338ca; 
+            background-color: #4f46e5; 
+            color: #ffffff; 
             border-color: #4f46e5;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
         }
         .inactive-tab {
             background-color: #ffffff;
             color: #6b7280;
             border-color: #e5e7eb;
         }
+        .inactive-tab:hover {
+            border-color: #4f46e5;
+            color: #4f46e5;
+        }
         .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- Compact Navbar -->
+    <!-- NAVIGATION (Standardized) -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
-        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
-            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
-            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center">
+            <ul id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-600 text-[13px] items-center">
                 <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
-                <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
-                <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
-                <li><a href="prajnalabs.html" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
-                <li><a href="pramana.html" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
-                <li><a href="openings.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1">Openings</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Services</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Team</a></li>
+                <li><a href="#" class="text-indigo-600 font-bold hover:text-indigo-800 transition">PrajñāLabs</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
+                <li><a href="openings.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Openings</a></li>
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
+            </ul>
+        </div>
+        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-xl">
+            <ul class="flex flex-col p-6 space-y-5 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="font-bold">PrajñāLabs</a></li>
+                <li><a href="openings.html" class="text-indigo-600">Openings</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow container mx-auto px-4 md:px-8 py-12 max-w-[1440px]">
         
-        <header class="text-center mb-10">
-            <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Join the <span class="gradient-text">Scientific Core</span></h1>
-            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
-                A professional R&D framework structured under the leadership of Senior Technologists.
+        <!-- Header -->
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                Join the <span class="gradient-text">Scientific Core.</span>
+            </h1>
+            <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+                A professional R&D framework structured under the leadership of Senior Technologists, dedicated to rigorous technical validation.
             </p>
         </header>
 
-        <!-- Category Tabs -->
-        <div class="flex flex-wrap justify-center gap-2 mb-10">
-            <button onclick="switchTab('technologists')" id="btn-technologists" class="active-tab px-5 py-2.5 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm">Technologists</button>
-            <button onclick="switchTab('fellows')" id="btn-fellows" class="inactive-tab px-5 py-2.5 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm">Project Fellows</button>
-            <button onclick="switchTab('interns')" id="btn-interns" class="inactive-tab px-5 py-2.5 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm">Technical Interns</button>
+        <!-- Category Tabs (Standardized to dashboard widget style) -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <button onclick="switchTab('technologists')" id="btn-technologists" class="active-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all">Technologists</button>
+            <button onclick="switchTab('fellows')" id="btn-fellows" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Project Fellows</button>
+            <button onclick="switchTab('interns')" id="btn-interns" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Technical Interns</button>
         </div>
 
-        <div id="content-area">
+        <div id="content-area" class="max-w-4xl mx-auto mb-16">
             
             <!-- Tier 1: Technologists -->
-            <div id="tab-technologists" class="tab-content active animate-fade-in">
-                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border-l-8 border-indigo-600 border-t border-r border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-50 pb-2 flex justify-between items-center">
-                        Technologist (Lead/Guide)
-                        <span class="text-[9px] text-indigo-500 font-bold bg-indigo-50 px-2 py-0.5 rounded">PhD / MS / R&D Background</span>
-                    </h3>
-                    <div class="space-y-3">
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Defining the experimental frameworks and leading high-fidelity CFD validation for industrial application.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Energy:</strong> Architecting thermal-fluid models and driving optimization for commercial micro-power architectures.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Synthesizing mathematical kinematic models and guiding the bio-mimetic R&D validation stream.</p>
+            <div id="tab-technologists" class="tab-content active">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-indigo-50 border-t-8 border-t-indigo-600">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Technologist (Lead/Guide)</h3>
+                        <span class="text-[10px] text-indigo-600 font-bold bg-indigo-50 px-3 py-1.5 rounded-full uppercase tracking-wider">PhD / MS / R&D Background</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-xl">💧</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Defining experimental frameworks and leading high-fidelity CFD validation for industrial application.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">⚡</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Energy:</strong> Architecting thermal-fluid models and driving optimization for commercial micro-power architectures.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">🦾</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Synthesizing mathematical kinematic models and guiding the bio-mimetic R&D validation stream.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Tier 2: Project Fellows -->
-            <div id="tab-fellows" class="tab-content animate-fade-in">
-                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border-l-8 border-sky-500 border-t border-r border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-50 pb-2 flex justify-between items-center">
-                        Project Fellow
-                        <span class="text-[9px] text-sky-500 font-bold bg-sky-50 px-2 py-0.5 rounded">Masters / Professional Grad Tier</span>
-                    </h3>
-                    <div class="space-y-3">
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Executing particulate flow simulations and modeling under the direct guidance of Senior Technologists.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Energy:</strong> Implementing numerical simulations for waste-energy recovery architectures as per design specifications.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Conducting stress and kinematic analysis for compliant mechanical joint prototypes.</p>
+            <div id="tab-fellows" class="tab-content">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-sky-50 border-t-8 border-t-sky-500">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Project Fellow</h3>
+                        <span class="text-[10px] text-sky-600 font-bold bg-sky-50 px-3 py-1.5 rounded-full uppercase tracking-wider">Masters / Prof. Grad Tier</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-xl">💧</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Executing particulate flow simulations and modeling under the direct guidance of Senior Technologists.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">⚡</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Energy:</strong> Implementing numerical simulations for waste-energy recovery architectures as per design specifications.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">🦾</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Conducting stress and kinematic analysis for compliant mechanical joint prototypes.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Tier 3: Technical Interns -->
-            <div id="tab-interns" class="tab-content animate-fade-in">
-                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border-l-8 border-emerald-500 border-t border-r border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-50 pb-2 flex justify-between items-center">
-                        Technical Intern
-                        <span class="text-[9px] text-emerald-500 font-bold bg-emerald-50 px-2 py-0.5 rounded">Execution & Prototyping Support</span>
-                    </h3>
-                    <div class="space-y-3">
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Building experimental setups and managing lab data acquisition as directed by the research core.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Energy:</strong> Prototyping solar thermal components and executing maintenance cycles for testing infrastructure.</p>
-                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Performing rapid prototyping, 3D printing operations, and CAD drafting support for product nodes.</p>
+            <div id="tab-interns" class="tab-content">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-emerald-50 border-t-8 border-t-emerald-500">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Technical Intern</h3>
+                        <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded-full uppercase tracking-wider">Execution Support</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-xl">💧</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Fluidics:</strong> Building experimental setups and managing lab data acquisition as directed by the research core.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">⚡</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Energy:</strong> Prototyping solar thermal components and executing maintenance cycles for testing infrastructure.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-xl">🦾</span>
+                            <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong>Biomechanics:</strong> Performing rapid prototyping, 3D printing operations, and CAD drafting support for product nodes.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- How to Apply -->
-        <section class="mt-12 text-center">
-            <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-md inline-block w-full max-w-xl">
-                <h2 class="text-base font-bold text-gray-900 mb-2">How to Apply?</h2>
-                <p class="text-[10px] text-gray-500 mb-6">Email your CV and a 100-word Statement of Purpose to the scientific core.</p>
-                <a href="mailto:sarva.kishor@gmail.com" class="bg-indigo-600 text-white px-8 py-2.5 rounded-full font-bold text-[10px] hover:bg-indigo-700 transition uppercase tracking-widest shadow-md">
+        <!-- How to Apply (Direct Connect Style) -->
+        <section class="max-w-3xl mx-auto">
+            <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] border border-slate-200 text-center shadow-sm">
+                <div class="flex flex-col items-center gap-4 mb-6">
+                    <span class="text-3xl">📩</span>
+                    <h2 class="text-xl font-extrabold text-gray-900 uppercase tracking-widest">How to Apply?</h2>
+                </div>
+                <p class="text-sm text-gray-600 mb-8 max-w-lg mx-auto leading-relaxed">
+                    Please email your CV and a 100-word Statement of Purpose (SoP) directly to the scientific core.
+                </p>
+                <a href="mailto:sarva.kishor@gmail.com" class="inline-block bg-indigo-600 text-white px-12 py-4 rounded-full font-bold text-xs hover:bg-indigo-700 hover:-translate-y-0.5 transition-all uppercase tracking-[0.25em] shadow-lg shadow-indigo-100">
                     Apply via Email
                 </a>
             </div>
         </section>
 
+        <!-- Navigation Shortcut -->
+        <div class="text-center mt-12">
+            <a href="index.html" class="inline-flex items-center gap-3 text-[11px] font-bold text-gray-400 hover:text-indigo-600 transition uppercase tracking-[0.25em] group">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
+        </div>
+
     </main>
 
-    <footer class="bg-white py-4 border-t border-gray-100 mt-auto flex-shrink-0">
-        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
-            <div>
-                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
-                <p class="tracking-widest uppercase text-[8px]">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+    <!-- FOOTER -->
+    <footer class="bg-white py-8 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 md:px-12 max-w-[1440px]">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500">
+                <div class="text-center md:text-left">
+                    <p class="font-bold text-gray-900 text-base">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                    <p class="tracking-[0.2em] uppercase text-[10px] mt-2 font-medium">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-[11px] mb-2 font-medium">Empowering deep-tech innovation through rigorous evidence.</p>
+                    <p class="text-[10px]">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+                </div>
             </div>
-            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
         </div>
     </footer>
 
