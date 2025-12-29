@@ -16,9 +16,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero-gradient {
+            background: radial-gradient(circle at 70% 30%, #fefce8 0%, #ffffff 100%);
+        }
     </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
 
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="container mx-auto px-6 py-2 flex justify-between items-center">
@@ -54,7 +57,7 @@
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-6 max-w-6xl">
+    <div class="flex-grow container mx-auto px-4 py-6 max-w-6xl">
         <header class="text-center my-8">
             <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">
                 PrajñāLabs <span class="text-indigo-600">Connect</span>
@@ -64,7 +67,7 @@
             </p>
         </header>
 
-        <!-- Corrected Verticals Grid -->
+        <!-- Verticals Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             <!-- Vertical 1 -->
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-105 hover:border-indigo-100">
@@ -82,11 +85,10 @@
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-105 hover:border-indigo-100">
                 <div class="text-2xl mb-2">🦾</div>
                 <h3 class="font-bold text-sm text-gray-900">Biomechanics</h3>
-                <p class="text-[10px] text-gray-500 mt-1">Biomimetics & Soft Robotics</p>
+                <p class="text-[10px] text-gray-500 mt-1">Biomimetics, Bio-fluid Mechanics & Soft Robotics</p>
             </div>
         </div>
 
-        <!-- Build With Us / Form Section -->
         <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden flex flex-col lg:flex-row items-stretch border border-gray-100">
             <div class="lg:w-5/12 p-8 md:p-10 bg-gray-900 text-white flex flex-col justify-center">
                 <h2 class="text-xl md:text-2xl font-bold mb-4">Build With Us</h2>
@@ -159,8 +161,15 @@
         </div>
     </div>
 
-    <footer class="text-center py-8 text-gray-400 text-[9px] tracking-widest uppercase border-t border-gray-100 mt-8">
-        Bengaluru (R&D) • Telangana (Regd) <br> © 2025 Prajñāpramāṇa IP Studios LLP
+    <!-- Updated Footer -->
+    <footer class="bg-white py-3 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
+            <div>
+                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                <p class="tracking-widest uppercase text-[8px]">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+            </div>
+            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+        </div>
     </footer>
 
     <script>
