@@ -21,12 +21,12 @@
         }
         /* Vertical Scroll Animation for Reviews */
         .marquee-container {
-            height: 80px; 
+            height: 100px; 
             overflow: hidden;
             position: relative;
         }
         .marquee-content {
-            animation: scrollUp 10s linear infinite;
+            animation: scrollUp 12s linear infinite;
         }
         .marquee-container:hover .marquee-content {
             animation-play-state: paused;
@@ -36,23 +36,22 @@
             100% { transform: translateY(-50%); } 
         }
         /* Custom Scrollbar for News */
-        .custom-scroll::-webkit-scrollbar { width: 3px; }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<!-- UPDATED BODY CLASS: Allow scrolling on mobile (overflow-y-auto), fixed on Large screens (lg:overflow-hidden) -->
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-y-auto lg:overflow-hidden">
 
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
-        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
             <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
-            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center">
+            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-[13px] items-center">
                 <li><a href="index.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Home</a></li>
                 <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
                 <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
@@ -74,69 +73,68 @@
     </nav>
 
     <!-- Split Layout Container -->
-    <!-- Added h-auto for mobile to allow content to grow -->
     <div class="flex-grow container mx-auto px-4 py-4 max-w-7xl grid grid-cols-1 lg:grid-cols-4 gap-6 h-auto lg:h-full">
         
         <!-- LEFT COLUMN: Main Content (3/4 width) -->
         <main class="lg:col-span-3 flex flex-col justify-center">
             
-            <header class="hero-gradient pt-6 pb-6 rounded-2xl mb-4 text-center border border-gray-50">
-                <div class="inline-block px-3 py-1 mb-2 text-[10px] md:text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-full border border-indigo-100">
+            <header class="hero-gradient pt-8 pb-8 rounded-2xl mb-4 text-center border border-gray-50">
+                <div class="inline-block px-4 py-1.5 mb-4 text-[11px] md:text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-full border border-indigo-100">
                     Integrated Deep-Tech IP & R&D Studio
                 </div>
-                <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
                     From <span class="gradient-text">Insight</span> to Evidence.
                 </h1>
                 
-                <p class="text-xs md:text-sm text-gray-600 leading-relaxed max-w-3xl mx-auto mb-6 px-4">
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8 px-4">
                     A Deep-Tech R&D Studio developing platform technologies in <span class="font-bold text-gray-800">Multiphase Fluidics</span>, <span class="font-bold text-gray-800">Decentralized Energy</span>, and <span class="font-bold text-gray-800">Applied Biomechanics</span>.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row justify-center gap-3 mb-8">
-                    <a href="prajnalabs.html" class="bg-indigo-600 text-white px-6 py-2 rounded-full font-bold shadow-md hover:bg-indigo-700 transition-all text-xs md:text-sm">
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+                    <a href="prajnalabs.html" class="bg-indigo-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-indigo-700 transition-all text-sm">
                         Join PrajñāLabs Connect
                     </a>
-                    <a href="pramana.html" class="border border-gray-300 text-gray-600 px-6 py-2 rounded-full font-bold hover:bg-white transition text-center text-xs md:text-sm">
+                    <a href="pramana.html" class="border border-gray-300 text-gray-600 px-8 py-3 rounded-full font-bold hover:bg-white transition text-center text-sm">
                         Scientific Evidence (Pramāṇa)
                     </a>
                 </div>
 
                 <!-- VERTICALS STRIP -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-5xl mx-auto text-left px-2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto text-left px-2">
                     
                     <!-- Vertical 1: Fluidics -->
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="text-xl">💧</span>
-                            <h4 class="font-bold text-[11px] text-indigo-900 uppercase tracking-wide">Multiphase Fluidics</h4>
+                            <h4 class="font-bold text-xs text-indigo-900 uppercase tracking-wide">Multiphase Fluidics</h4>
                         </div>
                         <div class="pl-1 border-l-2 border-indigo-100">
-                            <p class="text-[10px] text-gray-600 font-semibold">Core: Droplet Dynamics</p>
-                            <p class="text-[9px] text-gray-500 mt-0.5">Applications: <span class="text-indigo-600">Fogponics (Agri)</span> & <span class="text-sky-500">Nebulizers (Health)</span></p>
+                            <p class="text-[11px] text-gray-600 font-semibold">Core: Droplet Dynamics</p>
+                            <p class="text-[10px] text-gray-500 mt-1">Applications: <span class="text-indigo-600">Fogponics (Agri)</span> & <span class="text-sky-500">Nebulizers (Health)</span></p>
                         </div>
                     </div>
 
                     <!-- Vertical 2: Clean Energy -->
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="text-xl">⚡</span>
-                            <h4 class="font-bold text-[11px] text-indigo-900 uppercase tracking-wide">Clean Energy</h4>
+                            <h4 class="font-bold text-xs text-indigo-900 uppercase tracking-wide">Clean Energy</h4>
                         </div>
                         <div class="pl-1 border-l-2 border-indigo-100">
-                            <p class="text-[10px] text-gray-600 font-semibold">Core: Heat Transfer, Fluid Mechanics</p>
-                            <p class="text-[9px] text-gray-500 mt-0.5">Applications: <span class="text-indigo-600">Solar</span> & <span class="text-sky-500">Fuel Cells</span></p>
+                            <p class="text-[11px] text-gray-600 font-semibold">Core: Heat Transfer, Fluid Mechanics</p>
+                            <p class="text-[10px] text-gray-500 mt-1">Applications: <span class="text-indigo-600">Solar</span> & <span class="text-sky-500">Fuel Cells</span></p>
                         </div>
                     </div>
 
                     <!-- Vertical 3: Biomechanics -->
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-300 transition group">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="text-xl">🦾</span>
-                            <h4 class="font-bold text-[11px] text-indigo-900 uppercase tracking-wide">Biomechanics</h4>
+                            <h4 class="font-bold text-xs text-indigo-900 uppercase tracking-wide">Biomechanics</h4>
                         </div>
                         <div class="pl-1 border-l-2 border-indigo-100">
-                            <p class="text-[10px] text-gray-600 font-semibold">Core: Passive/Active Kinematics</p>
-                            <p class="text-[9px] text-gray-500 mt-0.5">Applications: <span class="text-indigo-600">Farming</span>, <span class="text-sky-500">Dentistry</span> & <span class="text-purple-500">Elder Care</span></p>
+                            <p class="text-[11px] text-gray-600 font-semibold">Core: Passive/Active Kinematics</p>
+                            <p class="text-[10px] text-gray-500 mt-1">Applications: <span class="text-indigo-600">Farming</span>, <span class="text-sky-500">Dentistry</span> & <span class="text-purple-500">Elder Care</span></p>
                         </div>
                     </div>
                 </div>
@@ -144,70 +142,69 @@
 
             <!-- FRAMEWORK LINKS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
-                <a href="services.html" class="block p-5 bg-sky-50 rounded-xl border border-sky-100 hover:border-sky-300 transition hover:shadow-md">
-                    <h3 class="text-base font-bold text-sky-600 mb-2">Prajñā (Insight)</h3>
-                    <p class="text-[11px] text-gray-600 leading-tight mb-3">
-                        Identifying the "White Space" through deep technical analysis and strategic IP landscaping.
+                <a href="services.html" class="block p-6 bg-sky-50 rounded-xl border border-sky-100 hover:border-sky-300 transition hover:shadow-md">
+                    <h3 class="text-lg font-bold text-sky-600 mb-2">Prajñā (Insight)</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                        Identifying the "White Space" through deep technical analysis and strategic IP landscaping to uncover high-impact opportunities.
                     </p>
-                    <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">Explore Services →</span>
+                    <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Explore Services →</span>
                 </a>
-                <a href="pramana.html" class="block p-5 bg-indigo-50 rounded-xl border border-indigo-100 hover:border-indigo-300 transition hover:shadow-md">
-                    <h3 class="text-base font-bold text-indigo-600 mb-2">Pramāṇa (Proof)</h3>
-                    <p class="text-[11px] text-gray-600 leading-tight mb-3">
-                        Building verifiable proof via industrial prototypes and secured intellectual property portfolios.
+                <a href="pramana.html" class="block p-6 bg-indigo-50 rounded-xl border border-indigo-100 hover:border-indigo-300 transition hover:shadow-md">
+                    <h3 class="text-lg font-bold text-indigo-600 mb-2">Pramāṇa (Proof)</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                        Building verifiable proof via industrial prototypes, rigorous data, and secured intellectual property portfolios.
                     </p>
-                    <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">See Publications & Patents →</span>
+                    <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">See Publications & Patents →</span>
                 </a>
             </div>
 
         </main>
 
         <!-- RIGHT SIDEBAR (1/4 width) -->
-        <!-- Added mb-6 on mobile to ensure spacing before footer -->
-        <aside class="lg:col-span-1 flex flex-col gap-4 h-full bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6 lg:mb-0">
+        <aside class="lg:col-span-1 flex flex-col gap-4 h-full bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-6 lg:mb-0">
             
             <!-- Box 1: Studio Log (Updates) -->
             <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex-1 overflow-hidden">
-                <div class="flex items-center gap-2 mb-3 border-b border-gray-100 pb-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
-                    <h3 class="font-bold text-gray-900 text-[10px] uppercase tracking-wider">Studio Log</h3>
+                <div class="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                    <div class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+                    <h3 class="font-bold text-gray-900 text-[11px] uppercase tracking-wider">Studio Log</h3>
                 </div>
                 
                 <!-- Timeline Items -->
-                <div class="space-y-6 pl-2 border-l-2 border-slate-100 ml-1 custom-scroll overflow-y-auto h-[90%]">
+                <div class="space-y-6 pl-2 border-l-2 border-slate-100 ml-1 custom-scroll overflow-y-auto h-[85%] pr-2">
                     
                     <!-- Item 1: Team -->
                     <div class="relative pl-4">
-                        <div class="absolute -left-[5px] top-1.5 w-2 h-2 bg-indigo-100 border border-indigo-500 rounded-full"></div>
-                        <span class="inline-block bg-indigo-50 text-indigo-700 text-[8px] font-bold px-1.5 py-0.5 rounded mb-1">TEAM</span>
-                        <p class="text-[10px] text-gray-700 leading-snug">
+                        <div class="absolute -left-[6px] top-1.5 w-2.5 h-2.5 bg-indigo-100 border border-indigo-500 rounded-full"></div>
+                        <span class="inline-block bg-indigo-50 text-indigo-700 text-[9px] font-bold px-2 py-0.5 rounded mb-1">TEAM</span>
+                        <p class="text-[11px] text-gray-700 leading-snug">
                             Congrats to <b class="text-gray-900">Shravya</b> for joining PhD at IIT Madras! 
                         </p>
                     </div>
 
                     <!-- Item 2: Lab/IP Progress -->
                     <div class="relative pl-4">
-                        <div class="absolute -left-[5px] top-1.5 w-2 h-2 bg-amber-100 border border-amber-500 rounded-full"></div>
-                        <span class="inline-block bg-amber-50 text-amber-700 text-[8px] font-bold px-1.5 py-0.5 rounded mb-1">IP MILESTONE</span>
-                        <p class="text-[10px] text-gray-700 leading-snug">
+                        <div class="absolute -left-[6px] top-1.5 w-2.5 h-2.5 bg-amber-100 border border-amber-500 rounded-full"></div>
+                        <span class="inline-block bg-amber-50 text-amber-700 text-[9px] font-bold px-2 py-0.5 rounded mb-1">IP MILESTONE</span>
+                        <p class="text-[11px] text-gray-700 leading-snug">
                             <b class="text-gray-900">Biomechanics:</b> Rapid progress in patent drafting for exosuit actuators.
                         </p>
                     </div>
 
-                    <!-- Item 3: Ecosystem (Updated) -->
+                    <!-- Item 3: Ecosystem -->
                     <div class="relative pl-4">
-                        <div class="absolute -left-[5px] top-1.5 w-2 h-2 bg-green-100 border border-green-500 rounded-full"></div>
-                        <span class="inline-block bg-green-50 text-green-700 text-[8px] font-bold px-1.5 py-0.5 rounded mb-1">ECOSYSTEM</span>
-                        <p class="text-[10px] text-gray-700 leading-snug">
-                            In talks with <b class="text-gray-900">Startups, Universities & Independent Consultants</b> for collaboration.
+                        <div class="absolute -left-[6px] top-1.5 w-2.5 h-2.5 bg-green-100 border border-green-500 rounded-full"></div>
+                        <span class="inline-block bg-green-50 text-green-700 text-[9px] font-bold px-2 py-0.5 rounded mb-1">ECOSYSTEM</span>
+                        <p class="text-[11px] text-gray-700 leading-snug">
+                            In talks with <b class="text-gray-900">Startups & Universities</b> for collaboration.
                         </p>
                     </div>
 
                     <!-- Item 4: Upcoming -->
                     <div class="relative pl-4 opacity-75">
-                        <div class="absolute -left-[5px] top-1.5 w-2 h-2 bg-slate-200 border border-slate-400 rounded-full"></div>
-                        <span class="inline-block bg-slate-100 text-slate-600 text-[8px] font-bold px-1.5 py-0.5 rounded mb-1">UPCOMING</span>
-                        <p class="text-[10px] text-gray-500 leading-snug">
+                        <div class="absolute -left-[6px] top-1.5 w-2.5 h-2.5 bg-slate-200 border border-slate-400 rounded-full"></div>
+                        <span class="inline-block bg-slate-100 text-slate-600 text-[9px] font-bold px-2 py-0.5 rounded mb-1">UPCOMING</span>
+                        <p class="text-[11px] text-gray-500 leading-snug">
                             Announcing Summer 2025 Internship Cohort.
                         </p>
                     </div>
@@ -217,24 +214,24 @@
 
             <!-- Box 2: Intern Scrolling (Small) -->
             <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex-none">
-                <div class="flex items-center gap-2 mb-2 border-b border-gray-100 pb-2">
-                    <span class="text-sm">🎓</span>
-                    <h3 class="font-bold text-gray-900 text-[10px] uppercase tracking-wider">Intern Voice</h3>
+                <div class="flex items-center gap-2 mb-3 border-b border-gray-100 pb-2">
+                    <span class="text-base">🎓</span>
+                    <h3 class="font-bold text-gray-900 text-[11px] uppercase tracking-wider">Intern Voice</h3>
                 </div>
                 
                 <div class="marquee-container">
-                    <div class="marquee-content space-y-4">
+                    <div class="marquee-content space-y-6">
                         <div class="text-center">
-                            <p class="text-[10px] text-gray-600 italic leading-relaxed">
-                                "Working on droplet dynamics helped me secure my PhD spot."
+                            <p class="text-xs text-gray-600 italic leading-relaxed">
+                                "Working on droplet dynamics helped me secure my PhD spot at a premier institute."
                             </p>
-                            <p class="text-[9px] font-bold text-indigo-700 mt-1">- Shravya (IITM)</p>
+                            <p class="text-[10px] font-bold text-indigo-700 mt-2">- Shravya (IITM)</p>
                         </div>
                         <div class="text-center pt-2 border-t border-gray-50">
-                            <p class="text-[10px] text-gray-600 italic leading-relaxed">
-                                "Working on droplet dynamics helped me secure my PhD spot."
+                            <p class="text-xs text-gray-600 italic leading-relaxed">
+                                "The exposure to IP strategy alongside R&D is unique to this studio."
                             </p>
-                            <p class="text-[9px] font-bold text-indigo-700 mt-1">- Shravya (IITM)</p>
+                            <p class="text-[10px] font-bold text-indigo-700 mt-2">- Research Intern</p>
                         </div>
                     </div>
                 </div>
@@ -244,13 +241,16 @@
 
     </div>
 
-    <footer class="bg-white py-3 border-t border-gray-100 mt-auto flex-shrink-0">
-        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
+    <footer class="bg-white py-4 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-500">
             <div>
-                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
-                <p class="tracking-widest uppercase text-[8px]">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+                <p class="font-bold text-gray-900 text-sm">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                <p class="tracking-widest uppercase text-[9px] mt-1">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
             </div>
-            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+            <div class="text-center md:text-right">
+                <p class="text-[10px] mb-1">Empowering deep-tech innovation through rigorous evidence.</p>
+                <p class="text-[9px]">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+            </div>
         </div>
     </footer>
 
