@@ -23,11 +23,18 @@
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        /* Form focus states */
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.05);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- NAVIGATION (Fixed Links) -->
+    <!-- NAVIGATION -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
@@ -72,8 +79,8 @@
             </p>
         </header>
 
+        <!-- Top Information Cards -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-            
             <!-- Research Hubs -->
             <div class="lg:col-span-8 bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100 shadow-sm">
                 <div class="flex items-center gap-4 mb-8">
@@ -114,42 +121,101 @@
             </div>
         </div>
 
-        <!-- Direct Connect -->
-        <div class="max-w-4xl mx-auto w-full mb-12">
-            <div class="bg-white p-8 md:p-12 rounded-3xl border border-indigo-50 shadow-xl border-t-8 border-t-indigo-600">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-10">
-                    <div class="md:w-1/2 text-center md:text-left">
-                        <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
-                            <span class="text-2xl">📩</span>
-                            <h2 class="text-xl font-bold text-gray-900">Direct Connect</h2>
-                        </div>
-                        <p class="text-[13px] md:text-[14px] text-gray-600 leading-relaxed">
-                            For strategic partnerships, industrial R&D inquiries, or scientific collaboration, reach out to our core team.
-                        </p>
+        <!-- CONTACT SECTION: FORMSPREE INTEGRATION -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-20 items-start">
+            
+            <!-- Column 1: Direct Reach & Info -->
+            <div class="space-y-8">
+                <div class="bg-white p-8 md:p-12 rounded-3xl border border-indigo-50 shadow-xl border-t-8 border-t-indigo-600">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-2xl">📩</span>
+                        <h2 class="text-xl font-bold text-gray-900">Direct Connect</h2>
                     </div>
-                    <div class="md:w-1/2 w-full space-y-3">
-                        <a href="mailto:sarva.kishor@gmail.com" class="block w-full text-center bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-md text-xs uppercase tracking-widest">
-                            Email Scientific Core
+                    <p class="text-[14px] text-gray-600 leading-relaxed mb-8">
+                        For strategic partnerships, industrial R&D inquiries, or scientific collaboration, reach out directly to our leadership core.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <!-- Updated Mailto with Subject -->
+                        <a href="mailto:sarva.kishor@gmail.com?subject=Inquiry%20|%20Prajñāpramāṇa%20IP%20Studios" class="group flex items-center justify-between w-full bg-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-indigo-700 transition shadow-md">
+                            <span class="text-xs uppercase tracking-widest">Email Scientific Core</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
-                        <a href="https://www.linkedin.com/in/kishor-kumar-sarva-phd-4ba39417a/" target="_blank" class="block w-full text-center border border-slate-200 text-gray-600 font-bold py-4 rounded-xl hover:bg-slate-50 transition text-xs uppercase tracking-widest">
-                            Connect on LinkedIn
+                        
+                        <a href="https://www.linkedin.com/in/kishor-kumar-sarva-phd-4ba39417a/" target="_blank" class="group flex items-center justify-between w-full border border-slate-200 text-gray-600 font-bold py-4 px-6 rounded-xl hover:bg-slate-50 transition">
+                            <span class="text-xs uppercase tracking-widest font-bold">Connect on LinkedIn</span>
+                            <svg class="w-4 h-4 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </a>
                     </div>
                 </div>
+
+                <div class="px-8 flex items-start gap-4">
+                    <div class="w-1 bg-indigo-100 self-stretch rounded-full"></div>
+                    <div>
+                        <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-[0.2em] mb-2">Operational Hours</h3>
+                        <p class="text-sm text-gray-600 font-medium">Monday — Friday, 09:00 — 18:00 IST</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Formspree Contact Form -->
+            <div class="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100 shadow-inner">
+                <h2 class="text-xl font-bold text-gray-900 mb-2">Send an Inquiry</h2>
+                <p class="text-sm text-gray-500 mb-8">Have a specific project in mind? Use the form below to initiate a formal request.</p>
+                
+                <form action="https://formspree.io/f/xpqardzp" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" for="name">Full Name</label>
+                            <input type="text" name="name" id="name" required placeholder="Dr. Jane Smith" class="form-input w-full px-5 py-3 rounded-xl border border-slate-200 text-sm transition bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" for="email">Email Address</label>
+                            <input type="email" name="email" id="email" required placeholder="jane@institute.res.in" class="form-input w-full px-5 py-3 rounded-xl border border-slate-200 text-sm transition bg-white">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" for="subject">Subject</label>
+                        <select name="subject" id="subject" class="form-input w-full px-5 py-3 rounded-xl border border-slate-200 text-sm transition bg-white appearance-none">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Industrial R&D">Industrial R&D Partnership</option>
+                            <option value="Scientific Collaboration">Scientific Collaboration</option>
+                            <option value="PrajñāLabs Consultation">PrajñāLabs Consultation</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" for="message">Detailed Message</label>
+                        <textarea name="message" id="message" required rows="5" placeholder="Describe your inquiry or technical requirements..." class="form-input w-full px-5 py-3 rounded-xl border border-slate-200 text-sm transition bg-white resize-none"></textarea>
+                    </div>
+
+                    <!-- Honeypot to prevent spam -->
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <button type="submit" class="w-full bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-indigo-600 transition shadow-lg text-[11px] uppercase tracking-[0.2em]">
+                        Transmit Message
+                    </button>
+                    
+                    <p class="text-[10px] text-gray-400 text-center">
+                        Securely powered by Formspree. Data is handled per our privacy guidelines.
+                    </p>
+                </form>
             </div>
         </div>
 
-        <div class="text-center pt-8">
+        <!-- Back Link -->
+        <div class="text-center pt-8 border-t border-slate-100">
             <a href="index.html" class="inline-flex items-center gap-2 text-[11px] font-bold text-gray-400 hover:text-indigo-600 transition uppercase tracking-widest">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Back to Home
+                Return to Core Site
             </a>
         </div>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-white py-8 border-t border-gray-100 mt-auto flex-shrink-0">
+    <footer class="bg-white py-12 border-t border-gray-100 mt-auto flex-shrink-0">
         <div class="container mx-auto px-6 md:px-12 max-w-[1440px]">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500">
                 <div class="text-center md:text-left">
