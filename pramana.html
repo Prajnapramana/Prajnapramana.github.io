@@ -3,110 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pramāṇa | Prajñāpramāṇa IP Studios</title>
+    <title>Pramāṇa | IP Portfolio & Validation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Montserrat', sans-serif; } </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to right, #4f46e5, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
 
-    <nav class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-100">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Compact Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
             
             <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
 
-            <ul id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-600 text-sm">
+            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center">
                 <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
                 <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
                 <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
                 <li><a href="prajnalabs.html" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
-                <li><a href="pramana.html" class="text-indigo-600 underline decoration-2 underline-offset-4">Pramāṇa</a></li>
-                 <li><a href="openings.html" class="hover:text-indigo-600 transition">Openings</a></li> <!-- New Link -->
+                <li><a href="pramana.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1">Pramāṇa</a></li>
+                <li><a href="openings.html" class="hover:text-indigo-600 transition">Openings</a></li>
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
             </ul>
         </div>
 
-        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden">
-            <ul class="flex flex-col p-6 space-y-4 font-semibold text-gray-600 text-sm text-center">
+        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-lg">
+            <ul class="flex flex-col p-6 space-y-4 font-semibold text-gray-600 text-sm">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="team.html">Team</a></li>
                 <li><a href="prajnalabs.html">PrajñāLabs</a></li>
-                <li><a href="pramana.html" class="text-indigo-600">Pramāṇa</a></li>
+                <li><a href="pramana.html" class="text-indigo-600 font-bold">Pramāṇa</a></li>
+                <li><a href="openings.html">Openings</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container mx-auto p-6 md:p-8 max-w-6xl">
-        <header class="text-center my-10 md:my-12">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="text-indigo-600">Scientific Proof</span></h1>
-            <p class="text-lg md:text-xl text-gray-500 mt-4 max-w-2xl mx-auto leading-relaxed">Validating innovation through high-impact research and protected IP.</p>
+    <main class="flex-grow container mx-auto px-4 py-6 max-w-5xl">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="gradient-text">Scientific Proof</span></h1>
+            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
+                Validating innovation through high-impact research and protected IP.
+            </p>
         </header>
 
-        <section class="mb-16 md:mb-20">
-            <div class="flex items-center space-x-4 mb-8 md:mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Intellectual Property</h2>
-                <div class="h-1 flex-grow bg-indigo-100 rounded-full"></div>
+        <!-- IP Section -->
+        <section class="mb-12">
+            <div class="flex items-center space-x-4 mb-6">
+                <h2 class="text-lg md:text-xl font-bold text-gray-800">Intellectual Property Portfolio</h2>
+                <div class="h-0.5 flex-grow bg-indigo-100 rounded-full"></div>
             </div>
             
-            <div class="mb-8">
-                <h3 class="text-lg md:text-xl font-bold text-indigo-600 mb-6 uppercase tracking-wider">Vertical: Multiphase Flows</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border-l-8 border-indigo-600 transition-transform hover:scale-[1.02]">
-                        <span class="bg-yellow-100 text-yellow-700 text-[9px] md:text-[10px] font-bold px-3 py-1 rounded-full uppercase">Status: Drafting</span>
-                        <h4 class="text-lg md:text-xl font-bold mt-4 mb-2">Device for Aeroponics/Fogponics</h4>
-                        <p class="text-gray-600 text-xs md:text-sm">Innovating fluid delivery systems for sustainable agriculture.</p>
-                    </div>
+            <div class="space-y-8">
+                <!-- Vertical 1: Fluidics -->
+                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                    <h3 class="text-sm font-bold text-indigo-600 mb-4 uppercase tracking-wider border-b border-gray-200 pb-2">Vertical: Multiphase Fluidics</h3>
+                    <ul class="space-y-4">
+                        <li class="bg-white p-4 rounded-xl border-l-4 border-yellow-400 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900">Device for Ultrasonic Fogponics</h4>
+                                <p class="text-gray-500 text-[10px]">Precision nozzle geometry for high-throughput atomization.</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 text-[9px] font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded uppercase">Status: Drafting</span>
+                        </li>
+                        <li class="bg-white p-4 rounded-xl border-l-4 border-yellow-400 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900">3D Slurry Printing System</h4>
+                                <p class="text-gray-500 text-[10px]">Novel extruder mechanism for particulate suspension deposition.</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 text-[9px] font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded uppercase">Status: Drafting</span>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border-l-8 border-indigo-600 transition-transform hover:scale-[1.02]">
-                        <span class="bg-yellow-100 text-yellow-700 text-[9px] md:text-[10px] font-bold px-3 py-1 rounded-full uppercase">Status: Drafting</span>
-                        <h4 class="text-lg md:text-xl font-bold mt-4 mb-2">3D Slurry Printing System</h4>
-                        <p class="text-gray-600 text-xs md:text-sm">Advanced additive manufacturing utilizing complex fluid dynamics.</p>
-                    </div>
+                <!-- Vertical 2: Clean Energy -->
+                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                    <h3 class="text-sm font-bold text-sky-600 mb-4 uppercase tracking-wider border-b border-gray-200 pb-2">Vertical: Clean Energy</h3>
+                    <ul class="space-y-4">
+                        <li class="bg-white p-4 rounded-xl border-l-4 border-blue-400 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900">Membraneless Micro-Fuel Cell</h4>
+                                <p class="text-gray-500 text-[10px]">Laminar flow-based electrolyte separation architecture.</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 text-[9px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded uppercase">Status: R&D / Ideation</span>
+                        </li>
+                        <li class="bg-white p-4 rounded-xl border-l-4 border-gray-400 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center opacity-80">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900">Concentrated Solar Power (CSP) Systems</h4>
+                                <p class="text-gray-500 text-[10px] italic">Strategic R&D initiative. Technical disclosures withheld pending IP filing.</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 text-[9px] font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded uppercase">Status: Work in Progress</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Vertical 3: Biomechanics -->
+                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                    <h3 class="text-sm font-bold text-gray-600 mb-4 uppercase tracking-wider border-b border-gray-200 pb-2">Vertical: Biomechanics</h3>
+                    <ul class="space-y-4">
+                        <li class="bg-white p-4 rounded-xl border-l-4 border-gray-400 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center opacity-80">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900">Advanced Actuation Systems</h4>
+                                <p class="text-gray-500 text-[10px] italic">Confidential R&D in passive and soft-robotic mechanisms. Details to be released upon filing.</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 text-[9px] font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded uppercase">Status: Stealth Mode / R&D</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section class="mb-16 md:mb-20">
-            <div class="flex items-center space-x-4 mb-8 md:mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Publications</h2>
-                <div class="h-1 flex-grow bg-sky-100 rounded-full"></div>
+        <!-- Publications Section -->
+        <section class="mb-10">
+            <div class="flex items-center space-x-4 mb-6">
+                <h2 class="text-lg md:text-xl font-bold text-gray-800">Publications & Research</h2>
+                <div class="h-0.5 flex-grow bg-sky-100 rounded-full"></div>
             </div>
 
-            <div class="space-y-6 md:space-y-8">
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border-r-4 border-indigo-600">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-indigo-600 text-white text-[9px] md:text-[10px] font-bold px-3 py-1 rounded">2025</span>
-                        <span class="text-gray-400 font-bold text-[9px] md:text-xs uppercase tracking-tight">Journal of Fluid Mechanics</span>
+            <div class="space-y-6">
+                <!-- Fluidics Papers -->
+                <div>
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3 pl-1">Multiphase Fluidics</h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-indigo-100 transition">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[9px] font-bold text-indigo-600">2025</span>
+                                <span class="text-[9px] text-gray-400 uppercase">Journal of Fluid Mechanics</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-900">"Dynamics of a liquid film flowing down a granular chain"</h4>
+                            <p class="text-[10px] text-gray-500 mt-1">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
+                            <a href="https://doi.org/10.1017/jfm.2025.XXX" target="_blank" class="inline-block mt-2 text-[10px] font-bold text-indigo-600 hover:underline">View Publication →</a>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-100 transition">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-[9px] font-bold text-sky-600">2025</span>
+                                <span class="text-[9px] text-gray-400 uppercase">Under Review: Phys. Rev. Fluids</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-900">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
+                            <p class="text-[10px] text-gray-500 mt-1">Sarva, K., Murthy, T. G., & Tomar, G.</p>
+                            <a href="https://arxiv.org/abs/2507.06800" target="_blank" class="inline-block mt-2 text-[10px] font-bold text-sky-600 hover:underline">Read on arXiv →</a>
+                        </div>
                     </div>
-                    <h4 class="text-lg md:text-xl font-bold text-gray-900 leading-tight">"Dynamics of a liquid film flowing down a granular chain"</h4>
-                    <p class="text-gray-600 text-xs md:text-sm mt-3 leading-relaxed"><b>Sarva, K. K.</b>, Murthy, T. G., & Tomar, G. (2025). <i>Journal of Fluid Mechanics</i>, 1016, A36.</p>
-                    <a href="https://doi.org/10.1017/jfm.2025.XXX" target="_blank" class="inline-block mt-4 text-indigo-600 text-sm font-bold hover:underline">View Publication →</a>
                 </div>
 
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border-r-4 border-sky-400">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-sky-400 text-white text-[9px] md:text-[10px] font-bold px-3 py-1 rounded">2025</span>
-                        <span class="text-gray-400 font-bold text-[9px] md:text-xs uppercase tracking-tight">Under Review: Physical Review Fluids</span>
+                <!-- Other Research -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2 pl-1">Clean Energy</h3>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 border-dashed h-full">
+                            <p class="text-[10px] text-gray-500 italic">Manuscripts in preparation regarding microfluidic fuel cell efficiency.</p>
+                        </div>
                     </div>
-                    <h4 class="text-lg md:text-xl font-bold text-gray-900 leading-tight">"Role of Transient Dynamics in Dripping-Jetting Transition in Newtonian Fluids"</h4>
-                    <p class="text-gray-600 text-xs md:text-sm mt-3 leading-relaxed"><b>Sarva, K.</b>, Murthy, T. G., & Tomar, G. (2025). <i>arXiv preprint arXiv:2507.06800</i>.</p>
-                    <div class="flex gap-4 mt-4">
-                        <a href="https://arxiv.org/abs/2507.06800" target="_blank" class="text-sky-600 text-sm font-bold hover:underline">Read on arXiv →</a>
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 pl-1">Biomechanics</h3>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 border-dashed h-full">
+                            <p class="text-[10px] text-gray-500 italic">Internal technical reports on kinematic efficiency of passive joints.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
+
+    <footer class="bg-white py-4 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
+            <div>
+                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                <p class="tracking-widest uppercase text-[8px]">Bengaluru (R&D) • Telangana (Regd)</p>
+            </div>
+            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+        </div>
+    </footer>
 
     <script>
         const btn = document.getElementById('menu-btn');
@@ -117,10 +201,5 @@
             });
         }
     </script>
-
-    <footer class="text-center py-10 md:py-12 text-gray-400 text-[10px] md:text-xs border-t bg-white">
-        © 2025 Prajñāpramāṇa IP Studios | Documentation of Research Excellence
-    </footer>
-
 </body>
 </html>
