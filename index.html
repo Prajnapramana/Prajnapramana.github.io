@@ -41,9 +41,10 @@
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-hidden">
+<!-- UPDATED BODY CLASS: Allow scrolling on mobile (overflow-y-auto), fixed on Large screens (lg:overflow-hidden) -->
+<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-y-auto lg:overflow-hidden">
 
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
@@ -73,7 +74,8 @@
     </nav>
 
     <!-- Split Layout Container -->
-    <div class="flex-grow container mx-auto px-4 py-4 max-w-7xl grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
+    <!-- Added h-auto for mobile to allow content to grow -->
+    <div class="flex-grow container mx-auto px-4 py-4 max-w-7xl grid grid-cols-1 lg:grid-cols-4 gap-6 h-auto lg:h-full">
         
         <!-- LEFT COLUMN: Main Content (3/4 width) -->
         <main class="lg:col-span-3 flex flex-col justify-center">
@@ -161,7 +163,8 @@
         </main>
 
         <!-- RIGHT SIDEBAR (1/4 width) -->
-        <aside class="lg:col-span-1 flex flex-col gap-4 h-full bg-slate-50 p-4 rounded-2xl border border-slate-100">
+        <!-- Added mb-6 on mobile to ensure spacing before footer -->
+        <aside class="lg:col-span-1 flex flex-col gap-4 h-full bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6 lg:mb-0">
             
             <!-- Box 1: Studio Log (Updates) -->
             <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex-1 overflow-hidden">
@@ -241,7 +244,7 @@
 
     </div>
 
-    <footer class="bg-white py-3 border-t border-gray-100 mt-auto">
+    <footer class="bg-white py-3 border-t border-gray-100 mt-auto flex-shrink-0">
         <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
             <div>
                 <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
