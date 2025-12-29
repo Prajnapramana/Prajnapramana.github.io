@@ -45,7 +45,7 @@
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- NAVIGATION (Standardized) -->
+    <!-- NAVIGATION (Updated with relative file links) -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
@@ -56,18 +56,22 @@
             </button>
             <ul id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-600 text-[13px] items-center">
                 <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Services</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Team</a></li>
-                <li><a href="#" class="text-indigo-600 font-bold hover:text-indigo-800 transition">PrajñāLabs</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
+                <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
+                <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
+                <li><a href="prajnalabs.html" class="text-indigo-600 font-bold hover:text-indigo-800 transition">PrajñāLabs</a></li>
+                <li><a href="pramana.html" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
                 <li><a href="openings.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Openings</a></li>
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
             </ul>
         </div>
+        <!-- MOBILE MENU -->
         <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-xl">
             <ul class="flex flex-col p-6 space-y-5 font-semibold text-gray-600 text-sm">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#" class="font-bold">PrajñāLabs</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="prajnalabs.html" class="font-bold">PrajñāLabs</a></li>
+                <li><a href="pramana.html">Pramāṇa</a></li>
                 <li><a href="openings.html" class="text-indigo-600">Openings</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -87,7 +91,7 @@
             </p>
         </header>
 
-        <!-- Category Tabs (Standardized to dashboard widget style) -->
+        <!-- Category Tabs -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
             <button onclick="switchTab('technologists')" id="btn-technologists" class="active-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all">Technologists</button>
             <button onclick="switchTab('fellows')" id="btn-fellows" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Project Fellows</button>
@@ -170,7 +174,7 @@
 
         </div>
 
-        <!-- How to Apply (Direct Connect Style) -->
+        <!-- How to Apply -->
         <section class="max-w-3xl mx-auto">
             <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] border border-slate-200 text-center shadow-sm">
                 <div class="flex flex-col items-center gap-4 mb-6">
