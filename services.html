@@ -16,38 +16,42 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f5f8ff 0%, #ffffff 100%);
+        }
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- Navbar -->
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
-        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+    <!-- NAVIGATION (Standardized) -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
-            
-            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
-
-            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center">
+            <ul id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-600 text-[13px] items-center">
                 <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
-                <li><a href="services.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1">Services</a></li>
+                <li><a href="services.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Services</a></li>
                 <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
-                <li><a href="prajnalabs.html" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
+                <li><a href="prajnalabs.html" class="text-indigo-600 font-bold hover:text-indigo-800 transition">PrajñāLabs</a></li>
                 <li><a href="pramana.html" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
                 <li><a href="openings.html" class="hover:text-indigo-600 transition">Openings</a></li>
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
             </ul>
         </div>
-
-        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-lg">
-            <ul class="flex flex-col p-6 space-y-4 font-semibold text-gray-600 text-sm">
+        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-xl">
+            <ul class="flex flex-col p-6 space-y-5 font-semibold text-gray-600 text-sm">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="services.html" class="text-indigo-600 font-bold">Services</a></li>
+                <li><a href="services.html" class="text-indigo-600">Services</a></li>
                 <li><a href="team.html">Team</a></li>
-                <li><a href="prajnalabs.html">PrajñāLabs</a></li>
+                <li><a href="prajnalabs.html" class="font-bold">PrajñāLabs</a></li>
                 <li><a href="pramana.html">Pramāṇa</a></li>
                 <li><a href="openings.html">Openings</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -55,138 +59,158 @@
         </div>
     </nav>
 
-    <main class="flex-grow container mx-auto px-4 py-6 max-w-6xl">
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow container mx-auto px-4 md:px-8 py-12 max-w-[1440px]">
         
-        <header class="text-center mb-10">
-            <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Our <span class="gradient-text">Dual Innovation Engine</span></h1>
-            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
-                De-risking breakthrough technology through systematic validation and IP creation.
+        <!-- Header: Standardized Size -->
+        <header class="text-center mb-16">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                Our <span class="gradient-text">Dual Innovation Engine.</span>
+            </h1>
+            <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+                De-risking breakthrough technology through systematic validation and IP creation, bridging the gap between scientific insight and commercial ownership.
             </p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             
             <!-- Service 1: Client-Centric R&D -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-indigo-600 border-l border-r border-b border-gray-100">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="text-2xl">🤝</span>
-                    <h2 class="text-lg font-bold text-gray-900">Client-Centric R&D</h2>
+            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-indigo-50 border-t-[10px] border-t-indigo-600 flex flex-col h-full">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-4xl">🤝</span>
+                    <h2 class="text-2xl font-bold text-gray-900">Client-Centric R&D</h2>
                 </div>
-                <p class="text-gray-600 text-xs md:text-sm mb-6 leading-relaxed">
+                <p class="text-sm md:text-base text-gray-600 mb-10 leading-relaxed">
                     We partner with high-growth startups and corporate R&D divisions to transform core technical challenges into valuable IP assets.
                 </p>
-                <div class="bg-gray-50 rounded-xl p-4">
-                    <h4 class="font-bold text-gray-800 mb-2 text-[10px] uppercase tracking-wider">The Validation Package</h4>
-                    <ul class="space-y-3 text-xs text-gray-600">
-                        <li class="flex items-start gap-2">
-                            <span class="text-indigo-600 font-bold">•</span>
-                            <span><b>Problem Definition:</b> Scoping the core technical challenge.</span>
+                <div class="bg-slate-50 rounded-3xl p-6 mt-auto">
+                    <h4 class="font-bold text-indigo-600 mb-4 text-[10px] uppercase tracking-[0.2em]">The Validation Package</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-indigo-600 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Problem Definition:</b> Scoping the core technical challenge.</span>
                         </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-indigo-600 font-bold">•</span>
-                            <span><b>Functional Prototype:</b> Physical proof of the solution.</span>
+                        <li class="flex items-start gap-3">
+                            <span class="text-indigo-600 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Functional Prototype:</b> Physical proof of the solution.</span>
                         </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-indigo-600 font-bold">•</span>
-                            <span><b>Foundational Patents:</b> Securing legal ownership.</span>
+                        <li class="flex items-start gap-3">
+                            <span class="text-indigo-600 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Foundational Patents:</b> Securing legal ownership.</span>
                         </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-indigo-600 font-bold">•</span>
-                            <span><b>Solution Consultancy:</b> Enabling clients from concept to commissioning, led by our network of subject matter experts and independent researchers.</span>
+                        <li class="flex items-start gap-3">
+                            <span class="text-indigo-600 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Solution Consultancy:</b> Concepts to commissioning, led by experts and independent researchers.</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Service 2: In-House IP Portfolio -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-sky-500 border-l border-r border-b border-gray-100 flex flex-col justify-between">
+            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-sky-50 border-t-[10px] border-t-sky-500 flex flex-col h-full">
                 <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl">🔬</span>
-                        <h2 class="text-lg font-bold text-gray-900">In-House IP Portfolio</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-4xl">🔬</span>
+                        <h2 class="text-2xl font-bold text-gray-900">In-House IP Portfolio</h2>
                     </div>
-                    <p class="text-gray-600 text-xs md:text-sm mb-6 leading-relaxed">
+                    <p class="text-sm md:text-base text-gray-600 mb-10 leading-relaxed">
                         We conduct foundational R&D to build a proprietary portfolio of high-value, defensible patents for future licensing and ventures.
                     </p>
-                    <div class="bg-gray-50 rounded-xl p-4">
-                        <!-- Updated Header with Link -->
-                        <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
-                            <h4 class="font-bold text-gray-800 text-[10px] uppercase tracking-wider">Focus Verticals</h4>
-                            <a href="prajnalabs.html" class="text-[9px] font-bold text-sky-600 hover:text-sky-800 hover:underline flex items-center gap-1">
-                                in PrajñāLabs <span class="text-xs">↗</span>
-                            </a>
-                        </div>
-                        
-                        <ul class="space-y-2 text-xs text-gray-600">
-                            <li class="flex items-start gap-2">
-                                <span class="text-sky-500 font-bold">•</span>
-                                <span><b>Multiphase Fluidics:</b> Precision Aeroponics.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-sky-500 font-bold">•</span>
-                                <span><b>Clean Energy:</b> Sustainable power systems.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-sky-500 font-bold">•</span>
-                                <span><b>Biomechanics:</b> Biomimetics & Soft Robotics.</span>
-                            </li>
-                        </ul>
+                </div>
+                <div class="bg-sky-50/50 rounded-3xl p-6 mt-auto">
+                    <div class="flex justify-between items-center mb-5 pb-3 border-b border-sky-100">
+                        <h4 class="font-bold text-sky-600 text-[10px] uppercase tracking-[0.2em]">Focus Verticals</h4>
+                        <a href="prajnalabs.html" class="text-[10px] font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1 uppercase tracking-wider">
+                            Visit Labs ↗
+                        </a>
                     </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-sky-500 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Multiphase Fluidics:</b> Precision Aeroponics.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sky-500 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Clean Energy:</b> Sustainable power systems.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sky-500 font-bold mt-0.5">•</span>
+                            <span class="text-[13px] md:text-sm text-gray-700 leading-snug"><b>Biomechanics:</b> Biomimetics & Soft Robotics.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Integrated Deep-Tech Section -->
-        <div class="bg-gray-900 rounded-[2rem] p-8 text-center text-white mb-12 shadow-xl relative overflow-hidden">
+        <!-- Integrated Deep-Tech Approach: Standardized Dashboard Style -->
+        <div class="bg-gray-900 rounded-[2.5rem] p-10 md:p-16 text-center text-white mb-16 shadow-2xl relative overflow-hidden">
             <div class="relative z-10">
-                <h3 class="text-xl md:text-2xl font-bold mb-4">The Integrated Deep-Tech Approach</h3>
-                <p class="text-gray-300 text-xs md:text-sm max-w-3xl mx-auto leading-relaxed mb-6">
+                <h3 class="text-2xl md:text-3xl font-extrabold mb-6 leading-tight">The Integrated Deep-Tech Approach</h3>
+                <p class="text-sm md:text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
                     Our verticals do not operate in silos. We harmonize <b>Multiphase Fluidics</b>, <b>Clean Energy</b>, and <b>Biomechanics</b> to create holistic solutions for the <b>Agriculture</b> and <b>Healthcare</b> sectors.
                 </p>
-                <p class="text-indigo-300 text-xs font-semibold max-w-3xl mx-auto border-t border-gray-700 pt-4">
-                    The foundational principles of each lab align to engineering complete, self-sustaining products.
-                </p>
+                <div class="inline-block border-t border-gray-700 pt-6 px-8">
+                    <p class="text-indigo-300 text-xs md:text-sm font-bold tracking-[0.15em] uppercase">
+                        Engineering complete, self-sustaining products.
+                    </p>
+                </div>
             </div>
-            <!-- Decorative blurred circle -->
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
+            <!-- Standardized gradient accent -->
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px]"></div>
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-sky-600/10 rounded-full blur-[100px]"></div>
         </div>
 
-        <!-- Methodology Strip -->
-        <div class="bg-indigo-50 p-6 md:p-8 rounded-[2rem] border border-indigo-100 mb-12">
-            <div class="text-center mb-6">
-                <h3 class="text-lg font-bold text-indigo-900">The Prajñā → Pramāṇa Framework</h3>
-                <p class="text-gray-600 text-xs mt-2 max-w-2xl mx-auto">From insight to legal ownership.</p>
+        <!-- Methodology Strip: Refined Layout -->
+        <div class="bg-slate-50 p-8 md:p-12 rounded-[3rem] border border-slate-100 mb-16">
+            <div class="text-center mb-10">
+                <h3 class="text-xl font-extrabold text-gray-900 uppercase tracking-widest">The Prajñā → Pramāṇa Framework</h3>
+                <p class="text-gray-500 text-xs mt-3 font-medium uppercase tracking-[0.2em]">From Insight to Legal Ownership</p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="bg-white p-4 rounded-xl shadow-sm">
-                    <p class="text-[9px] text-gray-400 font-bold uppercase mb-1">Step 1</p>
-                    <p class="text-xs font-bold text-gray-800">White Space Analysis</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition-all hover:-translate-y-1">
+                    <p class="text-[10px] text-indigo-600 font-bold uppercase mb-2 tracking-widest">Step 1</p>
+                    <p class="text-sm font-bold text-gray-900 px-2">White Space Analysis</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm">
-                    <p class="text-[9px] text-gray-400 font-bold uppercase mb-1">Step 2</p>
-                    <p class="text-xs font-bold text-gray-800">Deep Scientific R&D</p>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition-all hover:-translate-y-1">
+                    <p class="text-[10px] text-indigo-600 font-bold uppercase mb-2 tracking-widest">Step 2</p>
+                    <p class="text-sm font-bold text-gray-900 px-2">Deep Scientific R&D</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm">
-                    <p class="text-[9px] text-gray-400 font-bold uppercase mb-1">Step 3</p>
-                    <p class="text-xs font-bold text-gray-800">Prototype Validation</p>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition-all hover:-translate-y-1">
+                    <p class="text-[10px] text-indigo-600 font-bold uppercase mb-2 tracking-widest">Step 3</p>
+                    <p class="text-sm font-bold text-gray-900 px-2">Prototype Validation</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm">
-                    <p class="text-[9px] text-gray-400 font-bold uppercase mb-1">Step 4</p>
-                    <p class="text-xs font-bold text-gray-800">Patent Filing (IPR)</p>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition-all hover:-translate-y-1">
+                    <p class="text-[10px] text-indigo-600 font-bold uppercase mb-2 tracking-widest">Step 4</p>
+                    <p class="text-sm font-bold text-gray-900 px-2">Patent Filing (IPR)</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Navigation Shortcut -->
+        <div class="text-center">
+            <a href="index.html" class="inline-flex items-center gap-3 text-[11px] font-bold text-gray-400 hover:text-indigo-600 transition uppercase tracking-[0.25em] group">
+                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
         </div>
 
     </main>
 
-    <footer class="bg-white py-4 border-t border-gray-100 mt-auto flex-shrink-0">
-        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
-            <div>
-                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
-                <p class="tracking-widest uppercase text-[8px]">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+    <!-- FOOTER (Standardized) -->
+    <footer class="bg-white py-8 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 md:px-12 max-w-[1440px]">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500">
+                <div class="text-center md:text-left">
+                    <p class="font-bold text-gray-900 text-base">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                    <p class="tracking-[0.2em] uppercase text-[10px] mt-2 font-medium">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-[11px] mb-2 font-medium">Empowering deep-tech innovation through rigorous evidence.</p>
+                    <p class="text-[10px]">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+                </div>
             </div>
-            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
         </div>
     </footer>
 
