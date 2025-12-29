@@ -17,23 +17,26 @@
             background-clip: text;
         }
         .hero-gradient {
-            background: radial-gradient(circle at 70% 30%, #fefce8 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #f5f8ff 0%, #ffffff 100%);
         }
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
+    <!-- NAVIGATION (Standardized with Index) -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
-        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
-            
-            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
-
-            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center">
+            <ul id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-600 text-[13px] items-center">
                 <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
                 <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
                 <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
@@ -43,13 +46,13 @@
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
             </ul>
         </div>
-
-        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-lg">
-            <ul class="flex flex-col p-6 space-y-4 font-semibold text-gray-600 text-sm">
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-xl">
+            <ul class="flex flex-col p-6 space-y-5 font-semibold text-gray-600 text-sm">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="team.html">Team</a></li>
-                <li><a href="prajnalabs.html" class="text-indigo-600 font-bold">PrajñāLabs</a></li>
+                <li><a href="prajnalabs.html" class="text-indigo-600">PrajñāLabs</a></li>
                 <li><a href="pramana.html">Pramāṇa</a></li>
                 <li><a href="openings.html">Openings</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -57,96 +60,101 @@
         </div>
     </nav>
 
-    <div class="flex-grow container mx-auto px-4 py-6 max-w-6xl">
-        <header class="text-center my-8">
-            <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-                PrajñāLabs <span class="text-indigo-600">Connect</span>
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow container mx-auto px-4 md:px-8 py-12 max-w-[1440px]">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                PrajñāLabs <span class="text-indigo-600">Connect.</span>
             </h1>
-            <p class="text-xs md:text-sm text-gray-500 mt-3 max-w-2xl mx-auto leading-relaxed">
-                Join an emerging ecosystem of researchers and engineers building platform technologies for the future.
+            <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+                Join an emerging ecosystem of researchers and engineers building platform technologies for the future, driven by rigorous validation.
             </p>
         </header>
 
-        <!-- Verticals Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <!-- Verticals Grid (Standardized to Home Page Card Style) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <!-- Vertical 1 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-105 hover:border-indigo-100">
-                <div class="text-2xl mb-2">💧</div>
-                <h3 class="font-bold text-sm text-gray-900">Multiphase Fluidics</h3>
-                <p class="text-[10px] text-gray-500 mt-1">Droplet Dynamics & Particulate Suspensions</p>
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center transition-all hover:shadow-md hover:border-indigo-100 group">
+                <div class="text-4xl mb-4 transition-transform group-hover:scale-110">💧</div>
+                <h3 class="font-bold text-base text-gray-900 mb-2 uppercase tracking-widest">Multiphase Fluidics</h3>
+                <p class="text-[13px] text-gray-500 leading-relaxed">Droplet Dynamics & Particulate Suspensions</p>
             </div>
             <!-- Vertical 2 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-105 hover:border-indigo-100">
-                <div class="text-2xl mb-2">⚡</div>
-                <h3 class="font-bold text-sm text-gray-900">Clean Energy</h3>
-                <p class="text-[10px] text-gray-500 mt-1">Heat Transfer & Fluid Mechanics</p>
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center transition-all hover:shadow-md hover:border-indigo-100 group">
+                <div class="text-4xl mb-4 transition-transform group-hover:scale-110">⚡</div>
+                <h3 class="font-bold text-base text-gray-900 mb-2 uppercase tracking-widest">Clean Energy</h3>
+                <p class="text-[13px] text-gray-500 leading-relaxed">Heat Transfer & Fluid Mechanics</p>
             </div>
             <!-- Vertical 3 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-105 hover:border-indigo-100">
-                <div class="text-2xl mb-2">🦾</div>
-                <h3 class="font-bold text-sm text-gray-900">Biomechanics</h3>
-                <p class="text-[10px] text-gray-500 mt-1">Biomimetics, Bio-fluid Mechanics & Soft Robotics</p>
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center transition-all hover:shadow-md hover:border-indigo-100 group">
+                <div class="text-4xl mb-4 transition-transform group-hover:scale-110">🦾</div>
+                <h3 class="font-bold text-base text-gray-900 mb-2 uppercase tracking-widest">Biomechanics</h3>
+                <p class="text-[13px] text-gray-500 leading-relaxed">Biomimetics, Bio-fluid Mechanics & Soft Robotics</p>
             </div>
         </div>
 
         <!-- Integrated Approach Banner -->
-        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 mb-12 text-center">
-            <h3 class="text-sm font-bold text-indigo-900 uppercase tracking-widest mb-2">Integrated Innovation</h3>
-            <p class="text-xs md:text-sm text-gray-700 max-w-4xl mx-auto leading-relaxed">
-                Our labs operate in coherence, harmonizing <b>Fluidics, Energy, and Biomechanics</b> to engineer complete, holistic solutions for the <b>Agriculture</b> and <b>Healthcare</b> sectors.
+        <div class="bg-slate-50 border border-slate-100 rounded-3xl p-8 mb-16 text-center shadow-sm">
+            <h3 class="text-[11px] font-bold text-indigo-600 uppercase tracking-[0.25em] mb-4">Integrated Innovation</h3>
+            <p class="text-sm md:text-base text-gray-700 max-w-5xl mx-auto leading-relaxed font-medium">
+                Our labs operate in coherence, harmonizing <span class="text-indigo-600">Fluidics, Energy, and Biomechanics</span> to engineer complete, holistic solutions for the Agriculture and Healthcare sectors.
             </p>
         </div>
 
-        <!-- Registration Section -->
-        <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden flex flex-col lg:flex-row items-stretch border border-gray-100">
-            <div class="lg:w-5/12 p-8 md:p-10 bg-gray-900 text-white flex flex-col justify-center">
-                <h2 class="text-xl md:text-2xl font-bold mb-4">Build With Us</h2>
-                <p class="text-gray-400 mb-6 leading-relaxed text-xs md:text-sm">
+        <!-- Registration Section (Unified with Contact/Direct Connect styles) -->
+        <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row items-stretch border border-gray-100 mb-16">
+            <!-- Left Info Panel -->
+            <div class="lg:w-5/12 p-10 md:p-12 bg-gray-900 text-white flex flex-col justify-center">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-6 leading-tight">Build With Us</h2>
+                <p class="text-gray-400 mb-10 leading-relaxed text-sm">
                     We are opening our research verticals for early collaborations. Be part of the foundation of <b>PrajñāLabs Connect</b>.
                 </p>
-                <ul class="space-y-4 text-xs">
-                    <li class="flex items-start space-x-3">
-                        <span class="bg-indigo-600 p-1 rounded-full text-[8px] mt-0.5 shrink-0">✓</span>
-                        <span><b>Collaborators:</b> Faculty & PhD scholars looking for industrial relevance.</span>
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-indigo-600 w-5 h-5 flex items-center justify-center rounded-full text-[10px] mt-0.5 shrink-0">✓</span>
+                        <span class="text-[13px]"><b class="text-white">Collaborators:</b> Faculty & PhD scholars looking for industrial relevance.</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="bg-indigo-600 p-1 rounded-full text-[8px] mt-0.5 shrink-0">✓</span>
-                        <span><b>Fellows:</b> High-potential students eager for R&D experience.</span>
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-indigo-600 w-5 h-5 flex items-center justify-center rounded-full text-[10px] mt-0.5 shrink-0">✓</span>
+                        <span class="text-[13px]"><b class="text-white">Fellows:</b> High-potential students eager for R&D experience.</span>
                     </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="bg-indigo-600 p-1 rounded-full text-[8px] mt-0.5 shrink-0">✓</span>
-                        <span><b>Partners:</b> Institutions aiming to establish IP-driven incubation nodes.</span>
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-indigo-600 w-5 h-5 flex items-center justify-center rounded-full text-[10px] mt-0.5 shrink-0">✓</span>
+                        <span class="text-[13px]"><b class="text-white">Partners:</b> Institutions aiming to establish IP-driven nodes.</span>
                     </li>
                 </ul>
             </div>
 
-            <div class="lg:w-7/12 p-8 md:p-12">
-                <form action="https://formspree.io/f/xpqardzp" method="POST" class="space-y-4">
+            <!-- Right Form Panel -->
+            <div class="lg:w-7/12 p-8 md:p-14">
+                <form action="https://formspree.io/f/xpqardzp" method="POST" class="space-y-6">
                     <input type="text" name="_gotcha" style="display:none">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[9px] font-bold uppercase text-gray-400 mb-1 tracking-widest">Full Name</label>
+                            <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Full Name</label>
                             <input type="text" name="name" required placeholder="Name" 
-                                   class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition text-xs">
+                                   class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition text-sm">
                         </div>
                         <div>
-                            <label class="block text-[9px] font-bold uppercase text-gray-400 mb-1 tracking-widest">Email Address</label>
+                            <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Email Address</label>
                             <input type="email" name="email" required placeholder="Email" 
-                                   class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition text-xs">
+                                   class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition text-sm">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[9px] font-bold uppercase text-gray-400 mb-1 tracking-widest">Vertical of Interest</label>
-                            <select name="vertical" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition appearance-none text-xs">
+                            <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Vertical of Interest</label>
+                            <select name="vertical" class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition appearance-none text-sm cursor-pointer">
                                 <option value="fluidics">Multiphase Fluidics</option>
                                 <option value="energy">Clean Energy</option>
                                 <option value="biomechanics">Biomechanics</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[9px] font-bold uppercase text-gray-400 mb-1 tracking-widest">Current Role</label>
-                            <select name="role" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition appearance-none text-xs">
+                            <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Current Role</label>
+                            <select name="role" class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition appearance-none text-sm cursor-pointer">
                                 <option value="student">Student / Research Fellow</option>
                                 <option value="faculty">Faculty Member</option>
                                 <option value="industry">Industry Professional</option>
@@ -155,28 +163,43 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[9px] font-bold uppercase text-gray-400 mb-1 tracking-widest">Why do you want to join?</label>
+                        <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Why do you want to join?</label>
                         <textarea name="message" rows="3" placeholder="Briefly describe your research background..." 
-                                  class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition text-xs"></textarea>
+                                  class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition text-sm"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-md hover:bg-indigo-700 transition duration-300 transform hover:-translate-y-0.5 text-xs md:text-sm">
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all text-xs uppercase tracking-widest">
                         Register for PrajñāLabs Connect
                     </button>
-                    <p class="text-[8px] text-gray-400 text-center mt-2">
+                    <p class="text-[10px] text-gray-400 text-center mt-4">
                         By registering, you agree to receive updates from Prajñāpramāṇa IP Studios LLP.
                     </p>
                 </form>
             </div>
         </div>
-    </div>
 
-    <footer class="bg-white py-3 border-t border-gray-100 mt-auto flex-shrink-0">
-        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] text-gray-500">
-            <div>
-                <p class="font-bold text-gray-900">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
-                <p class="tracking-widest uppercase text-[8px]">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+        <!-- Navigation Shortcut -->
+        <div class="text-center">
+            <a href="index.html" class="inline-flex items-center gap-3 text-[11px] font-bold text-gray-400 hover:text-indigo-600 transition uppercase tracking-[0.25em] group">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER (Standardized) -->
+    <footer class="bg-white py-8 border-t border-gray-100 mt-auto flex-shrink-0">
+        <div class="container mx-auto px-6 md:px-12 max-w-[1440px]">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500">
+                <div class="text-center md:text-left">
+                    <p class="font-bold text-gray-900 text-base">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
+                    <p class="tracking-[0.2em] uppercase text-[10px] mt-2 font-medium">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-[11px] mb-2 font-medium">Empowering deep-tech innovation through rigorous evidence.</p>
+                    <p class="text-[10px]">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
+                </div>
             </div>
-            <p class="text-[8px] text-center">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
         </div>
     </footer>
 
