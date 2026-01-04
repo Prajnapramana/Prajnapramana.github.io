@@ -99,6 +99,8 @@
             <button onclick="switchTab('advisors')" id="btn-advisors" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Strategic Advisors</button>
             <button onclick="switchTab('ip')" id="btn-ip" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">IP Strategists</button>
             <button onclick="switchTab('fellows')" id="btn-fellows" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Research Fellows</button>
+            <!-- Added Independent Researchers Tab -->
+            <button onclick="switchTab('independent')" id="btn-independent" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Independent Researchers</button>
         </div>
 
         <div id="content-area" class="max-w-6xl mx-auto mb-16">
@@ -112,7 +114,7 @@
                             <div class="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-extrabold text-xl shadow-inner">KS</div>
                             <div>
                                 <h3 class="font-bold text-gray-900 text-lg leading-snug">Kishor Kumar Sarva, PhD</h3>
-                                <p class="text-[10px] text-indigo-600 uppercase font-bold tracking-widest mt-1">Founder & Lead Scientist</p>
+                                <p class="text-[10px] text-indigo-600 uppercase font-bold tracking-widest mt-1">Founder & Technologist</p>
                             </div>
                         </div>
                         <ul class="text-[13px] text-gray-600 space-y-3 border-t border-slate-50 pt-5 leading-relaxed">
@@ -271,6 +273,26 @@
                 </div>
             </div>
 
+            <!-- 5. INDEPENDENT RESEARCHERS -->
+            <div id="tab-independent" class="tab-content">
+                <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-50 border-t-[12px] border-t-amber-500 relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
+                        <div class="text-6xl flex-shrink-0">🚀</div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4">Consultants & Freelancers</h3>
+                            <p class="text-sm md:text-lg text-gray-600 leading-relaxed mb-8">
+                                We collaborate with specialized independent researchers and subject matter experts who engage with us on a project basis to solve specific high-complexity problems.
+                            </p>
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Simulation Experts</span>
+                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Fabrication Specialists</span>
+                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Domain Consultants</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Navigation Shortcut -->
@@ -321,7 +343,7 @@
             setTimeout(() => activeEl.classList.add('active'), 10);
 
             // Update button styles
-            const buttons = ['technologists', 'advisors', 'ip', 'fellows'];
+            const buttons = ['technologists', 'advisors', 'ip', 'fellows', 'independent'];
             buttons.forEach(name => {
                 const button = document.getElementById('btn-' + name);
                 if (name === tabName) {
