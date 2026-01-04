@@ -11,8 +11,8 @@
     <style>
         body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
         .gradient-text {
-            /* Darker Greens: Emerald-900 to Emerald-700 */
-            background: linear-gradient(to right, #064e3b, #047857);
+            /* Darker Greens: Emerald-800 to Emerald-600 */
+            background: linear-gradient(to right, #065f46, #059669);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -75,31 +75,43 @@
         
         <!-- Header -->
         <header class="mb-20 flex flex-col md:flex-row gap-12 items-center">
-            <div class="md:w-3/5">
+            <div class="w-full md:w-3/5">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-8">
-                    Clean Energy <span class="gradient-text">Innovation Engine.</span>
+                    <span class="gradient-text">Clean Energy</span> Innovation Engine.
                 </h1>
-                <!-- Description paragraph removed as per previous request -->
+                <!-- Description removed as requested -->
             </div>
             
-            <div class="md:w-2/5 w-full">
+            <div class="w-full md:w-2/5">
                 <!-- Technology Frontiers Card -->
                 <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
                     <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-widest mb-6">Technology Frontiers</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-[13px] font-medium text-gray-700">
+                        
+                        <!-- Domain 1 -->
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-2 font-bold text-gray-900">
                                 <span class="w-1.5 h-1.5 bg-emerald-800 rounded-full"></span> Solar Thermal
                             </div>
                             <p class="text-[11px] text-gray-500 pl-3.5">CSP Receiver Design, Heliostats</p>
-                        </div> 
-                        <!-- Restored/Updated Thermal Management Item -->
+                        </div>
+
+                        <!-- Domain 2 -->
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-2 font-bold text-gray-900">
                                 <span class="w-1.5 h-1.5 bg-green-800 rounded-full"></span> Thermal Mgmt.
                             </div>
                             <p class="text-[11px] text-gray-500 pl-3.5">Micro-Cooling, Heat Pipes</p>
                         </div>
+
+                        <!-- Domain 3 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center gap-2 font-bold text-gray-900">
+                                <span class="w-1.5 h-1.5 bg-teal-800 rounded-full"></span> Micro-Power
+                            </div>
+                            <p class="text-[11px] text-gray-500 pl-3.5">Micro Fuel Cells, MEMS Power</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
