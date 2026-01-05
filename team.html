@@ -48,7 +48,7 @@
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- NAVIGATION (Standardized) -->
+    <!-- NAVIGATION -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center max-w-[1440px]">
             <div class="flex items-center space-x-2">
@@ -62,20 +62,8 @@
                 <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
                 <li><a href="team.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Team</a></li>
                 <li><a href="prajnalabs.html" class="text-indigo-600 font-bold hover:text-indigo-800 transition">PrajñāLabs</a></li>
-                <li><a href="pramana.html" class="hover:text-indigo-600 transition">Pramāṇa</a></li>
                 <li><a href="openings.html" class="hover:text-indigo-600 transition">Openings</a></li>
                 <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
-            </ul>
-        </div>
-        <div id="mobile-menu" class="hidden bg-white border-b border-gray-100 md:hidden absolute w-full z-50 shadow-xl">
-            <ul class="flex flex-col p-6 space-y-5 font-semibold text-gray-600 text-sm">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="team.html" class="text-indigo-600">Team</a></li>
-                <li><a href="prajnalabs.html" class="font-bold">PrajñāLabs</a></li>
-                <li><a href="pramana.html">Pramāṇa</a></li>
-                <li><a href="openings.html">Openings</a></li>
-                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -83,7 +71,6 @@
     <!-- MAIN CONTENT -->
     <main class="flex-grow container mx-auto px-4 md:px-8 py-12 max-w-[1440px]">
         
-        <!-- Header -->
         <header class="text-center mb-12">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
                 The <span class="gradient-text">Intellectual Core.</span>
@@ -93,22 +80,21 @@
             </p>
         </header>
 
-        <!-- Tabs Navigation -->
+        <!-- Tabs Navigation: Arranged by Logical Importance -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
             <button onclick="switchTab('technologists')" id="btn-technologists" class="active-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all">Technologists</button>
+            <button onclick="switchTab('mentors')" id="btn-mentors" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Mentor/Collaborators</button>
             <button onclick="switchTab('advisors')" id="btn-advisors" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Strategic Advisors</button>
             <button onclick="switchTab('ip')" id="btn-ip" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">IP Strategists</button>
             <button onclick="switchTab('fellows')" id="btn-fellows" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Research Fellows</button>
-            <!-- Added Independent Researchers Tab -->
             <button onclick="switchTab('independent')" id="btn-independent" class="inactive-tab px-6 py-3 rounded-full border text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all border-slate-200 shadow-sm">Independent Researchers</button>
         </div>
 
         <div id="content-area" class="max-w-6xl mx-auto mb-16">
             
-            <!-- 1. TECHNOLOGISTS -->
+            <!-- 1. TECHNOLOGISTS (Primary Core) -->
             <div id="tab-technologists" class="tab-content active">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Kishor -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-white p-8 rounded-3xl shadow-xl border border-indigo-50 border-t-8 border-t-indigo-600 transition-all hover:shadow-2xl">
                         <div class="flex items-center gap-5 mb-6">
                             <div class="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-extrabold text-xl shadow-inner">KS</div>
@@ -123,8 +109,6 @@
                             <li class="flex items-start gap-2"><span>•</span> <span><b>Expertise:</b> Multiphase Flows</span></li>
                         </ul>
                     </div>
-
-                    <!-- Premchand -->
                     <div class="bg-white p-8 rounded-3xl shadow-xl border border-sky-50 border-t-8 border-t-sky-500 transition-all hover:shadow-2xl">
                         <div class="flex items-center gap-5 mb-6">
                             <div class="w-16 h-16 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-700 font-extrabold text-xl shadow-inner">PC</div>
@@ -139,29 +123,33 @@
                             <li class="flex items-start gap-2"><span>•</span> <span><b>Expertise:</b> Energy Systems</span></li>
                         </ul>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Associate -->
-                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-indigo-50 border-t-8 border-t-indigo-400 transition-all hover:shadow-2xl">
-                        <div class="flex items-center gap-5 mb-6">
-                            <div class="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-400 font-extrabold text-xl shadow-inner">AS</div>
-                            <div>
-                                <h3 class="font-bold text-gray-900 text-lg leading-snug">Associate Scientist</h3>
-                                <p class="text-[10px] text-indigo-400 uppercase font-bold tracking-widest mt-1">Technologist</p>
+            <!-- 2. MENTOR/COLLABORATORS (Scientific Authority) -->
+            <div id="tab-mentors" class="tab-content">
+                <div class="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-lg border-l-8 border-l-sky-500 transition-all hover:shadow-xl">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-20 h-20 rounded-2xl bg-sky-100 flex-shrink-0 flex items-center justify-center text-sky-700 font-extrabold text-2xl shadow-inner">RM</div>
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-1">Prof. Rajendra Machavaram</h3>
+                            <p class="text-[11px] text-sky-600 uppercase font-bold tracking-[0.15em] mb-4">Scientific Advisor: Agri-Tech & Precision Farming</p>
+                            <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
+                                Professor at the Department of Agricultural and Food Engineering, <b>IIT Kharagpur</b>. A leading authority in Machine Vision and Digital Agriculture.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 text-[13px] text-gray-700 font-medium">
+                                <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Faculty, IIT Kharagpur</span>
+                                <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Expertise: Machine Vision & AI in Agri</span>
+                                <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Farm Machinery & Power</span>
+                                <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Hyperspectral Imaging</span>
                             </div>
                         </div>
-                        <ul class="text-[13px] text-gray-600 space-y-3 border-t border-slate-50 pt-5 leading-relaxed">
-                            <li class="flex items-start gap-2"><span>•</span> <span><b>PhD, IISc (In-Progress)</b></span></li>
-                            <li class="flex items-start gap-2"><span>•</span> <span>M.Tech (Research)</span></li>
-                            <li class="flex items-start gap-2"><span>•</span> <span><b>Focus:</b> Experimental Validation</span></li>
-                        </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. STRATEGIC ADVISORS -->
+            <!-- 3. STRATEGIC ADVISORS (Industrial Authority) -->
             <div id="tab-advisors" class="tab-content">
-                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-[0.25em] mb-8 text-center">Industrial Strategy & Academic Council</h4>
-                
                 <div class="space-y-8">
                     <!-- Navneet Bhushan -->
                     <div class="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-lg border-l-8 border-l-purple-600 transition-all hover:shadow-xl">
@@ -196,28 +184,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 text-[13px] text-gray-700 font-medium">
                                     <span class="flex items-center gap-3"><span class="text-emerald-600">✓</span> B.Tech (IIT Kharagpur) + MBA</span>
                                     <span class="flex items-center gap-3"><span class="text-emerald-600">✓</span> Ex-Bosch, Titan, Dana India</span>
-                                    <span class="flex items-center gap-3"><span class="text-emerald-600">✓</span> Expertise: Green Energy, Automation, TRIZ</span>
+                                    <span class="flex items-center gap-3"><span class="text-emerald-600">✓</span> Expertise: Green Energy, Automation, Innovation Specialist</span>
                                     <span class="flex items-center gap-3"><span class="text-emerald-600">✓</span> PG Diploma in IPR (NLSIU)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Prof. Rajendra Machavaram -->
-                    <div class="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-lg border-l-8 border-l-sky-500 transition-all hover:shadow-xl">
-                        <div class="flex flex-col md:flex-row gap-8 items-start">
-                            <div class="w-20 h-20 rounded-2xl bg-sky-100 flex-shrink-0 flex items-center justify-center text-sky-700 font-extrabold text-2xl shadow-inner">RM</div>
-                            <div>
-                                <h3 class="text-2xl font-extrabold text-gray-900 mb-1">Prof. Rajendra Machavaram</h3>
-                                <p class="text-[11px] text-sky-600 uppercase font-bold tracking-[0.15em] mb-4">Scientific Advisor: Agri-Tech & Precision Farming</p>
-                                <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
-                                    Professor at the Department of Agricultural and Food Engineering, <b>IIT Kharagpur</b>. A leading authority in Machine Vision and Digital Agriculture.
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 text-[13px] text-gray-700 font-medium">
-                                    <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Faculty, IIT Kharagpur</span>
-                                    <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Expertise: Machine Vision & AI in Agri</span>
-                                    <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Farm Machinery & Power</span>
-                                    <span class="flex items-center gap-3"><span class="text-sky-600">✓</span> Hyperspectral Imaging</span>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +193,7 @@
                 </div>
             </div>
 
-            <!-- 3. IP STRATEGISTS -->
+            <!-- 4. IP STRATEGISTS (Enablers) -->
             <div id="tab-ip" class="tab-content">
                 <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-indigo-50 border-t-[12px] border-t-indigo-600 relative overflow-hidden">
                     <div class="relative z-10 flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
@@ -242,11 +210,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-indigo-600/5 rounded-full blur-[100px]"></div>
                 </div>
             </div>
 
-            <!-- 4. RESEARCH FELLOWS -->
+            <!-- 5. RESEARCH FELLOWS (Execution Workforce) -->
             <div id="tab-fellows" class="tab-content">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-lg border border-emerald-50 border-l-8 border-l-emerald-500">
@@ -273,51 +240,31 @@
                 </div>
             </div>
 
-            <!-- 5. INDEPENDENT RESEARCHERS -->
+            <!-- 6. INDEPENDENT RESEARCHERS (Project Support) -->
             <div id="tab-independent" class="tab-content">
-                <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-50 border-t-[12px] border-t-amber-500 relative overflow-hidden">
-                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
-                        <div class="text-6xl flex-shrink-0">🚀</div>
-                        <div>
-                            <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4">Consultants & Freelancers</h3>
-                            <p class="text-sm md:text-lg text-gray-600 leading-relaxed mb-8">
-                                We collaborate with specialized independent researchers and subject matter experts who engage with us on a project basis to solve specific high-complexity problems.
-                            </p>
-                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Simulation Experts</span>
-                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Fabrication Specialists</span>
-                                <span class="bg-amber-50 px-4 py-2 rounded-full text-[11px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest">Domain Consultants</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-amber-50 border-t-8 border-t-amber-500">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="text-3xl">🧩</div>
+                            <div>
+                                <h3 class="text-xl font-extrabold text-gray-900">Independent Researchers</h3>
+                                <p class="text-[10px] text-amber-600 font-bold uppercase tracking-widest mt-1">Problem Solving Core</p>
                             </div>
                         </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6 italic">
+                            Details for specialized innovation roles and project-based researchers will be updated soon.
+                        </p>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Navigation Shortcut -->
-        <div class="text-center">
-            <a href="index.html" class="inline-flex items-center gap-3 text-[11px] font-bold text-gray-400 hover:text-indigo-600 transition uppercase tracking-[0.25em] group">
-                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Back to Home
-            </a>
-        </div>
-
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white py-8 border-t border-gray-100 mt-auto flex-shrink-0">
         <div class="container mx-auto px-6 md:px-12 max-w-[1440px]">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-gray-500">
-                <div class="text-center md:text-left">
-                    <p class="font-bold text-gray-900 text-base">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></p>
-                    <p class="tracking-[0.2em] uppercase text-[10px] mt-2 font-medium">Hyderabad, Bengaluru (R&D) • Telangana (Regd)</p>
-                </div>
-                <div class="text-center md:text-right">
-                    <p class="text-[11px] mb-2 font-medium">Empowering deep-tech innovation through rigorous evidence.</p>
-                    <p class="text-[10px]">© 2025 Prajñāpramāṇa <span class="text-indigo-600 font-bold">IP Studios</span> LLP</p>
-                </div>
-            </div>
+            <p class="text-center text-[10px] text-gray-500 font-medium tracking-[0.1em]">© 2025 Prajñāpramāṇa IP Studios LLP • Hyderabad, Bengaluru</p>
         </div>
     </footer>
 
@@ -331,32 +278,26 @@
         }
 
         function switchTab(tabName) {
-            // Hide all contents
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
                 el.style.display = 'none';
             });
-            
-            // Show selected content
             const activeEl = document.getElementById('tab-' + tabName);
             activeEl.style.display = 'block';
             setTimeout(() => activeEl.classList.add('active'), 10);
 
-            // Update button styles
-            const buttons = ['technologists', 'advisors', 'ip', 'fellows', 'independent'];
+            const buttons = ['technologists', 'mentors', 'advisors', 'ip', 'fellows', 'independent'];
             buttons.forEach(name => {
                 const button = document.getElementById('btn-' + name);
                 if (name === tabName) {
-                    button.classList.remove('inactive-tab');
                     button.classList.add('active-tab');
+                    button.classList.remove('inactive-tab');
                 } else {
                     button.classList.remove('active-tab');
                     button.classList.add('inactive-tab');
                 }
             });
         }
-        
-        // Initialize the first tab on load
         window.onload = () => switchTab('technologists');
     </script>
 </body>
