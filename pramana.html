@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pramāṇa | Technical Portfolio & Methodology</title>
+    <title>Pramāṇa | Technical Portfolio & CMS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,6 +49,15 @@
             letter-spacing: 0.05em;
             margin-left: 10px;
         }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4f46e5;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         #drafting-output {
             font-family: 'Courier New', Courier, monospace;
             font-size: 11px;
@@ -79,8 +88,8 @@
         
         <header class="text-center mb-10">
             <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="gradient-text">Empirical Validation</span></h1>
-            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest">
-                Technical Knowledge Hub • Peer-Reviewed Evidence
+            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest font-semibold">
+                Peer-Reviewed Evidence • Technical CMS
             </p>
         </header>
 
@@ -90,92 +99,76 @@
             <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="inactive-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400">Portfolio & Technical Library</button>
         </div>
 
-        <!-- PANEL 1: LOGIC & INSIGHTS HUB (Blog/Narrative View) -->
+        <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
         <div id="panel-logic" class="tab-panel active">
             <section class="space-y-12">
-                <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
-                    The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
-                </h2>
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] flex items-center gap-4 flex-grow">
+                        The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
+                    </h2>
+                </div>
 
+                <!-- Live Container for Firestore Articles -->
                 <div id="journal-feed" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">Case Study: Fluidics</span>
-                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Era 2026</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">Capillary-Wave Logic in Aeroponics</h3>
-                        <p class="text-sm text-gray-500 leading-relaxed flex-grow">Characterizing droplet diameter regimes (10-50µm) to mitigate nutrient-transport limitations. Resolving instabilities at the micron scale to enable high-efficiency agricultural misting.</p>
-                        <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
-                            <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Open Whitepaper →</span>
-                            <span class="text-[9px] text-gray-400">Scientist: K. Sarva</span>
-                        </div>
-                    </article>
-
-                    <article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <span class="text-[9px] font-bold text-sky-600 uppercase tracking-widest bg-sky-50 px-2 py-0.5 rounded">Strategy: Energy</span>
-                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">In Preparation</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition">Membraneless Laminar Transport</h3>
-                        <p class="text-sm text-gray-500 leading-relaxed flex-grow">Leveraging microfluidic laminar separation to eliminate physical electrolyte barriers. A technical overview of reducing system cost via interfacial flow control.</p>
-                        <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
-                            <span class="text-[10px] font-bold text-sky-600 uppercase tracking-widest">Request Abstract →</span>
-                            <span class="text-[9px] text-gray-400">Scientist: P. Chandra</span>
-                        </div>
-                    </article>
+                    <div id="loading-indicator" class="col-span-full flex flex-col items-center py-20 text-gray-400">
+                        <div class="loading-spinner mb-4"></div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest">Synchronizing Scientific Record...</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- GATED PORTAL (Internal) -->
-            <section id="contributor-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
-                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200">
+            <!-- GATED CURATOR PORTAL -->
+            <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
+                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center mb-8">
-                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Scientific Entry Provision (Internal)</h2>
-                        <button onclick="togglePortal()" class="text-[9px] font-bold text-gray-400 hover:text-red-500 uppercase tracking-widest">Close Portal ✕</button>
+                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Curator Management Portal</h2>
+                        <button onclick="logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
-                    <form action="https://formspree.io/f/xpqardzp" method="POST" id="submission-form" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author / Scientist Name</label>
-                                <input type="text" name="author" id="in-author" required placeholder="Full Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vertical / Category</label>
-                                <input type="text" name="category" id="in-category" required placeholder="e.g. Case Study: Fluidics" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Title</label>
-                                <input type="text" name="title" id="in-title" required placeholder="Enter formal title..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
-                                <input type="text" name="era" id="in-era" required placeholder="e.g. Era 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                            </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author Name</label>
+                            <input type="text" id="in-author" placeholder="Scientist / Contributor" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Technical Abstract</label>
-                            <textarea name="summary" id="in-summary" rows="3" required placeholder="Summarize the logic..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none"></textarea>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">TRL / Validation Stage</label>
-                                <input type="text" name="trl" id="in-trl" required placeholder="e.g. TRL 4 Prototype" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                            </div>
-                            <button type="button" onclick="handleSubmission()" class="bg-gray-900 text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg">Push for Validation</button>
-                        </div>
-                    </form>
-                    <div id="entry-preview" class="hidden mt-10">
-                        <div class="bg-gray-900 text-indigo-300 p-6 rounded-2xl border border-slate-800 overflow-x-auto shadow-xl">
-                            <code id="drafting-output"></code>
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vertical / Category</label>
+                            <input type="text" id="in-category" placeholder="e.g. Case Study: Fluidics" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                     </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Title</label>
+                            <input type="text" id="in-title" placeholder="Formal Narrative Title" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
+                            <input type="text" id="in-era" placeholder="e.g. Jan 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-1 mb-6">
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Technical Abstract</label>
+                        <textarea id="in-summary" rows="3" placeholder="Core logic summary for readers..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">PDF Report Link (External URL)</label>
+                            <input type="url" id="in-pdf" placeholder="https://drive.google.com/..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Validation Stage (TRL)</label>
+                            <input type="text" id="in-trl" placeholder="e.g. TRL 4" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+
+                    <button onclick="publishArticle()" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Commit to Journal</button>
                 </div>
             </section>
         </div>
 
-        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Consolidated by Vertical) -->
+        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Consolidated Inventory) -->
         <div id="panel-portfolio" class="tab-panel">
             
             <!-- VERTICAL 01: MULTIPHASE FLUIDICS -->
@@ -186,60 +179,41 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <!-- IP Assets -->
                     <div>
                         <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
                         <ol class="space-y-6 list-decimal pl-4 text-gray-500">
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Apparatus for ultrasonic vibration induced mist formation
-                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Interfacial atomization architecture for high-throughput misting.</p>
-                            </li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Apparatus for Aeroponic and/or Fogponic generation
-                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Precision generation system utilizing high-frequency modulation.</p>
-                            </li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Apparatus for Aeroponic and/or Fogponic generation for ducted design
-                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Specialized internal atmosphere transport for vertical farming apps.</p>
-                            </li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Slurry extrusion transport system
-                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Novel particulate suspension deposition for additive manufacturing.</p>
-                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for ultrasonic vibration induced mist formation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation for ducted design <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Slurry extrusion transport system <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
                         </ol>
                     </div>
-
-                    <!-- Scientific Record -->
                     <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Scientific Record</h3>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Record</h3>
                         <div class="space-y-4">
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Journal of Fluid Mechanics (JFM) | 2025</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Dynamics of a liquid film flowing down a granular chain"</h4>
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">JFM | 2025</p>
+                                <h4 class="text-sm font-bold text-gray-900">"Dynamics of a liquid film flowing down a granular chain"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">K. K. Sarva, T. G. Murthy, & G. Tomar.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Phys. Rev. Fluids | 2025</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
+                                <h4 class="text-sm font-bold text-gray-900">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">K. Sarva, T. G. Murthy, & G. Tomar.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS Conference | DFD 2022</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Ultrasonic vibration induced mist formation"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">Ray, C., Sarva, K. K., & Tomar, G. (Bulletin of the APS)</p>
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS DFD Conference | 2022</p>
+                                <h4 class="text-sm font-bold text-gray-900">"Ultrasonic vibration induced mist formation"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Ray, C., Sarva, K. K., & Tomar, G.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS Conference | DFD 2022</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Dynamics of fluid film on a granular chain"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G. (Bulletin of the APS)</p>
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS DFD Conference | 2022</p>
+                                <h4 class="text-sm font-bold text-gray-900">"Dynamics of fluid film on a granular chain"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Springer | FMFP 2024</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Particle Filtration in Suspension Droplet Breakup"</h4>
+                                <h4 class="text-sm font-bold text-gray-900">"Particle Filtration in Suspension Droplet Breakup"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
                             </div>
                         </div>
@@ -247,38 +221,27 @@
                 </div>
             </section>
 
-            <!-- VERTICAL 02: CLEAN ENERGY & THERMAL SYSTEMS -->
-            <section class="mb-16">
+            <!-- VERTICAL 02: CLEAN ENERGY -->
+            <section class="mb-20">
                 <div class="flex items-center space-x-4 mb-8">
-                    <h2 class="text-xl font-extrabold text-emerald-600 uppercase tracking-tight">Vertical 02: Clean Energy & Thermal Systems</h2>
+                    <h2 class="text-xl font-extrabold text-emerald-600 uppercase tracking-tight">Vertical 02: Clean Energy</h2>
                     <div class="h-1 flex-grow bg-emerald-50 rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <!-- IP Assets -->
                     <div>
                         <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
                         <ol class="space-y-6 list-decimal pl-4 text-gray-500">
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Micro-Fluidic Fuel Cell Architecture
-                                <span class="stage-badge bg-blue-50 text-blue-600 border border-blue-100">TRL 3 Characterization</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Laminar Flow based electrolyte interface control systems.</p>
-                            </li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Apparatus for CSP power generation
-                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Advanced thermal receiver for concentrated solar conversion architectures.</p>
-                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Micro-Fluidic Fuel Cell Architecture <span class="stage-badge bg-blue-50 text-blue-600">TRL 3</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for CSP power generation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
                         </ol>
                     </div>
-
-                    <!-- Scientific Record -->
                     <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Scientific Record</h3>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Record</h3>
                         <div class="space-y-4">
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">Heat and Mass Transfer | 2023</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Flow and heat transfer characteristics of an impinging jet augmented with swirl"</h4>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Flow and heat transfer of an impinging jet augmented with swirl"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, & P Dutta.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
@@ -296,54 +259,191 @@
                                 <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"On the flow topology of swirl jets upon impingement"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra & P Dutta.</p>
                             </div>
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">ICFFHMT | 2023</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Swirling and Round Jet for Impingement Heat Transfer Improvement"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">Premchand V, Gopakumar R, PP Panda, & P Dutta.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- VERTICAL 03: APPLIED BIOMECHANICS -->
-            <section class="mb-12">
+            <section class="mb-16">
                 <div class="flex items-center space-x-4 mb-8">
                     <h2 class="text-xl font-extrabold text-amber-600 uppercase tracking-tight">Vertical 03: Applied Biomechanics</h2>
                     <div class="h-1 flex-grow bg-amber-50 rounded-full"></div>
                 </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <div>
                         <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
-                        <ol class="space-y-6 list-decimal pl-4">
+                        <ol class="space-y-6 list-decimal pl-4 text-gray-500">
                             <li class="text-[13px] font-bold text-gray-900 leading-snug">
-                                Kinematic Stability Mechanisms
-                                <span class="stage-badge bg-gray-50 text-gray-400 border border-gray-200">Stealth R&D</span>
-                                <p class="font-normal text-[11px] text-gray-500 mt-1">Passive actuation limits for performance-enhancing wearables.</p>
+                                Kinematic Stability Mechanisms for Human Performance
+                                <span class="stage-badge bg-gray-50 text-gray-400 border border-gray-100">Stealth R&D</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Passive actuation limits for energy-efficient wearable robotics.</p>
                             </li>
                         </ol>
+                    </div>
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Scientific Record</h3>
+                        <div class="p-8 rounded-[2rem] bg-slate-50 border border-dashed border-slate-200 text-center">
+                            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Internal Manuscripts in Preparation</p>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
-
     </main>
 
-    <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0 text-center">
+    <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0">
         <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
                 <p class="text-[9px] text-gray-300 mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
             </div>
-            <button onclick="togglePortal()" class="text-[9px] font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Contributor Portal</button>
+            <button id="portal-btn" onclick="loginPortal()" class="text-[9px] font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
         </div>
     </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'prajnapramana-hub';
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let isCurator = false;
+
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Firebase auth failed", err);
+            }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) loadArticles();
+        });
+
+        function loadArticles() {
+            if (!currentUser) return;
+            const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+            
+            onSnapshot(articlesRef, (snapshot) => {
+                const feed = document.getElementById('journal-feed');
+                const loading = document.getElementById('loading-indicator');
+                if (loading) loading.remove();
+                
+                const articles = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                articles.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                if (articles.length === 0) {
+                    feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Evidence Series Hub is active. Awaiting curator entries.</div>`;
+                    return;
+                }
+
+                feed.innerHTML = articles.map(art => `
+                    <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative">
+                        ${isCurator ? `<button onclick="deleteArticle('${art.id}')" class="absolute top-6 right-6 text-gray-300 hover:text-red-500 text-[10px] font-bold transition-colors">DELETE ✕</button>` : ''}
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">${art.category}</span>
+                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${art.era}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">${art.title}</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed flex-grow">${art.summary}</p>
+                        <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
+                            <div class="flex gap-4 items-center">
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Stage: ${art.trl || 'R&D'}</span>
+                                ${art.pdfUrl ? `<a href="${art.pdfUrl}" target="_blank" class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 hover:bg-emerald-100 transition">Technical PDF</a>` : ''}
+                            </div>
+                            <span class="text-[9px] text-gray-400 font-semibold uppercase italic">Author: ${art.author}</span>
+                        </div>
+                    </article>
+                `).join('');
+            }, (error) => {
+                console.error("Snapshot error:", error);
+                const feed = document.getElementById('journal-feed');
+                feed.innerHTML = `<p class="col-span-full text-center text-xs text-red-400">Permission error accessing empirical record. Please contact admin.</p>`;
+            });
+        }
+
+        window.publishArticle = async function() {
+            if (!currentUser || !isCurator) { alert("Unauthorized access."); return; }
+            const author = document.getElementById('in-author').value;
+            const title = document.getElementById('in-title').value;
+            const category = document.getElementById('in-category').value;
+            const era = document.getElementById('in-era').value;
+            const summary = document.getElementById('in-summary').value;
+            const pdfUrl = document.getElementById('in-pdf').value;
+            const trl = document.getElementById('in-trl').value;
+
+            if (!author || !title || !summary) { alert("Core technical fields are mandatory."); return; }
+
+            try {
+                const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+                await addDoc(articlesRef, {
+                    author, title, category, era, summary, pdfUrl, trl,
+                    timestamp: serverTimestamp()
+                });
+                alert("Entry committed to scientific record.");
+                document.getElementById('in-author').value = '';
+                document.getElementById('in-title').value = '';
+                document.getElementById('in-category').value = '';
+                document.getElementById('in-era').value = '';
+                document.getElementById('in-summary').value = '';
+                document.getElementById('in-pdf').value = '';
+                document.getElementById('in-trl').value = '';
+            } catch (err) {
+                alert("Committal error: " + err.message);
+            }
+        };
+
+        window.deleteArticle = async function(id) {
+            if (!currentUser || !isCurator) return;
+            if (confirm("Permanently purge this technical entry?")) {
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id));
+                } catch (e) {
+                    alert("Delete failed: Insufficient permissions.");
+                }
+            }
+        };
+
+        window.loginPortal = function() {
+            const pass = prompt("Enter Scientific Access Key:");
+            if (pass === "prajna2025") {
+                isCurator = true;
+                document.getElementById('curator-portal').classList.remove('hidden');
+                document.getElementById('portal-btn').classList.add('text-indigo-600');
+                loadArticles();
+                document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
+            } else if (pass !== null) {
+                alert("Access Denied.");
+            }
+        };
+
+        window.logoutPortal = function() {
+            isCurator = false;
+            document.getElementById('curator-portal').classList.add('hidden');
+            document.getElementById('portal-btn').classList.remove('text-indigo-600');
+            loadArticles();
+        };
+    </script>
 
     <script>
         function switchTab(tabName) {
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
             document.getElementById('panel-' + tabName).classList.add('active');
-            
             const btnPortfolio = document.getElementById('tab-btn-portfolio');
             const btnLogic = document.getElementById('tab-btn-logic');
 
@@ -357,68 +457,6 @@
                 btnPortfolio.classList.remove('text-gray-400');
                 btnLogic.classList.remove('active');
                 btnLogic.classList.add('text-gray-400');
-            }
-        }
-
-        function togglePortal() {
-            const portal = document.getElementById('contributor-portal');
-            if (portal.classList.contains('hidden')) {
-                const creds = prompt("Enter Scientific Access Key:");
-                if (creds === "prajna2025") {
-                    portal.classList.remove('hidden');
-                    portal.scrollIntoView({ behavior: 'smooth' });
-                } else if (creds !== null) {
-                    alert("Invalid Credentials.");
-                }
-            } else {
-                portal.classList.add('hidden');
-            }
-        }
-
-        async function handleSubmission() {
-            const author = document.getElementById('in-author').value;
-            const category = document.getElementById('in-category').value;
-            const era = document.getElementById('in-era').value;
-            const title = document.getElementById('in-title').value;
-            const summary = document.getElementById('in-summary').value;
-            const trl = document.getElementById('in-trl').value;
-
-            if (!author || !title || !summary) {
-                alert("Please fill all mandatory fields.");
-                return;
-            }
-
-            const htmlBlock = `
-<article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
-    <div class="flex justify-between items-start mb-6">
-        <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">${category}</span>
-        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${era}</span>
-    </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">${title}</h3>
-    <p class="text-sm text-gray-500 leading-relaxed flex-grow">${summary}</p>
-    <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
-        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Read Narrative →</span>
-        <span class="text-[9px] text-gray-400">Scientist: ${author}</span>
-    </div>
-</article>`;
-
-            document.getElementById('drafting-output').innerText = htmlBlock.trim();
-            document.getElementById('entry-preview').classList.remove('hidden');
-
-            const form = document.getElementById('submission-form');
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    alert("Entry pushed to P.I. validation queue. Approval pending.");
-                }
-            } catch (error) {
-                console.error("Submission failed, but block generated.");
             }
         }
     </script>
