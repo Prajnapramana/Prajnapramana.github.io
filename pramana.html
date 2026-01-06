@@ -19,7 +19,7 @@
         .tab-btn {
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
-            cursor: pointer; /* Ensure pointer cursor */
+            cursor: pointer;
         }
         .tab-btn.active {
             color: #4f46e5;
@@ -77,22 +77,16 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
     
-    <!-- Tab Logic Moved to Head for Reliability -->
     <script>
         function switchTab(tabName) {
-            // Hide all contents
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(el => el.classList.remove('active'));
             
-            // Show target
             const target = document.getElementById('panel-' + tabName);
             if (target) target.classList.add('active');
 
-            // Update Buttons
             const btnPortfolio = document.getElementById('tab-btn-portfolio');
             const btnLogic = document.getElementById('tab-btn-logic');
-
-            // Reset base classes
             const baseClasses = "pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 tab-btn";
             
             if (tabName === 'logic') {
@@ -107,7 +101,6 @@
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- NAVIGATION -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-6 py-2 flex justify-between items-center max-w-7xl">
             <div class="flex items-center space-x-2">
@@ -125,7 +118,6 @@
     </nav>
 
     <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
-        
         <header class="text-center mb-10">
             <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="gradient-text">Empirical Validation</span></h1>
             <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest font-semibold">
@@ -133,33 +125,28 @@
             </p>
         </header>
 
-        <!-- SUB-TAB NAVIGATION -->
         <div class="flex space-x-8 border-b border-gray-100 mb-12 overflow-x-auto scrollbar-hide">
             <button onclick="switchTab('logic')" id="tab-btn-logic" class="tab-btn active pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 border-indigo-600 text-indigo-600 font-bold">Logic & Insights Hub</button>
             <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="tab-btn pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400 border-b-2 border-transparent hover:text-gray-600">Portfolio & Technical Library</button>
         </div>
 
-        <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
         <div id="panel-logic" class="tab-content active">
             <section class="space-y-12">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] flex items-center gap-4 flex-grow">
                         The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
                     </h2>
-                    <!-- Status Indicator -->
                     <div id="status-container" class="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
                         <div id="sync-spinner" class="loading-spinner"></div>
                         <span id="status-text">Connecting</span>
                     </div>
                 </div>
 
-                <!-- Live Container -->
                 <div id="journal-feed" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Articles injected by Firebase -->
+                    <!-- Articles injected via JS -->
                 </div>
             </section>
 
-            <!-- GATED CURATOR PORTAL -->
             <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
                 <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm transition-all duration-300 ring-2 ring-transparent focus-within:ring-indigo-100">
                     <div class="flex justify-between items-center mb-8">
@@ -167,7 +154,6 @@
                         <button onclick="window.logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
                     
-                    <!-- Management Form -->
                     <div class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
@@ -221,9 +207,7 @@
             </section>
         </div>
 
-        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Static Inventory) -->
         <div id="panel-portfolio" class="tab-content">
-            <!-- IP Inventory -->
             <section class="mb-16">
                 <div class="flex items-center space-x-4 mb-10">
                     <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">IP Inventory: Statutory Drafts</h2>
@@ -259,7 +243,6 @@
                 </div>
             </section>
 
-            <!-- Peer-Reviewed Library / Publications -->
             <section class="mb-12">
                 <div class="flex items-center space-x-4 mb-10">
                     <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">Publications</h2>
@@ -268,11 +251,9 @@
 
                 <div class="max-w-4xl mx-auto space-y-12">
                     
-                    <!-- Vertical: Multiphase Flows (Now First) -->
                     <div>
                         <h3 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-50 pb-2">Vertical: Multiphase Flows</h3>
                         <div class="space-y-4">
-                            <!-- Existing 1 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">01.</span>
                                 <div class="flex-grow">
@@ -286,7 +267,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Existing 2 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">02.</span>
                                 <div class="flex-grow">
@@ -300,7 +280,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Existing 3 -->
                             <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">03.</span>
                                 <div class="flex-grow">
@@ -313,7 +292,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Existing 4 -->
                             <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">04.</span>
                                 <div class="flex-grow">
@@ -326,7 +304,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Existing 5 -->
                             <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">05.</span>
                                 <div class="flex-grow">
@@ -342,11 +319,9 @@
                         </div>
                     </div>
 
-                    <!-- Vertical: Clean Energy (Now Second) -->
                     <div>
                         <h3 class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-6 border-b border-sky-50 pb-2">Vertical: Clean Energy</h3>
                         <div class="space-y-4">
-                            <!-- Publication 1 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">06.</span>
                                 <div class="flex-grow">
@@ -360,7 +335,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Publication 2 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">07.</span>
                                 <div class="flex-grow">
@@ -374,7 +348,6 @@
                                 </div>
                             </div>
 
-                            <!-- Publication 3 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">08.</span>
                                 <div class="flex-grow">
@@ -388,7 +361,6 @@
                                 </div>
                             </div>
 
-                            <!-- Publication 4 -->
                             <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                                 <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">09.</span>
                                 <div class="flex-grow">
@@ -402,7 +374,6 @@
                                 </div>
                             </div>
 
-                            <!-- Publication 5 -->
                             <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">10.</span>
                                 <div class="flex-grow">
@@ -417,7 +388,6 @@
                         </div>
                     </div>
 
-                    <!-- Vertical: Biomechanics (New Section) -->
                     <div>
                         <h3 class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-6 border-b border-amber-50 pb-2">Vertical: Biomechanics</h3>
                         <div class="space-y-4">
@@ -459,7 +429,6 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // SEED ARTICLES FOR LOGIC HUB
         const seedArticles = [
             {
                 id: 'seed1',
@@ -488,7 +457,6 @@
         let editingId = null;
 
         // --- CORE RENDER FUNCTION ---
-        // Defined on window to be accessible if module fails partially
         window.renderArticles = function() {
             const feed = document.getElementById('journal-feed');
             if (!feed) return;
@@ -534,8 +502,6 @@
             return 'text-indigo-600 bg-indigo-50';
         }
 
-        // --- CACHE & OFFLINE SAFETY LOGIC ---
-        
         // 1. Try to load from cache
         const localCache = localStorage.getItem('pramana_cache');
         if (localCache) {
@@ -544,25 +510,23 @@
             } catch(e) { console.warn("Cache corrupted"); }
         }
         
-        // 2. If empty (cache miss or corrupted), use seeds
+        // 2. If empty, use seeds
         if (!globalArticles || globalArticles.length === 0) {
             globalArticles = [...seedArticles];
         }
 
-        // 3. Render immediately to ensure UI is visible (Offline Mode)
+        // 3. Render immediately
         window.renderArticles();
         
-        // 4. Force hide spinner initially (will reshow if auth starts)
         const spinner = document.getElementById('sync-spinner');
         const statusText = document.getElementById('status-text');
         if(spinner) spinner.style.display = 'none';
         if(statusText) statusText.innerText = 'Hub Active (Offline Mode)';
 
-        // --- FIREBASE LOGIC (TRY/CATCH WRAPPED) ---
+        // --- FIREBASE LOGIC ---
         try {
-            // Environment Variables Handling - Safe Access
             let firebaseConfig = null;
-            let appId = 'prajnapramana-hub'; // Default fallback
+            let appId = 'prajnapramana-hub'; 
             
             if (typeof __firebase_config !== 'undefined') {
                 firebaseConfig = JSON.parse(__firebase_config);
@@ -572,7 +536,6 @@
             }
 
             if (firebaseConfig) {
-                // Only proceed if config exists
                 if(statusText) statusText.innerText = 'Connecting...';
                 if(spinner) spinner.style.display = 'block';
 
@@ -588,7 +551,7 @@
                             await signInAnonymously(auth);
                         }
                     } catch (err) { 
-                        console.error("Auth Failed, staying in Offline Mode:", err); 
+                        console.error("Auth Failed:", err); 
                         if(spinner) spinner.style.display = 'none';
                         if(statusText) statusText.innerText = 'Hub Active (Offline)';
                     }
@@ -601,7 +564,6 @@
                         onSnapshot(articlesRef, (snapshot) => {
                             const firestoreDocs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
                             
-                            // Merge and Sort
                             globalArticles = [...firestoreDocs, ...seedArticles];
                             globalArticles.sort((a, b) => {
                                 const timeA = a.timestamp?.seconds || 0;
@@ -612,7 +574,6 @@
                             localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
                             window.renderArticles();
                             
-                            // UI Success State
                             if(spinner) spinner.style.display = 'none';
                             const statusContainer = document.getElementById('status-container');
                             if(statusContainer) {
@@ -620,14 +581,12 @@
                             }
                         }, (err) => {
                             console.error("Sync Error:", err);
-                            // Fallback UI
                             if(spinner) spinner.style.display = 'none';
                             if(statusText) statusText.innerText = 'Hub Active (Offline)';
                         });
                     }
                 });
 
-                // Expose specific firebase functions for the portal interactions
                 window.dbInstance = db;
                 window.appIdInstance = appId;
             } else {
@@ -635,8 +594,7 @@
             }
 
         } catch (e) {
-            console.error("Firebase Initialization Critical Failure:", e);
-            // Ensure UI is usable even if everything explodes
+            console.error("Firebase Init Failure:", e);
             if(spinner) spinner.style.display = 'none';
             if(statusText) statusText.innerText = 'Hub Active (Safe Mode)';
         }
@@ -699,7 +657,6 @@
 
         window.publishArticle = async function() {
             if (!isCurator) return;
-            if (!window.dbInstance) { alert("Database connection unavailable. Cannot save."); return; }
             
             const fields = {
                 author: document.getElementById('in-author').value,
@@ -714,28 +671,64 @@
 
             if (!fields.author || !fields.title || !fields.summary) { alert("Core data fields are mandatory."); return; }
 
-            try {
+            // FALLBACK FOR MISSING DB (Saves to LocalStorage only to "Resolve" the error)
+            if (!window.dbInstance) {
+                // Generate a temporary ID if new
+                const docId = editingId || 'local-' + Date.now();
+                const newArticle = { id: docId, ...fields, timestamp: { seconds: Date.now() / 1000 } };
+                
+                // Update global state
                 if (editingId) {
+                    const idx = globalArticles.findIndex(a => a.id === editingId);
+                    if (idx !== -1) globalArticles[idx] = newArticle;
+                } else {
+                    globalArticles.unshift(newArticle);
+                }
+                
+                localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
+                window.renderArticles();
+                alert("Database disconnected. Saved to Local Cache successfully.");
+                window.cancelEdit();
+                return;
+            }
+
+            try {
+                if (editingId && !editingId.startsWith('local-')) {
                     const ref = doc(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles', editingId);
                     await updateDoc(ref, { ...fields, updated: serverTimestamp() });
                     alert("Entry updated.");
-                    window.cancelEdit();
+                } else if (editingId && editingId.startsWith('local-')) {
+                    // Updating a local-only file? Update local cache.
+                     const idx = globalArticles.findIndex(a => a.id === editingId);
+                     if (idx !== -1) {
+                         globalArticles[idx] = { ...globalArticles[idx], ...fields };
+                         localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
+                         window.renderArticles();
+                         alert("Local Entry updated.");
+                     }
                 } else {
                     const ref = collection(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles');
                     await addDoc(ref, { ...fields, timestamp: serverTimestamp() });
                     alert("Entry committed.");
-                    window.cancelEdit();
                 }
+                window.cancelEdit();
             } catch (e) { alert("Action failed: " + e.message); }
         };
 
         window.deleteArticle = async function(id) {
             if (!isCurator) return;
-            if (!window.dbInstance) { alert("Database connection unavailable."); return; }
+            
             if (confirm("Permanently purge this technical entry?")) {
+                if (!window.dbInstance || id.startsWith('local-')) {
+                     globalArticles = globalArticles.filter(a => a.id !== id);
+                     localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
+                     window.renderArticles();
+                     return;
+                }
+
                 try {
                     await deleteDoc(doc(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles', id));
-                } catch (e) { alert("Delete failed."); }
+                } catch (e) { alert("Delete failed: " + e.message); }
             }
         };
 
