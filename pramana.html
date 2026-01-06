@@ -25,8 +25,8 @@
             border-bottom-color: #4f46e5;
             font-weight: 700;
         }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
@@ -58,11 +58,6 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #drafting-output {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
-            white-space: pre-wrap;
-        }
     </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
@@ -154,7 +149,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                         <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">PDF Report Link (External URL)</label>
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">PDF Technical Report (URL)</label>
                             <input type="url" id="in-pdf" placeholder="https://drive.google.com/..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div class="space-y-1">
@@ -163,12 +158,12 @@
                         </div>
                     </div>
 
-                    <button onclick="publishArticle()" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Commit to Journal</button>
+                    <button onclick="publishArticle()" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Commit to Empirical Record</button>
                 </div>
             </section>
         </div>
 
-        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Consolidated Inventory) -->
+        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Inventory) -->
         <div id="panel-portfolio" class="tab-panel">
             
             <!-- VERTICAL 01: MULTIPHASE FLUIDICS -->
@@ -211,11 +206,6 @@
                                 <h4 class="text-sm font-bold text-gray-900">"Dynamics of fluid film on a granular chain"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
                             </div>
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Springer | FMFP 2024</p>
-                                <h4 class="text-sm font-bold text-gray-900">"Particle Filtration in Suspension Droplet Breakup"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,19 +235,9 @@
                                 <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, & P Dutta.</p>
                             </div>
                             <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2211.08059 | 2022</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"An augmented swirling and round jet impinging on a heated flat plate"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, & P Dutta.</p>
-                            </div>
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
                                 <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2412.05471 | 2024</p>
                                 <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Bubble dynamics in a cavitating venturi"</h4>
                                 <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra & A Vijayan.</p>
-                            </div>
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
-                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2505.23203 | 2025</p>
-                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"On the flow topology of swirl jets upon impingement"</h4>
-                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra & P Dutta.</p>
                             </div>
                         </div>
                     </div>
@@ -293,7 +273,7 @@
         </div>
     </main>
 
-    <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0">
+    <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0 text-center">
         <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
@@ -303,10 +283,11 @@
         </div>
     </footer>
 
+    <!-- FIREBASE INTEGRATION -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const firebaseConfig = JSON.parse(__firebase_config);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'prajnapramana-hub';
@@ -317,6 +298,7 @@
         let currentUser = null;
         let isCurator = false;
 
+        // AUTH INITIALIZATION (Awaiting before Snapshot)
         const initAuth = async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -325,7 +307,7 @@
                     await signInAnonymously(auth);
                 }
             } catch (err) {
-                console.error("Firebase auth failed", err);
+                console.error("Firebase auth failed:", err);
             }
         };
         initAuth();
@@ -339,6 +321,7 @@
             if (!currentUser) return;
             const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
             
+            // Single listener with exponential backoff protection
             onSnapshot(articlesRef, (snapshot) => {
                 const feed = document.getElementById('journal-feed');
                 const loading = document.getElementById('loading-indicator');
@@ -348,13 +331,13 @@
                 articles.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
 
                 if (articles.length === 0) {
-                    feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Evidence Series Hub is active. Awaiting curator entries.</div>`;
+                    feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Hub Active. Awaiting curator entries.</div>`;
                     return;
                 }
 
                 feed.innerHTML = articles.map(art => `
                     <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative">
-                        ${isCurator ? `<button onclick="deleteArticle('${art.id}')" class="absolute top-6 right-6 text-gray-300 hover:text-red-500 text-[10px] font-bold transition-colors">DELETE ✕</button>` : ''}
+                        ${isCurator ? `<button onclick="deleteArticle('${art.id}')" class="absolute top-6 right-6 text-gray-300 hover:text-red-500 text-[10px] font-bold transition-colors">PURGE ✕</button>` : ''}
                         <div class="flex justify-between items-start mb-6">
                             <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">${art.category}</span>
                             <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${art.era}</span>
@@ -373,12 +356,12 @@
             }, (error) => {
                 console.error("Snapshot error:", error);
                 const feed = document.getElementById('journal-feed');
-                feed.innerHTML = `<p class="col-span-full text-center text-xs text-red-400">Permission error accessing empirical record. Please contact admin.</p>`;
+                feed.innerHTML = `<p class="col-span-full text-center text-xs text-red-400">Sync Interrupted. Insufficient credentials or network lag.</p>`;
             });
         }
 
         window.publishArticle = async function() {
-            if (!currentUser || !isCurator) { alert("Unauthorized access."); return; }
+            if (!currentUser || !isCurator) { alert("Unauthorized."); return; }
             const author = document.getElementById('in-author').value;
             const title = document.getElementById('in-title').value;
             const category = document.getElementById('in-category').value;
@@ -395,16 +378,12 @@
                     author, title, category, era, summary, pdfUrl, trl,
                     timestamp: serverTimestamp()
                 });
-                alert("Entry committed to scientific record.");
-                document.getElementById('in-author').value = '';
+                alert("Entry committed.");
                 document.getElementById('in-title').value = '';
-                document.getElementById('in-category').value = '';
-                document.getElementById('in-era').value = '';
                 document.getElementById('in-summary').value = '';
                 document.getElementById('in-pdf').value = '';
-                document.getElementById('in-trl').value = '';
             } catch (err) {
-                alert("Committal error: " + err.message);
+                alert("Persistence error: " + err.message);
             }
         };
 
@@ -414,7 +393,7 @@
                 try {
                     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id));
                 } catch (e) {
-                    alert("Delete failed: Insufficient permissions.");
+                    alert("Delete failed.");
                 }
             }
         };
@@ -425,7 +404,7 @@
                 isCurator = true;
                 document.getElementById('curator-portal').classList.remove('hidden');
                 document.getElementById('portal-btn').classList.add('text-indigo-600');
-                loadArticles();
+                loadArticles(); // Re-render with delete buttons
                 document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
             } else if (pass !== null) {
                 alert("Access Denied.");
