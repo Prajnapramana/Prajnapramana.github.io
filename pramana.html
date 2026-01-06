@@ -58,6 +58,16 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
@@ -69,12 +79,12 @@
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
             <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center uppercase tracking-widest">
-                <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
-                <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
-                <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
-                <li><a href="prajnalabs.html" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
-                <li><a href="pramana.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1 text-xs">Pramāṇa</a></li>
-                <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Home</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Services</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Team</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
+                <li><a href="#" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1 text-xs">Pramāṇa</a></li>
+                <li><a href="#" class="hover:text-indigo-600 transition">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -90,8 +100,8 @@
 
         <!-- SUB-TAB NAVIGATION -->
         <div class="flex space-x-8 border-b border-gray-100 mb-12 overflow-x-auto scrollbar-hide">
-            <button onclick="switchTab('logic')" id="tab-btn-logic" class="active-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all">Logic & Insights Hub</button>
-            <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="inactive-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400">Portfolio & Technical Library</button>
+            <button onclick="switchTab('logic')" id="tab-btn-logic" class="active-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 border-indigo-600 text-indigo-600 font-bold">Logic & Insights Hub</button>
+            <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="inactive-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400 border-b-2 border-transparent hover:text-gray-600">Portfolio & Technical Library</button>
         </div>
 
         <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
@@ -117,7 +127,7 @@
             <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
                 <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm transition-all duration-300 ring-2 ring-transparent focus-within:ring-indigo-100">
                     <div class="flex justify-between items-center mb-8">
-                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Curator Management Portal</h2>
+                        <h2 id="form-header" class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Curator Management Portal</h2>
                         <button onclick="window.logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
                     
@@ -168,7 +178,7 @@
 
                         <div class="flex items-center gap-4 pt-4">
                             <button id="form-submit-btn" onclick="window.publishArticle()" class="flex-grow bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Commit to Empirical Record</button>
-                            <button id="form-cancel-btn" onclick="window.cancelEdit()" class="hidden px-6 py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest border border-slate-200 text-gray-500 hover:bg-slate-100 transition-all">Cancel</button>
+                            <button id="form-cancel-btn" onclick="window.cancelEdit()" class="hidden px-6 py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest border border-slate-200 text-gray-500 hover:bg-slate-100 transition-all">Cancel Edit</button>
                         </div>
                     </div>
                 </div>
@@ -213,76 +223,163 @@
                 </div>
             </section>
 
-            <!-- Peer-Reviewed Library -->
+            <!-- Peer-Reviewed Library / Publications -->
             <section class="mb-12">
                 <div class="flex items-center space-x-4 mb-10">
-                    <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">Peer-Reviewed Technical Library</h2>
+                    <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">Publications </h2>
                     <div class="h-px flex-grow bg-slate-200"></div>
                 </div>
 
-                <div class="space-y-4 max-w-4xl mx-auto">
-                    <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
-                        <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">01.</span>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Journal of Fluid Mechanics (JFM) | 2025</p>
-                                <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published</span>
+                <div class="max-w-4xl mx-auto space-y-12">
+                   
+                    <!-- Vertical: Multiphase Flows -->
+                    <div>
+                        <h3 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-50 pb-2">Vertical: Multiphase Flows</h3>
+                        <div class="space-y-4">
+                            <!-- Existing 1 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">06.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Journal of Fluid Mechanics (JFM) | 2025</p>
+                                        <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Dynamics of a liquid film flowing down a granular chain"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
+                                    <a href="https://doi.org/10.1017/jfm.2025.XXX" target="_blank" class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest hover:underline mt-2 inline-block">DOI Request →</a>
+                                </div>
                             </div>
-                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Dynamics of a liquid film flowing down a granular chain"</h4>
-                            <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
-                            <a href="https://doi.org/10.1017/jfm.2025.XXX" target="_blank" class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest hover:underline mt-2 inline-block">DOI Request →</a>
+                            
+                            <!-- Existing 2 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">07.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Phys. Rev. Fluids | 2025</p>
+                                        <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Under Review</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
+                                    <a href="https://arxiv.org/abs/2507.06800" target="_blank" class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest hover:underline mt-2 inline-block">Preprint (arXiv) →</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Existing 3 -->
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">08.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">APS Conference | 75th Annual Meeting (DFD 2022)</p>
+                                        <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published Abstract</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Ultrasonic vibration induced mist formation"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Ray, C., Sarva, K. K., & Tomar, G. (Bulletin of the APS)</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Existing 4 -->
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">09.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">APS Conference | 75th Annual Meeting (DFD 2022)</p>
+                                        <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Conference Presentation</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Dynamics of fluid film on a granular chain"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G. (Bulletin of the APS)</p>
+                                </div>
+                            </div>
+                             
+                    <!-- Vertical: Clean Energy -->
+                    <div>
+                        <h3 class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-6 border-b border-sky-50 pb-2">Vertical: Clean Energy</h3>
+                        <div class="space-y-4">
+                            <!-- Publication 1 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">01.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Int. Comm. Heat and Mass Transfer | Vol 149 (2023)</p>
+                                        <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Published</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Flow and heat transfer characteristics of an impinging jet augmented with swirl"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, P Dutta</p>
+                                    <a href="https://doi.org/10.1016/j.icheatmasstransfer.2023.107121" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">DOI Request →</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Publication 2 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">02.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">arXiv:2211.08059 | 2022</p>
+                                        <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Preprint</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"An augmented swirling and round jet impinging on a heated flat plate and its heat transfer characteristics"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, P Dutta</p>
+                                    <a href="https://arxiv.org/abs/2211.08059" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">View on arXiv →</a>
+                                </div>
+                            </div>
+
+                            <!-- Publication 3 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">03.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">arXiv:2412.05471 | 2024</p>
+                                        <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Preprint</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Bubble dynamics in a cavitating venturi"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">PV Chandra, A Vijayan</p>
+                                    <a href="https://arxiv.org/abs/2412.05471" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">View on arXiv →</a>
+                                </div>
+                            </div>
+
+                            <!-- Publication 4 -->
+                            <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                                <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">04.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">arXiv:2505.23203 | 2025</p>
+                                        <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Preprint</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"On the flow topology of swirl jets upon impingement"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">PV Chandra, P Dutta</p>
+                                    <a href="https://arxiv.org/abs/2505.23203" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">View on arXiv →</a>
+                                </div>
+                            </div>
+
+                            <!-- Publication 5 -->
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">05.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">10th Int. Conf. on Fluid Flow, Heat and Mass Transfer | 2025</p>
+                                        <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Conference</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Single Augmented Swirling and Round Jet for Improvement of Impingement Heat Transfer from a Flat plate"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Premchand V, Gopakumar R, Pratikash P Panda, Pradip Dutta</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- (Preserving all other publications as requested) -->
-                    <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
-                        <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">02.</span>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Phys. Rev. Fluids | 2025</p>
-                                <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Under Review</span>
+                            <!-- Existing 5 -->
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">10.</span>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fluid Mechanics & Power (FMFP) | Springer (2024)</p>
+                                        <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published</span>
+                                    </div>
+                                    <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Particle Filtration in Suspension Droplet Breakup"</h4>
+                                    <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
+                                    <a href="https://doi.org/10.1007/978-981-99-6074-3_36" target="_blank" class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest hover:underline mt-2 inline-block">Access DOI →</a>
+                                </div>
                             </div>
-                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
-                            <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
-                            <a href="https://arxiv.org/abs/2507.06800" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">Preprint (arXiv) →</a>
                         </div>
                     </div>
-                    <!-- APS DFD 1 -->
-                    <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
-                        <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">03.</span>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">APS Conference | 75th Annual Meeting (DFD 2022)</p>
-                                <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published Abstract</span>
-                            </div>
-                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Ultrasonic vibration induced mist formation"</h4>
-                            <p class="text-[11px] text-gray-500 mt-1 italic">Ray, C., Sarva, K. K., & Tomar, G. (Bulletin of the APS)</p>
-                        </div>
-                    </div>
-                    <!-- APS DFD 2 -->
-                    <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
-                        <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">04.</span>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">APS Conference | 75th Annual Meeting (DFD 2022)</p>
-                                <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Conference Presentation</span>
-                            </div>
-                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Dynamics of fluid film on a granular chain"</h4>
-                            <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G. (Bulletin of the APS)</p>
-                        </div>
-                    </div>
-                    <!-- Springer -->
-                    <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
-                        <span class="text-lg font-bold text-sky-200 group-hover:text-sky-600">05.</span>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fluid Mechanics & Power (FMFP) | Springer (2024)</p>
-                                <span class="stage-badge bg-sky-50 text-sky-600 border border-sky-100">Published</span>
-                            </div>
-                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Particle Filtration in Suspension Droplet Breakup"</h4>
-                            <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
-                            <a href="https://doi.org/10.1007/978-981-99-6074-3_36" target="_blank" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest hover:underline mt-2 inline-block">Access DOI →</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
         </div>
@@ -353,10 +450,10 @@
         });
 
         function getBadgeStyle(type) {
-            if (type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
-            if (type.includes('Energy')) return 'text-sky-600 bg-sky-50';
-            if (type.includes('Biomechanics')) return 'text-amber-600 bg-amber-50';
-            if (type.includes('Opinion')) return 'text-gray-500 bg-slate-100';
+            if (type && type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
+            if (type && type.includes('Energy')) return 'text-sky-600 bg-sky-50';
+            if (type && type.includes('Biomechanics')) return 'text-amber-600 bg-amber-50';
+            if (type && type.includes('Opinion')) return 'text-gray-500 bg-slate-100';
             return 'text-indigo-600 bg-indigo-50';
         }
 
@@ -368,11 +465,11 @@
                 return;
             }
             feed.innerHTML = globalArticles.map(art => `
-                <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative cursor-pointer">
+                <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative cursor-pointer border hover:border-indigo-100 transition-all duration-300">
                     ${isCurator ? `
-                        <div class="absolute top-6 right-6 flex gap-2">
-                            <button onclick="window.editArticle('${art.id}')" class="text-gray-400 hover:text-indigo-600 text-[10px] font-bold transition-colors">EDIT ✎</button>
-                            <button onclick="window.deleteArticle('${art.id}')" class="text-gray-300 hover:text-red-500 text-[10px] font-bold transition-colors">✕</button>
+                        <div class="absolute top-6 right-6 flex gap-2 z-10 bg-white/80 backdrop-blur pl-2 pb-2 rounded-bl-xl">
+                            <button onclick="window.editArticle('${art.id}')" class="text-[9px] font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-lg hover:bg-indigo-600 hover:text-white transition-colors border border-indigo-100">EDIT</button>
+                            <button onclick="window.deleteArticle('${art.id}')" class="text-[9px] font-bold text-red-400 bg-red-50 px-3 py-1.5 rounded-lg hover:bg-red-500 hover:text-white transition-colors border border-red-100">DELETE</button>
                         </div>
                     ` : ''}
                     <div class="flex justify-between items-start mb-6 pr-12">
@@ -398,17 +495,21 @@
             const article = globalArticles.find(a => a.id === id);
             if (!article) return;
 
-            document.getElementById('in-author').value = article.author;
-            document.getElementById('in-title').value = article.title;
-            document.getElementById('in-category').value = article.category;
-            document.getElementById('in-era').value = article.era;
-            document.getElementById('in-summary').value = article.summary;
+            document.getElementById('in-author').value = article.author || '';
+            document.getElementById('in-title').value = article.title || '';
+            document.getElementById('in-category').value = article.category || '';
+            document.getElementById('in-era').value = article.era || '';
+            document.getElementById('in-summary').value = article.summary || '';
             document.getElementById('in-pdf').value = article.pdfUrl || '';
             document.getElementById('in-trl').value = article.trl || '';
             document.getElementById('in-link-text').value = article.linkText || 'Read Narrative';
 
             editingId = id;
+            document.getElementById('form-header').innerText = "Editing: " + (article.title.substring(0, 20) + "...");
             document.getElementById('form-submit-btn').innerText = "Update Entry";
+            document.getElementById('form-submit-btn').classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+            document.getElementById('form-submit-btn').classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+            
             document.getElementById('form-cancel-btn').classList.remove('hidden');
             document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
         };
@@ -418,13 +519,19 @@
             document.getElementById('in-author').value = '';
             document.getElementById('in-title').value = '';
             document.getElementById('in-category').value = '';
-            document.getElementById('in-era').value = '';
+            document.getElementById('in-era').value = 'Jan 2026';
             document.getElementById('in-summary').value = '';
             document.getElementById('in-pdf').value = '';
             document.getElementById('in-trl').value = '';
             document.getElementById('in-link-text').value = '';
 
+            document.getElementById('form-header').innerText = "Curator Management Portal";
             document.getElementById('form-submit-btn').innerText = "Commit to Empirical Record";
+            
+            // Restore button styles
+            document.getElementById('form-submit-btn').classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+            document.getElementById('form-submit-btn').classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+            
             document.getElementById('form-cancel-btn').classList.add('hidden');
         };
 
@@ -479,6 +586,7 @@
         };
 
         window.logoutPortal = function() {
+            window.cancelEdit(); // Ensure edit state is cleared on logout
             isCurator = false;
             document.getElementById('curator-portal').classList.add('hidden');
             document.getElementById('portal-btn').classList.remove('text-indigo-600');
@@ -494,15 +602,17 @@
             const btnLogic = document.getElementById('tab-btn-logic');
 
             if (tabName === 'logic') {
-                btnLogic.classList.add('active');
-                btnLogic.classList.remove('text-gray-400');
-                btnPortfolio.classList.remove('active');
-                btnPortfolio.classList.add('text-gray-400');
+                btnLogic.classList.add('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
+                btnLogic.classList.remove('text-gray-400', 'border-transparent');
+                
+                btnPortfolio.classList.remove('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
+                btnPortfolio.classList.add('text-gray-400', 'border-transparent');
             } else {
-                btnPortfolio.classList.add('active');
-                btnPortfolio.classList.remove('text-gray-400');
-                btnLogic.classList.remove('active');
-                btnLogic.classList.add('text-gray-400');
+                btnPortfolio.classList.add('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
+                btnPortfolio.classList.remove('text-gray-400', 'border-transparent');
+                
+                btnLogic.classList.remove('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
+                btnLogic.classList.add('text-gray-400', 'border-transparent');
             }
         }
     </script>
