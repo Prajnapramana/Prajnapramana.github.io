@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramāṇa | Technical Portfolio & Methodology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        .gradient-text {
+            background: linear-gradient(to right, #4f46e5, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .tab-btn {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-btn.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+            font-weight: 700;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .blog-card {
+            transition: all 0.2s ease;
+            border: 1px solid #f1f5f9;
+        }
+        .blog-card:hover {
+            border-color: #cbd5e1;
+            background-color: #fafafa;
+            transform: translateY(-2px);
+        }
+        .stage-badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 1px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 10px;
+        }
+        #drafting-output {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center max-w-7xl">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
+            </div>
+            <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center uppercase tracking-widest">
+                <li><a href="index.html" class="hover:text-indigo-600 transition">Home</a></li>
+                <li><a href="services.html" class="hover:text-indigo-600 transition">Services</a></li>
+                <li><a href="team.html" class="hover:text-indigo-600 transition">Team</a></li>
+                <li><a href="prajnalabs.html" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
+                <li><a href="pramana.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1 text-xs">Pramāṇa</a></li>
+                <li><a href="contact.html" class="hover:text-indigo-600 transition">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="gradient-text">Empirical Validation</span></h1>
+            <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest">
+                Technical Knowledge Hub • Peer-Reviewed Evidence
+            </p>
+        </header>
+
+        <!-- SUB-TAB NAVIGATION -->
+        <div class="flex space-x-8 border-b border-gray-100 mb-12 overflow-x-auto scrollbar-hide">
+            <button onclick="switchTab('logic')" id="tab-btn-logic" class="active-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all">Logic & Insights Hub</button>
+            <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="inactive-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400">Portfolio & Technical Library</button>
+        </div>
+
+        <!-- PANEL 1: LOGIC & INSIGHTS HUB (Blog/Narrative View) -->
+        <div id="panel-logic" class="tab-panel active">
+            <section class="space-y-12">
+                <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+                    The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
+                </h2>
+
+                <div id="journal-feed" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">Case Study: Fluidics</span>
+                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Era 2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">Capillary-Wave Logic in Aeroponics</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed flex-grow">Characterizing droplet diameter regimes (10-50µm) to mitigate nutrient-transport limitations. Resolving instabilities at the micron scale to enable high-efficiency agricultural misting.</p>
+                        <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
+                            <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Open Whitepaper →</span>
+                            <span class="text-[9px] text-gray-400">Scientist: K. Sarva</span>
+                        </div>
+                    </article>
+
+                    <article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-[9px] font-bold text-sky-600 uppercase tracking-widest bg-sky-50 px-2 py-0.5 rounded">Strategy: Energy</span>
+                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">In Preparation</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition">Membraneless Laminar Transport</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed flex-grow">Leveraging microfluidic laminar separation to eliminate physical electrolyte barriers. A technical overview of reducing system cost via interfacial flow control.</p>
+                        <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
+                            <span class="text-[10px] font-bold text-sky-600 uppercase tracking-widest">Request Abstract →</span>
+                            <span class="text-[9px] text-gray-400">Scientist: P. Chandra</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- GATED PORTAL (Internal) -->
+            <section id="contributor-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
+                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Scientific Entry Provision (Internal)</h2>
+                        <button onclick="togglePortal()" class="text-[9px] font-bold text-gray-400 hover:text-red-500 uppercase tracking-widest">Close Portal ✕</button>
+                    </div>
+                    <form action="https://formspree.io/f/xpqardzp" method="POST" id="submission-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author / Scientist Name</label>
+                                <input type="text" name="author" id="in-author" required placeholder="Full Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vertical / Category</label>
+                                <input type="text" name="category" id="in-category" required placeholder="e.g. Case Study: Fluidics" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Title</label>
+                                <input type="text" name="title" id="in-title" required placeholder="Enter formal title..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
+                                <input type="text" name="era" id="in-era" required placeholder="e.g. Era 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Technical Abstract</label>
+                            <textarea name="summary" id="in-summary" rows="3" required placeholder="Summarize the logic..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">TRL / Validation Stage</label>
+                                <input type="text" name="trl" id="in-trl" required placeholder="e.g. TRL 4 Prototype" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            </div>
+                            <button type="button" onclick="handleSubmission()" class="bg-gray-900 text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg">Push for Validation</button>
+                        </div>
+                    </form>
+                    <div id="entry-preview" class="hidden mt-10">
+                        <div class="bg-gray-900 text-indigo-300 p-6 rounded-2xl border border-slate-800 overflow-x-auto shadow-xl">
+                            <code id="drafting-output"></code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Consolidated by Vertical) -->
+        <div id="panel-portfolio" class="tab-panel">
+            
+            <!-- VERTICAL 01: MULTIPHASE FLUIDICS -->
+            <section class="mb-20">
+                <div class="flex items-center space-x-4 mb-8">
+                    <h2 class="text-xl font-extrabold text-indigo-600 uppercase tracking-tight">Vertical 01: Multiphase Fluidics</h2>
+                    <div class="h-1 flex-grow bg-indigo-50 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- IP Assets -->
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
+                        <ol class="space-y-6 list-decimal pl-4 text-gray-500">
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Apparatus for ultrasonic vibration induced mist formation
+                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Interfacial atomization architecture for high-throughput misting.</p>
+                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Apparatus for Aeroponic and/or Fogponic generation
+                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Precision generation system utilizing high-frequency modulation.</p>
+                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Apparatus for Aeroponic and/or Fogponic generation for ducted design
+                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Specialized internal atmosphere transport for vertical farming apps.</p>
+                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Slurry extrusion transport system
+                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Novel particulate suspension deposition for additive manufacturing.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Scientific Record -->
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Scientific Record</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Journal of Fluid Mechanics (JFM) | 2025</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Dynamics of a liquid film flowing down a granular chain"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">K. K. Sarva, T. G. Murthy, & G. Tomar.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Phys. Rev. Fluids | 2025</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Role of Transient Dynamics in Dripping-Jetting Transition"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">K. Sarva, T. G. Murthy, & G. Tomar.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS Conference | DFD 2022</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Ultrasonic vibration induced mist formation"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Ray, C., Sarva, K. K., & Tomar, G. (Bulletin of the APS)</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS Conference | DFD 2022</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Dynamics of fluid film on a granular chain"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G. (Bulletin of the APS)</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">Springer | FMFP 2024</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-indigo-600">"Particle Filtration in Suspension Droplet Breakup"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Sarva, K., Murthy, T. G., & Tomar, G.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VERTICAL 02: CLEAN ENERGY & THERMAL SYSTEMS -->
+            <section class="mb-16">
+                <div class="flex items-center space-x-4 mb-8">
+                    <h2 class="text-xl font-extrabold text-emerald-600 uppercase tracking-tight">Vertical 02: Clean Energy & Thermal Systems</h2>
+                    <div class="h-1 flex-grow bg-emerald-50 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- IP Assets -->
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
+                        <ol class="space-y-6 list-decimal pl-4 text-gray-500">
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Micro-Fluidic Fuel Cell Architecture
+                                <span class="stage-badge bg-blue-50 text-blue-600 border border-blue-100">TRL 3 Characterization</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Laminar Flow based electrolyte interface control systems.</p>
+                            </li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Apparatus for CSP power generation
+                                <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Advanced thermal receiver for concentrated solar conversion architectures.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Scientific Record -->
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Scientific Record</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">Heat and Mass Transfer | 2023</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Flow and heat transfer characteristics of an impinging jet augmented with swirl"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, & P Dutta.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2211.08059 | 2022</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"An augmented swirling and round jet impinging on a heated flat plate"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra, PP Panda, & P Dutta.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2412.05471 | 2024</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Bubble dynamics in a cavitating venturi"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra & A Vijayan.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">arXiv:2505.23203 | 2025</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"On the flow topology of swirl jets upon impingement"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">PV Chandra & P Dutta.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50 transition group">
+                                <p class="text-[9px] font-bold text-emerald-600 uppercase mb-1">ICFFHMT | 2023</p>
+                                <h4 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-emerald-600">"Swirling and Round Jet for Impingement Heat Transfer Improvement"</h4>
+                                <p class="text-[10px] text-gray-500 mt-1 italic">Premchand V, Gopakumar R, PP Panda, & P Dutta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VERTICAL 03: APPLIED BIOMECHANICS -->
+            <section class="mb-12">
+                <div class="flex items-center space-x-4 mb-8">
+                    <h2 class="text-xl font-extrabold text-amber-600 uppercase tracking-tight">Vertical 03: Applied Biomechanics</h2>
+                    <div class="h-1 flex-grow bg-amber-50 rounded-full"></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <div>
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
+                        <ol class="space-y-6 list-decimal pl-4">
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">
+                                Kinematic Stability Mechanisms
+                                <span class="stage-badge bg-gray-50 text-gray-400 border border-gray-200">Stealth R&D</span>
+                                <p class="font-normal text-[11px] text-gray-500 mt-1">Passive actuation limits for performance-enhancing wearables.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0 text-center">
+        <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-left">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
+                <p class="text-[9px] text-gray-300 mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
+            </div>
+            <button onclick="togglePortal()" class="text-[9px] font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Contributor Portal</button>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById('panel-' + tabName).classList.add('active');
+            
+            const btnPortfolio = document.getElementById('tab-btn-portfolio');
+            const btnLogic = document.getElementById('tab-btn-logic');
+
+            if (tabName === 'logic') {
+                btnLogic.classList.add('active');
+                btnLogic.classList.remove('text-gray-400');
+                btnPortfolio.classList.remove('active');
+                btnPortfolio.classList.add('text-gray-400');
+            } else {
+                btnPortfolio.classList.add('active');
+                btnPortfolio.classList.remove('text-gray-400');
+                btnLogic.classList.remove('active');
+                btnLogic.classList.add('text-gray-400');
+            }
+        }
+
+        function togglePortal() {
+            const portal = document.getElementById('contributor-portal');
+            if (portal.classList.contains('hidden')) {
+                const creds = prompt("Enter Scientific Access Key:");
+                if (creds === "prajna2025") {
+                    portal.classList.remove('hidden');
+                    portal.scrollIntoView({ behavior: 'smooth' });
+                } else if (creds !== null) {
+                    alert("Invalid Credentials.");
+                }
+            } else {
+                portal.classList.add('hidden');
+            }
+        }
+
+        async function handleSubmission() {
+            const author = document.getElementById('in-author').value;
+            const category = document.getElementById('in-category').value;
+            const era = document.getElementById('in-era').value;
+            const title = document.getElementById('in-title').value;
+            const summary = document.getElementById('in-summary').value;
+            const trl = document.getElementById('in-trl').value;
+
+            if (!author || !title || !summary) {
+                alert("Please fill all mandatory fields.");
+                return;
+            }
+
+            const htmlBlock = `
+<article class="blog-card p-8 rounded-[2rem] cursor-pointer group flex flex-col h-full">
+    <div class="flex justify-between items-start mb-6">
+        <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">${category}</span>
+        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${era}</span>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">${title}</h3>
+    <p class="text-sm text-gray-500 leading-relaxed flex-grow">${summary}</p>
+    <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
+        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Read Narrative →</span>
+        <span class="text-[9px] text-gray-400">Scientist: ${author}</span>
+    </div>
+</article>`;
+
+            document.getElementById('drafting-output').innerText = htmlBlock.trim();
+            document.getElementById('entry-preview').classList.remove('hidden');
+
+            const form = document.getElementById('submission-form');
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    alert("Entry pushed to P.I. validation queue. Approval pending.");
+                }
+            } catch (error) {
+                console.error("Submission failed, but block generated.");
+            }
+        }
+    </script>
+</body>
+</html>
