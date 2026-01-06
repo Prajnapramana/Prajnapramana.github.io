@@ -21,11 +21,7 @@
             border-bottom: 2px solid transparent;
             cursor: pointer;
         }
-        .tab-btn.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-            font-weight: 700;
-        }
+        /* Active state handling handled via JS classes, but keeping this for ref */
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn {
@@ -79,14 +75,19 @@
     
     <script>
         function switchTab(tabName) {
+            // Hide all content panels
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(el => el.classList.remove('active'));
             
+            // Show the selected panel
             const target = document.getElementById('panel-' + tabName);
             if (target) target.classList.add('active');
 
+            // Update Button Styles
             const btnPortfolio = document.getElementById('tab-btn-portfolio');
             const btnLogic = document.getElementById('tab-btn-logic');
+            
+            // Base classes for all tabs
             const baseClasses = "pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 tab-btn";
             
             if (tabName === 'logic') {
@@ -101,18 +102,20 @@
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
+    <!-- NAVIGATION (Updated links to prevent # hash issues) -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 flex-shrink-0">
         <div class="container mx-auto px-6 py-2 flex justify-between items-center max-w-7xl">
             <div class="flex items-center space-x-2">
                 <span class="font-bold text-lg md:text-xl text-gray-900 tracking-tight">Prajñāpramāṇa <span class="text-indigo-600">IP Studios</span></span>
             </div>
             <ul id="menu" class="hidden md:flex space-x-6 font-semibold text-gray-600 text-xs items-center uppercase tracking-widest">
-                <li><a href="#" class="hover:text-indigo-600 transition">Home</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Services</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Team</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">PrajñāLabs</a></li>
-                <li><a href="#" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1 text-xs">Pramāṇa</a></li>
-                <li><a href="#" class="hover:text-indigo-600 transition">Contact</a></li>
+                <!-- Using javascript:void(0) to prevent URL changes and jumping -->
+                <li><a href="javascript:void(0)" class="hover:text-indigo-600 transition cursor-default">Home</a></li>
+                <li><a href="javascript:void(0)" class="hover:text-indigo-600 transition cursor-default">Services</a></li>
+                <li><a href="javascript:void(0)" class="hover:text-indigo-600 transition cursor-default">Team</a></li>
+                <li><a href="javascript:void(0)" class="hover:text-indigo-600 transition cursor-default">PrajñāLabs</a></li>
+                <li><a href="javascript:void(0)" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1 text-xs cursor-default">Pramāṇa</a></li>
+                <li><a href="javascript:void(0)" class="hover:text-indigo-600 transition cursor-default">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -125,11 +128,13 @@
             </p>
         </header>
 
+        <!-- SUB-TAB NAVIGATION -->
         <div class="flex space-x-8 border-b border-gray-100 mb-12 overflow-x-auto scrollbar-hide">
             <button onclick="switchTab('logic')" id="tab-btn-logic" class="tab-btn active pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 border-indigo-600 text-indigo-600 font-bold">Logic & Insights Hub</button>
             <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="tab-btn pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400 border-b-2 border-transparent hover:text-gray-600">Portfolio & Technical Library</button>
         </div>
 
+        <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
         <div id="panel-logic" class="tab-content active">
             <section class="space-y-12">
                 <div class="flex justify-between items-center mb-8">
@@ -147,6 +152,7 @@
                 </div>
             </section>
 
+            <!-- GATED CURATOR PORTAL -->
             <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
                 <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm transition-all duration-300 ring-2 ring-transparent focus-within:ring-indigo-100">
                     <div class="flex justify-between items-center mb-8">
@@ -154,6 +160,7 @@
                         <button onclick="window.logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
                     
+                    <!-- Management Form -->
                     <div class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
@@ -207,7 +214,9 @@
             </section>
         </div>
 
+        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Static Inventory) -->
         <div id="panel-portfolio" class="tab-content">
+            <!-- IP Inventory -->
             <section class="mb-16">
                 <div class="flex items-center space-x-4 mb-10">
                     <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">IP Inventory: Statutory Drafts</h2>
@@ -243,6 +252,7 @@
                 </div>
             </section>
 
+            <!-- Peer-Reviewed Library / Publications -->
             <section class="mb-12">
                 <div class="flex items-center space-x-4 mb-10">
                     <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">Publications</h2>
@@ -251,6 +261,7 @@
 
                 <div class="max-w-4xl mx-auto space-y-12">
                     
+                    <!-- Vertical: Multiphase Flows -->
                     <div>
                         <h3 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-50 pb-2">Vertical: Multiphase Flows</h3>
                         <div class="space-y-4">
@@ -319,6 +330,7 @@
                         </div>
                     </div>
 
+                    <!-- Vertical: Clean Energy -->
                     <div>
                         <h3 class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-6 border-b border-sky-50 pb-2">Vertical: Clean Energy</h3>
                         <div class="space-y-4">
@@ -388,6 +400,7 @@
                         </div>
                     </div>
 
+                    <!-- Vertical: Biomechanics -->
                     <div>
                         <h3 class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-6 border-b border-amber-50 pb-2">Vertical: Biomechanics</h3>
                         <div class="space-y-4">
@@ -429,6 +442,7 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // SEED ARTICLES FOR LOGIC HUB
         const seedArticles = [
             {
                 id: 'seed1',
@@ -457,6 +471,7 @@
         let editingId = null;
 
         // --- CORE RENDER FUNCTION ---
+        // Exposed to window so it's accessible globally
         window.renderArticles = function() {
             const feed = document.getElementById('journal-feed');
             if (!feed) return;
@@ -502,6 +517,7 @@
             return 'text-indigo-600 bg-indigo-50';
         }
 
+        // --- INITIAL CACHE LOAD & RENDER ---
         // 1. Try to load from cache
         const localCache = localStorage.getItem('pramana_cache');
         if (localCache) {
@@ -520,6 +536,8 @@
         
         const spinner = document.getElementById('sync-spinner');
         const statusText = document.getElementById('status-text');
+        
+        // Default to Offline Mode UI immediately so it doesn't look like it's stuck
         if(spinner) spinner.style.display = 'none';
         if(statusText) statusText.innerText = 'Hub Active (Offline Mode)';
 
@@ -536,9 +554,10 @@
             }
 
             if (firebaseConfig) {
-                if(statusText) statusText.innerText = 'Connecting...';
-                if(spinner) spinner.style.display = 'block';
-
+                // Do not show "Connecting..." text if we already have data visible.
+                // Just let the connection happen in background.
+                // if(statusText && globalArticles.length === 0) statusText.innerText = 'Connecting...';
+                
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth(app);
                 const db = getFirestore(app);
@@ -552,8 +571,7 @@
                         }
                     } catch (err) { 
                         console.error("Auth Failed:", err); 
-                        if(spinner) spinner.style.display = 'none';
-                        if(statusText) statusText.innerText = 'Hub Active (Offline)';
+                        // Stay in Offline Mode silently
                     }
                 };
                 initAuth();
@@ -564,7 +582,23 @@
                         onSnapshot(articlesRef, (snapshot) => {
                             const firestoreDocs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
                             
-                            globalArticles = [...firestoreDocs, ...seedArticles];
+                            // Merge Strategy: Prefer Firestore, fallback to seeds if empty/new
+                            if(firestoreDocs.length > 0) {
+                                globalArticles = [...firestoreDocs];
+                                // Optionally append seeds if they are not in DB, 
+                                // but typically DB is source of truth. 
+                                // For this demo, let's append seeds if they are missing?
+                                // Actually, simpler: Just use DB + Seeds that are 'system' types if we want.
+                                // Let's just merge:
+                                const dbIds = new Set(firestoreDocs.map(d => d.id));
+                                seedArticles.forEach(s => {
+                                    if(!dbIds.has(s.id)) globalArticles.push(s);
+                                });
+                            } else {
+                                // DB empty? keep seeds
+                                globalArticles = [...seedArticles];
+                            }
+
                             globalArticles.sort((a, b) => {
                                 const timeA = a.timestamp?.seconds || 0;
                                 const timeB = b.timestamp?.seconds || 0;
@@ -574,6 +608,7 @@
                             localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
                             window.renderArticles();
                             
+                            // Update UI to Live
                             if(spinner) spinner.style.display = 'none';
                             const statusContainer = document.getElementById('status-container');
                             if(statusContainer) {
@@ -581,8 +616,7 @@
                             }
                         }, (err) => {
                             console.error("Sync Error:", err);
-                            if(spinner) spinner.style.display = 'none';
-                            if(statusText) statusText.innerText = 'Hub Active (Offline)';
+                            // Stay in Offline Mode
                         });
                     }
                 });
@@ -595,8 +629,6 @@
 
         } catch (e) {
             console.error("Firebase Init Failure:", e);
-            if(spinner) spinner.style.display = 'none';
-            if(statusText) statusText.innerText = 'Hub Active (Safe Mode)';
         }
 
         // --- GLOBAL PORTAL ACTIONS ---
