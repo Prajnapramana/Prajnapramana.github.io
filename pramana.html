@@ -49,15 +49,13 @@
             letter-spacing: 0.05em;
             margin-left: 10px;
         }
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #4f46e5;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            animation: spin 1s linear infinite;
+        .delete-btn {
+            opacity: 0;
+            transition: opacity 0.2s;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .blog-card:hover .delete-btn {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
@@ -95,80 +93,74 @@
         </div>
 
         <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
-        <div id="panel-logic" class="tab-content active">
+        <div id="panel-logic" class="tab-panel active">
             <section class="space-y-12">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] flex items-center gap-4 flex-grow">
                         The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
                     </h2>
-                    <div id="sync-indicator" class="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
-                        <div class="loading-spinner"></div>
-                        <span>Syncing</span>
+                    <div id="status-indicator" class="flex items-center gap-2 text-[9px] text-emerald-500 font-bold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Live System</span>
                     </div>
                 </div>
 
-                <!-- Live Container -->
+                <!-- Dynamic Content Container -->
                 <div id="journal-feed" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Data flows from Cache immediately, then Updates from Firestore -->
+                    <!-- Articles injected by JS -->
                 </div>
             </section>
 
             <!-- GATED CURATOR PORTAL -->
             <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
-                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm transition-all duration-300 ring-2 ring-transparent focus-within:ring-indigo-100">
+                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center mb-8">
                         <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Curator Management Portal</h2>
-                        <button onclick="window.logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
+                        <button onclick="logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
                     
                     <!-- Management Form -->
                     <div class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author Name</label>
-                                <input type="text" id="in-author" placeholder="Author Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vertical / Category</label>
-                                <input type="text" id="in-category" placeholder="e.g. Case Study: Fluidics" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Article Headline</label>
-                                <input type="text" id="in-title" placeholder="Formal Title" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Type</label>
+                                <select id="in-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                    <option value="Fluidics">Case Study: Fluidics</option>
+                                    <option value="Energy">Strategy: Clean Energy</option>
+                                    <option value="Biomechanics">Case Study: Biomechanics</option>
+                                    <option value="Opinion">Opinion / Perspective</option>
+                                    <option value="Whitepaper">Institutional Whitepaper</option>
+                                </select>
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
-                                <input type="text" id="in-era" value="Jan 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                <input type="text" id="in-era" value="Jan 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             </div>
                         </div>
                         
                         <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Article Headline</label>
+                            <input type="text" id="in-title" placeholder="e.g. The Logic of Passive Actuation" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div class="space-y-1">
                             <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Executive Summary (Abstract)</label>
-                            <textarea id="in-summary" rows="3" placeholder="Write the core insight here..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"></textarea>
+                            <textarea id="in-summary" rows="3" placeholder="Write the core insight here..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
                                 <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Link Text</label>
-                                <input type="text" id="in-link-text" placeholder="e.g. Read Narrative" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                <input type="text" id="in-link-text" placeholder="e.g. Read Narrative" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             </div>
                             <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">PDF URL (Optional)</label>
-                                <input type="url" id="in-pdf" placeholder="https://..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author / Scientist</label>
+                                <input type="text" id="in-author" placeholder="e.g. K. Sarva" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             </div>
-                        </div>
-                        
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">TRL Stage</label>
-                            <input type="text" id="in-trl" placeholder="e.g. TRL 4" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                         </div>
 
                         <div class="flex items-center gap-4 pt-4">
-                            <button id="form-submit-btn" onclick="window.publishArticle()" class="flex-grow bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Commit to Empirical Record</button>
-                            <button id="form-cancel-btn" onclick="window.cancelEdit()" class="hidden px-6 py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest border border-slate-200 text-gray-500 hover:bg-slate-100 transition-all">Cancel</button>
+                            <button onclick="publishLocalArticle()" class="flex-grow bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Publish to Live Hub</button>
                         </div>
                     </div>
                 </div>
@@ -221,8 +213,7 @@
                 </div>
 
                 <div class="space-y-4 max-w-4xl mx-auto">
-                    <!-- JFM -->
-                    <div class="flex items-start gap-4 p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group">
+                    <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
                         <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">01.</span>
                         <div class="flex-grow">
                             <div class="flex justify-between items-center mb-1">
@@ -233,7 +224,7 @@
                             <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
                         </div>
                     </div>
-                    <!-- (Other publications preserved) -->
+                    <!-- (Other publications preserved here as static items) -->
                 </div>
             </section>
         </div>
@@ -246,63 +237,56 @@
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
                 <p class="text-[9px] text-gray-300 mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
             </div>
-            <button id="portal-btn" onclick="window.loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
+            <button id="portal-btn" onclick="loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
         </div>
     </footer>
 
-    <!-- FIREBASE INTEGRATION -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Environment Variables Handling
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'prajnapramana-hub';
-        
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
+    <script>
+        // --- DATA LAYER (LocalStorage) ---
+        const DB_KEY = 'pramana_insights_db';
         let isCurator = false;
-        let globalArticles = [];
-        let editingId = null;
 
-        // CACHE-FIRST LOGIC
-        const localCache = localStorage.getItem('pramana_cache');
-        if (localCache) {
-            globalArticles = JSON.parse(localCache);
-            renderArticles();
+        // Default Seed Data (If empty)
+        const seedData = [
+            {
+                id: '1',
+                type: 'Fluidics',
+                era: 'Jan 2026',
+                title: 'Capillary-Wave Logic in Aeroponics',
+                summary: 'Characterizing droplet diameter regimes (10-50µm) to mitigate nutrient-transport limitations. Resolving instabilities at the micron scale to enable high-efficiency agricultural misting.',
+                linkText: 'Open Whitepaper',
+                author: 'K. Sarva'
+            },
+            {
+                id: '2',
+                type: 'Energy',
+                era: 'In Preparation',
+                title: 'Membraneless Laminar Transport',
+                summary: 'Leveraging microfluidic laminar separation to eliminate physical electrolyte barriers. A technical overview of reducing system cost via interfacial flow control.',
+                linkText: 'Request Abstract',
+                author: 'P. Chandra'
+            }
+        ];
+
+        function getArticles() {
+            const data = localStorage.getItem(DB_KEY);
+            return data ? JSON.parse(data) : seedData;
         }
 
-        // AUTHENTICATION & SYNC (Rule: Auth before Query)
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Auth Handshake Failed:", err); }
-        };
-        initAuth();
+        function saveArticle(article) {
+            const articles = getArticles();
+            articles.unshift(article); // Add to top
+            localStorage.setItem(DB_KEY, JSON.stringify(articles));
+            renderFeed();
+        }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-                onSnapshot(articlesRef, (snapshot) => {
-                    globalArticles = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                    globalArticles.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                    
-                    localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
-                    renderArticles();
-                    document.getElementById('sync-indicator').style.display = 'none';
-                }, (err) => {
-                    console.error("Firestore sync error:", err);
-                    document.getElementById('sync-indicator').innerHTML = "<span>Sync Blocked</span>";
-                });
-            }
-        });
+        function removeArticle(id) {
+            const articles = getArticles().filter(a => a.id !== id);
+            localStorage.setItem(DB_KEY, JSON.stringify(articles));
+            renderFeed();
+        }
+
+        // --- UI LOGIC ---
 
         function getBadgeStyle(type) {
             if (type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
@@ -312,151 +296,100 @@
             return 'text-indigo-600 bg-indigo-50';
         }
 
-        function renderArticles() {
+        function renderFeed() {
+            const articles = getArticles();
             const feed = document.getElementById('journal-feed');
-            if (!feed) return;
-            if (globalArticles.length === 0) {
-                feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Hub Active. Awaiting curator records.</div>`;
-                return;
-            }
-            feed.innerHTML = globalArticles.map(art => `
+            
+            feed.innerHTML = articles.map(art => `
                 <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative cursor-pointer">
-                    ${isCurator ? `
-                        <div class="absolute top-6 right-6 flex gap-2">
-                            <button onclick="window.editArticle('${art.id}')" class="text-gray-400 hover:text-indigo-600 text-[10px] font-bold transition-colors">EDIT ✎</button>
-                            <button onclick="window.deleteArticle('${art.id}')" class="text-gray-300 hover:text-red-500 text-[10px] font-bold transition-colors">✕</button>
-                        </div>
-                    ` : ''}
-                    <div class="flex justify-between items-start mb-6 pr-12">
-                        <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ${getBadgeStyle(art.category)}">${art.category}</span>
+                    ${isCurator ? `<button onclick="handleDelete('${art.id}')" class="delete-btn absolute top-6 right-6 text-red-400 text-[10px] font-bold uppercase tracking-widest hover:text-red-600">Delete ✕</button>` : ''}
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ${getBadgeStyle(art.type)}">${art.type}</span>
                         <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${art.era}</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">${art.title}</h3>
                     <p class="text-sm text-gray-500 leading-relaxed flex-grow">${art.summary}</p>
                     <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
-                        <div class="flex gap-4 items-center">
-                            <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">${art.linkText || 'Read'} →</span>
-                            <span class="text-[9px] text-gray-400">Stage: ${art.trl || 'R&D'}</span>
-                            ${art.pdfUrl ? `<a href="${art.pdfUrl}" target="_blank" class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 hover:bg-emerald-100 transition">PDF</a>` : ''}
-                        </div>
-                        <span class="text-[9px] text-gray-400 font-semibold uppercase italic">Author: ${art.author}</span>
+                        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest group-hover:underline">${art.linkText} →</span>
+                        <span class="text-[9px] text-gray-400">Author: ${art.author}</span>
                     </div>
                 </article>
             `).join('');
         }
 
-        // GLOBAL SCOPING FOR PORTAL ACTIONS
-        window.editArticle = function(id) {
-            const article = globalArticles.find(a => a.id === id);
-            if (!article) return;
-
-            document.getElementById('in-author').value = article.author;
-            document.getElementById('in-title').value = article.title;
-            document.getElementById('in-category').value = article.category;
-            document.getElementById('in-era').value = article.era;
-            document.getElementById('in-summary').value = article.summary;
-            document.getElementById('in-pdf').value = article.pdfUrl || '';
-            document.getElementById('in-trl').value = article.trl || '';
-            document.getElementById('in-link-text').value = article.linkText || 'Read Narrative';
-
-            editingId = id;
-            document.getElementById('form-submit-btn').innerText = "Update Entry";
-            document.getElementById('form-cancel-btn').classList.remove('hidden');
-            document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
-        };
-
-        window.cancelEdit = function() {
-            editingId = null;
-            document.getElementById('in-author').value = '';
-            document.getElementById('in-title').value = '';
-            document.getElementById('in-category').value = '';
-            document.getElementById('in-era').value = '';
-            document.getElementById('in-summary').value = '';
-            document.getElementById('in-pdf').value = '';
-            document.getElementById('in-trl').value = '';
-            document.getElementById('in-link-text').value = '';
-
-            document.getElementById('form-submit-btn').innerText = "Commit to Empirical Record";
-            document.getElementById('form-cancel-btn').classList.add('hidden');
-        };
-
-        window.publishArticle = async function() {
-            if (!isCurator) return;
-            const fields = {
-                author: document.getElementById('in-author').value,
-                title: document.getElementById('in-title').value,
-                category: document.getElementById('in-category').value,
-                era: document.getElementById('in-era').value,
-                summary: document.getElementById('in-summary').value,
-                pdfUrl: document.getElementById('in-pdf').value,
-                trl: document.getElementById('in-trl').value,
-                linkText: document.getElementById('in-link-text').value || 'Read Narrative'
-            };
-
-            if (!fields.author || !fields.title || !fields.summary) { alert("Core data fields are mandatory."); return; }
-
-            try {
-                if (editingId) {
-                    const ref = doc(db, 'artifacts', appId, 'public', 'data', 'articles', editingId);
-                    await updateDoc(ref, { ...fields, updated: serverTimestamp() });
-                    alert("Entry updated.");
-                    window.cancelEdit();
-                } else {
-                    const ref = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-                    await addDoc(ref, { ...fields, timestamp: serverTimestamp() });
-                    alert("Entry committed.");
-                    window.cancelEdit();
-                }
-            } catch (e) { alert("Action failed: " + e.message); }
-        };
-
-        window.deleteArticle = async function(id) {
-            if (!isCurator) return;
-            if (confirm("Permanently purge this technical entry?")) {
-                try {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id));
-                } catch (e) { alert("Delete failed."); }
-            }
-        };
-
-        window.loginPortal = function() {
+        function loginPortal() {
             const pass = prompt("Enter Scientific Access Key:");
             if (pass === "prajna2025") {
                 isCurator = true;
                 document.getElementById('curator-portal').classList.remove('hidden');
                 document.getElementById('portal-btn').classList.add('text-indigo-600');
-                renderArticles();
+                renderFeed(); // Re-render to show delete buttons
                 document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
-            } else if (pass !== null) { alert("Access Denied."); }
-        };
+            } else if (pass !== null) {
+                alert("Access Denied.");
+            }
+        }
 
-        window.logoutPortal = function() {
+        function logoutPortal() {
             isCurator = false;
             document.getElementById('curator-portal').classList.add('hidden');
             document.getElementById('portal-btn').classList.remove('text-indigo-600');
-            renderArticles();
-        };
-    </script>
+            renderFeed();
+        }
 
-    <script>
+        function publishLocalArticle() {
+            const typeMap = document.getElementById('in-type');
+            const typeText = typeMap.options[typeMap.selectedIndex].text;
+            
+            const newArticle = {
+                id: Date.now().toString(),
+                type: typeText,
+                era: document.getElementById('in-era').value,
+                title: document.getElementById('in-title').value,
+                summary: document.getElementById('in-summary').value,
+                linkText: document.getElementById('in-link-text').value,
+                author: document.getElementById('in-author').value
+            };
+
+            if (!newArticle.title || !newArticle.summary) {
+                alert("Please fill in the core details.");
+                return;
+            }
+
+            saveArticle(newArticle);
+            alert("Entry Published to Logic Hub.");
+            
+            // Clear form
+            document.getElementById('in-title').value = '';
+            document.getElementById('in-summary').value = '';
+        }
+
+        function handleDelete(id) {
+            if(confirm("Are you sure you want to remove this entry?")) {
+                removeArticle(id);
+            }
+        }
+
+        // Tab Switching
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
             document.getElementById('panel-' + tabName).classList.add('active');
-            const btnPortfolio = document.getElementById('tab-btn-portfolio');
-            const btnLogic = document.getElementById('tab-btn-logic');
+            const b1 = document.getElementById('tab-btn-logic');
+            const b2 = document.getElementById('tab-btn-portfolio');
 
             if (tabName === 'logic') {
-                btnLogic.classList.add('active');
-                btnLogic.classList.remove('text-gray-400');
-                btnPortfolio.classList.remove('active');
-                btnPortfolio.classList.add('text-gray-400');
+                b1.classList.add('active'); b1.classList.remove('text-gray-400');
+                b2.classList.remove('active'); b2.classList.add('text-gray-400');
             } else {
-                btnPortfolio.classList.add('active');
-                btnPortfolio.classList.remove('text-gray-400');
-                btnLogic.classList.remove('active');
-                btnLogic.classList.add('text-gray-400');
+                b2.classList.add('active'); b2.classList.remove('text-gray-400');
+                b1.classList.remove('active'); b1.classList.add('text-gray-400');
             }
         }
+
+        // Initialize
+        window.onload = () => {
+            renderFeed();
+        };
     </script>
 </body>
 </html>
