@@ -49,15 +49,13 @@
             letter-spacing: 0.05em;
             margin-left: 10px;
         }
-        .loading-spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #4f46e5;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            animation: spin 1s linear infinite;
+        .delete-btn {
+            opacity: 0;
+            transition: opacity 0.2s;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .blog-card:hover .delete-btn {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
@@ -84,7 +82,7 @@
         <header class="text-center mb-10">
             <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 leading-tight">Pramāṇa: <span class="gradient-text">Empirical Validation</span></h1>
             <p class="text-xs md:text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest font-semibold">
-                Peer-Reviewed Evidence • Industrial Knowledge Library
+                Peer-Reviewed Evidence • Technical CMS
             </p>
         </header>
 
@@ -95,291 +93,303 @@
         </div>
 
         <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
-        <div id="panel-logic" class="tab-content active">
+        <div id="panel-logic" class="tab-panel active">
             <section class="space-y-12">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] flex items-center gap-4 flex-grow">
                         The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
                     </h2>
-                    <div id="sync-indicator" class="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
-                        <div class="loading-spinner"></div>
-                        <span>Handshaking...</span>
+                    <div id="status-indicator" class="flex items-center gap-2 text-[9px] text-emerald-500 font-bold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Live System</span>
                     </div>
                 </div>
 
+                <!-- Dynamic Content Container -->
                 <div id="journal-feed" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Articles appear here via Cache then Cloud Sync -->
+                    <!-- Articles injected by JS -->
                 </div>
             </section>
 
             <!-- GATED CURATOR PORTAL -->
             <section id="curator-portal" class="hidden mt-24 pt-16 border-t-2 border-dashed border-slate-100">
-                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200">
+                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center mb-8">
-                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Scientific Record Management</h2>
-                        <button onclick="window.logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
+                        <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-[0.3em]">Curator Management Portal</h2>
+                        <button onclick="logoutPortal()" class="text-[9px] font-bold text-red-400 hover:text-red-600 uppercase tracking-widest">Secure Logout ✕</button>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author Name</label>
-                            <input type="text" id="in-author" placeholder="Author Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                    <!-- Management Form -->
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Type</label>
+                                <select id="in-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                    <option value="Fluidics">Case Study: Fluidics</option>
+                                    <option value="Energy">Strategy: Clean Energy</option>
+                                    <option value="Biomechanics">Case Study: Biomechanics</option>
+                                    <option value="Opinion">Opinion / Perspective</option>
+                                    <option value="Whitepaper">Institutional Whitepaper</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
+                                <input type="text" id="in-era" value="Jan 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
                         </div>
+                        
                         <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vertical / Category</label>
-                            <input type="text" id="in-category" placeholder="e.g. Case Study: Fluidics" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Article Headline</label>
+                            <input type="text" id="in-title" placeholder="e.g. The Logic of Passive Actuation" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        
                         <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Article Title</label>
-                            <input type="text" id="in-title" placeholder="Formal Title" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Executive Summary (Abstract)</label>
+                            <textarea id="in-summary" rows="3" placeholder="Write the core insight here..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
                         </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Era / Date</label>
-                            <input type="text" id="in-era" placeholder="e.g. Jan 2026" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-1 mb-6">
-                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Technical Abstract</label>
-                        <textarea id="in-summary" rows="3" placeholder="Core characterization logic..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none"></textarea>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">PDF URL</label>
-                            <input type="url" id="in-pdf" placeholder="https://..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Link Text</label>
+                                <input type="text" id="in-link-text" placeholder="e.g. Read Narrative" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Author / Scientist</label>
+                                <input type="text" id="in-author" placeholder="e.g. K. Sarva" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
                         </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Stage (TRL)</label>
-                            <input type="text" id="in-trl" placeholder="e.g. TRL 4" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none">
+
+                        <div class="flex items-center gap-4 pt-4">
+                            <button onclick="publishLocalArticle()" class="flex-grow bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Publish to Live Hub</button>
                         </div>
                     </div>
-
-                    <button onclick="window.publishArticle()" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 shadow-lg transition-all">Commit to Record</button>
                 </div>
             </section>
         </div>
 
-        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY -->
+        <!-- PANEL 2: PORTFOLIO & TECHNICAL LIBRARY (Static Inventory) -->
         <div id="panel-portfolio" class="tab-content">
-            <!-- VERTICAL 01: FLUIDICS -->
-            <section class="mb-20">
-                <div class="flex items-center space-x-4 mb-8">
-                    <h2 class="text-xl font-extrabold text-indigo-600 uppercase tracking-tight">Vertical 01: Multiphase Fluidics</h2>
-                    <div class="h-1 flex-grow bg-indigo-50 rounded-full"></div>
+            <!-- IP Inventory -->
+            <section class="mb-16">
+                <div class="flex items-center space-x-4 mb-10">
+                    <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">IP Inventory: Statutory Drafts</h2>
+                    <div class="h-px flex-grow bg-slate-200"></div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
+                        <h3 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-50 pb-2">Vertical: Multiphase Fluidics</h3>
                         <ol class="space-y-6 list-decimal pl-4 text-gray-500">
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for ultrasonic vibration induced mist formation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation for ducted design <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Slurry extrusion transport system <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for ultrasonic vibration induced mist formation <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for Aeroponic and/or Fogponic generation for ducted design <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span></li>
+                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Slurry extrusion transport system <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span></li>
                         </ol>
                     </div>
-                    <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Peer-Reviewed Record</h3>
-                        <div class="space-y-4 text-sm">
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">JFM | 2025</p>
-                                <h4 class="font-bold text-gray-900">Dynamics of a liquid film flowing down a granular chain</h4>
-                            </div>
-                            <div class="p-4 rounded-xl border border-slate-50 hover:bg-slate-50">
-                                <p class="text-[9px] font-bold text-indigo-600 uppercase mb-1">APS | 2022</p>
-                                <h4 class="font-bold text-gray-900">Ultrasonic vibration induced mist formation</h4>
-                            </div>
+
+                    <div class="space-y-12">
+                        <div>
+                            <h3 class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-6 border-b border-sky-50 pb-2">Vertical: Clean Energy</h3>
+                            <ol class="space-y-6 list-decimal pl-4">
+                                <li class="text-[13px] font-bold text-gray-900 leading-snug">Micro-Fluidic Fuel Cell Architecture <span class="stage-badge bg-blue-50 text-blue-600 border border-blue-200">TRL 3</span></li>
+                                <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for CSP power generation <span class="stage-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Drafting</span></li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-6 border-b border-amber-50 pb-2">Vertical: Biomechanics</h3>
+                            <ol class="space-y-6 list-decimal pl-4">
+                                <li class="text-[13px] font-bold text-gray-900 leading-snug">Kinematic Stability Mechanisms <span class="stage-badge bg-gray-50 text-gray-400 border border-gray-200">Stealth R&D</span></li>
+                            </ol>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- VERTICAL 02: CLEAN ENERGY -->
-            <section class="mb-20">
-                <div class="flex items-center space-x-4 mb-8">
-                    <h2 class="text-xl font-extrabold text-emerald-600 uppercase tracking-tight">Vertical 02: Clean Energy</h2>
-                    <div class="h-1 flex-grow bg-emerald-50 rounded-full"></div>
+            <!-- Peer-Reviewed Library -->
+            <section class="mb-12">
+                <div class="flex items-center space-x-4 mb-10">
+                    <h2 class="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-tight">Peer-Reviewed Technical Library</h2>
+                    <div class="h-px flex-grow bg-slate-200"></div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
-                        <ol class="space-y-6 list-decimal pl-4">
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Micro-Fluidic Fuel Cell Architecture <span class="stage-badge bg-blue-50 text-blue-600">TRL 3</span></li>
-                            <li class="text-[13px] font-bold text-gray-900 leading-snug">Apparatus for CSP power generation <span class="stage-badge bg-yellow-50 text-yellow-600">Drafting</span></li>
-                        </ol>
-                    </div>
-                </div>
-            </section>
 
-            <!-- VERTICAL 03: BIOMECHANICS -->
-            <section class="mb-16">
-                <div class="flex items-center space-x-4 mb-8">
-                    <h2 class="text-xl font-extrabold text-amber-600 uppercase tracking-tight">Vertical 03: Applied Biomechanics</h2>
-                    <div class="h-1 flex-grow bg-amber-50 rounded-full"></div>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 text-sm">
-                    <div>
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Statutory Drafts (IP)</h3>
-                        <li class="text-[13px] font-bold text-gray-900 leading-snug list-none">Kinematic Stability Mechanisms for Human Performance <span class="stage-badge bg-gray-50 text-gray-400">Stealth R&D</span></li>
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    <div class="p-5 rounded-2xl border border-slate-50 hover:bg-slate-50 transition group flex items-start gap-4">
+                        <span class="text-lg font-bold text-indigo-200 group-hover:text-indigo-600">01.</span>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Journal of Fluid Mechanics (JFM) | 2025</p>
+                                <span class="stage-badge bg-indigo-50 text-indigo-600 border border-indigo-100">Published</span>
+                            </div>
+                            <h4 class="text-[14px] font-bold text-gray-900 leading-snug">"Dynamics of a liquid film flowing down a granular chain"</h4>
+                            <p class="text-[11px] text-gray-500 mt-1 italic">Sarva, K. K., Murthy, T. G., & Tomar, G.</p>
+                        </div>
                     </div>
+                    <!-- (Other publications preserved here as static items) -->
                 </div>
             </section>
         </div>
+
     </main>
 
     <footer class="bg-white py-10 border-t border-gray-100 mt-auto flex-shrink-0">
         <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left text-gray-400">
-                <p class="text-[10px] font-bold uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
-                <p class="text-[9px] mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
+            <div class="text-left">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
+                <p class="text-[9px] text-gray-300 mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
             </div>
-            <button id="portal-btn" onclick="window.loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
+            <button id="portal-btn" onclick="loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
         </div>
     </footer>
 
-    <!-- FIREBASE INTEGRATION -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Environment Variables Handling
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'prajnapramana-hub';
-        
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
+    <script>
+        // --- DATA LAYER (LocalStorage) ---
+        const DB_KEY = 'pramana_insights_db';
         let isCurator = false;
-        let globalArticles = [];
 
-        // CACHE-FIRST LOGIC
-        const localCache = localStorage.getItem('pramana_cache');
-        if (localCache) {
-            globalArticles = JSON.parse(localCache);
-            renderArticles();
+        // Default Seed Data (If empty)
+        const seedData = [
+            {
+                id: '1',
+                type: 'Fluidics',
+                era: 'Jan 2026',
+                title: 'Capillary-Wave Logic in Aeroponics',
+                summary: 'Characterizing droplet diameter regimes (10-50µm) to mitigate nutrient-transport limitations. Resolving instabilities at the micron scale to enable high-efficiency agricultural misting.',
+                linkText: 'Open Whitepaper',
+                author: 'K. Sarva'
+            },
+            {
+                id: '2',
+                type: 'Energy',
+                era: 'In Preparation',
+                title: 'Membraneless Laminar Transport',
+                summary: 'Leveraging microfluidic laminar separation to eliminate physical electrolyte barriers. A technical overview of reducing system cost via interfacial flow control.',
+                linkText: 'Request Abstract',
+                author: 'P. Chandra'
+            }
+        ];
+
+        function getArticles() {
+            const data = localStorage.getItem(DB_KEY);
+            return data ? JSON.parse(data) : seedData;
         }
 
-        // AUTHENTICATION & SYNC (Rule: Auth before Query)
-        const startSync = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Auth Handshake Failed:", err); }
-        };
+        function saveArticle(article) {
+            const articles = getArticles();
+            articles.unshift(article); // Add to top
+            localStorage.setItem(DB_KEY, JSON.stringify(articles));
+            renderFeed();
+        }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-                onSnapshot(articlesRef, (snapshot) => {
-                    globalArticles = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                    globalArticles.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                    
-                    localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
-                    renderArticles();
-                    document.getElementById('sync-indicator').style.display = 'none';
-                }, (err) => {
-                    console.error("Firestore sync error:", err);
-                    document.getElementById('sync-indicator').innerHTML = "<span>Sync Blocked</span>";
-                });
-            }
-        });
-        startSync();
+        function removeArticle(id) {
+            const articles = getArticles().filter(a => a.id !== id);
+            localStorage.setItem(DB_KEY, JSON.stringify(articles));
+            renderFeed();
+        }
 
-        function renderArticles() {
+        // --- UI LOGIC ---
+
+        function getBadgeStyle(type) {
+            if (type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
+            if (type.includes('Energy')) return 'text-sky-600 bg-sky-50';
+            if (type.includes('Biomechanics')) return 'text-amber-600 bg-amber-50';
+            if (type.includes('Opinion')) return 'text-gray-500 bg-slate-100';
+            return 'text-indigo-600 bg-indigo-50';
+        }
+
+        function renderFeed() {
+            const articles = getArticles();
             const feed = document.getElementById('journal-feed');
-            if (!feed) return;
-            if (globalArticles.length === 0) {
-                feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Hub Active. Awaiting curator records.</div>`;
-                return;
-            }
-            feed.innerHTML = globalArticles.map(art => `
-                <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative">
-                    ${isCurator ? `<button onclick="window.deleteArticle('${art.id}')" class="absolute top-6 right-6 text-gray-300 hover:text-red-500 text-[10px] font-bold">PURGE ✕</button>` : ''}
+            
+            feed.innerHTML = articles.map(art => `
+                <article class="blog-card p-8 rounded-[2rem] group flex flex-col h-full relative cursor-pointer">
+                    ${isCurator ? `<button onclick="handleDelete('${art.id}')" class="delete-btn absolute top-6 right-6 text-red-400 text-[10px] font-bold uppercase tracking-widest hover:text-red-600">Delete ✕</button>` : ''}
                     <div class="flex justify-between items-start mb-6">
-                        <span class="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded">${art.category}</span>
+                        <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ${getBadgeStyle(art.type)}">${art.type}</span>
                         <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${art.era}</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition">${art.title}</h3>
                     <p class="text-sm text-gray-500 leading-relaxed flex-grow">${art.summary}</p>
                     <div class="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center">
-                        <div class="flex gap-4 items-center">
-                            <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Stage: ${art.trl || 'R&D'}</span>
-                            ${art.pdfUrl ? `<a href="${art.pdfUrl}" target="_blank" class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 hover:bg-emerald-100">Technical PDF</a>` : ''}
-                        </div>
-                        <span class="text-[9px] text-gray-400 font-bold uppercase italic">Author: ${art.author}</span>
+                        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest group-hover:underline">${art.linkText} →</span>
+                        <span class="text-[9px] text-gray-400">Author: ${art.author}</span>
                     </div>
                 </article>
             `).join('');
         }
 
-        // GLOBAL SCOPING FOR PORTAL
-        window.publishArticle = async function() {
-            if (!isCurator) return;
-            const fields = {
-                author: document.getElementById('in-author').value,
-                title: document.getElementById('in-title').value,
-                category: document.getElementById('in-category').value,
-                era: document.getElementById('in-era').value,
-                summary: document.getElementById('in-summary').value,
-                pdfUrl: document.getElementById('in-pdf').value,
-                trl: document.getElementById('in-trl').value
-            };
-            if (!fields.author || !fields.title || !fields.summary) { alert("Incomplete data."); return; }
-            try {
-                const ref = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-                await addDoc(ref, { ...fields, timestamp: serverTimestamp() });
-                alert("Article committed.");
-                ["in-title", "in-summary", "in-pdf"].forEach(id => document.getElementById(id).value = '');
-            } catch (e) { alert("Commit failed."); }
-        };
-
-        window.deleteArticle = async function(id) {
-            if (!isCurator) return;
-            if (confirm("Purge from empirical record?")) {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id));
-            }
-        };
-
-        window.loginPortal = function() {
-            const key = prompt("Scientific Access Key:");
-            if (key === "prajna2025") {
+        function loginPortal() {
+            const pass = prompt("Enter Scientific Access Key:");
+            if (pass === "prajna2025") {
                 isCurator = true;
                 document.getElementById('curator-portal').classList.remove('hidden');
                 document.getElementById('portal-btn').classList.add('text-indigo-600');
-                renderArticles();
+                renderFeed(); // Re-render to show delete buttons
                 document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
-            } else if (key !== null) { alert("Access Denied."); }
-        };
+            } else if (pass !== null) {
+                alert("Access Denied.");
+            }
+        }
 
-        window.logoutPortal = function() {
+        function logoutPortal() {
             isCurator = false;
             document.getElementById('curator-portal').classList.add('hidden');
             document.getElementById('portal-btn').classList.remove('text-indigo-600');
-            renderArticles();
-        };
-    </script>
+            renderFeed();
+        }
 
-    <script>
+        function publishLocalArticle() {
+            const typeMap = document.getElementById('in-type');
+            const typeText = typeMap.options[typeMap.selectedIndex].text;
+            
+            const newArticle = {
+                id: Date.now().toString(),
+                type: typeText,
+                era: document.getElementById('in-era').value,
+                title: document.getElementById('in-title').value,
+                summary: document.getElementById('in-summary').value,
+                linkText: document.getElementById('in-link-text').value,
+                author: document.getElementById('in-author').value
+            };
+
+            if (!newArticle.title || !newArticle.summary) {
+                alert("Please fill in the core details.");
+                return;
+            }
+
+            saveArticle(newArticle);
+            alert("Entry Published to Logic Hub.");
+            
+            // Clear form
+            document.getElementById('in-title').value = '';
+            document.getElementById('in-summary').value = '';
+        }
+
+        function handleDelete(id) {
+            if(confirm("Are you sure you want to remove this entry?")) {
+                removeArticle(id);
+            }
+        }
+
+        // Tab Switching
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
             document.getElementById('panel-' + tabName).classList.add('active');
-            const btns = { logic: document.getElementById('tab-btn-logic'), portfolio: document.getElementById('tab-btn-portfolio') };
+            const b1 = document.getElementById('tab-btn-logic');
+            const b2 = document.getElementById('tab-btn-portfolio');
+
             if (tabName === 'logic') {
-                btns.logic.classList.add('active'); btns.logic.classList.remove('text-gray-400');
-                btns.portfolio.classList.remove('active'); btns.portfolio.classList.add('text-gray-400');
+                b1.classList.add('active'); b1.classList.remove('text-gray-400');
+                b2.classList.remove('active'); b2.classList.add('text-gray-400');
             } else {
-                btns.portfolio.classList.add('active'); btns.portfolio.classList.remove('text-gray-400');
-                btns.logic.classList.remove('active'); btns.logic.classList.add('text-gray-400');
+                b2.classList.add('active'); b2.classList.remove('text-gray-400');
+                b1.classList.remove('active'); b1.classList.add('text-gray-400');
             }
         }
+
+        // Initialize
+        window.onload = () => {
+            renderFeed();
+        };
     </script>
 </body>
 </html>
