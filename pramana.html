@@ -19,6 +19,7 @@
         .tab-btn {
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
+            cursor: pointer; /* Ensure pointer cursor */
         }
         .tab-btn.active {
             color: #4f46e5;
@@ -72,16 +73,37 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
         
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+    
+    <!-- Tab Logic Moved to Head for Reliability -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.remove('active'));
+            
+            // Show target
+            const target = document.getElementById('panel-' + tabName);
+            if (target) target.classList.add('active');
+
+            // Update Buttons
+            const btnPortfolio = document.getElementById('tab-btn-portfolio');
+            const btnLogic = document.getElementById('tab-btn-logic');
+
+            // Reset base classes
+            const baseClasses = "pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 tab-btn";
+            
+            if (tabName === 'logic') {
+                btnLogic.className = baseClasses + " active border-indigo-600 text-indigo-600 font-bold";
+                btnPortfolio.className = baseClasses + " inactive text-gray-400 border-transparent hover:text-gray-600";
+            } else {
+                btnPortfolio.className = baseClasses + " active border-indigo-600 text-indigo-600 font-bold";
+                btnLogic.className = baseClasses + " inactive text-gray-400 border-transparent hover:text-gray-600";
+            }
+        }
+    </script>
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen overflow-x-hidden">
 
@@ -113,8 +135,8 @@
 
         <!-- SUB-TAB NAVIGATION -->
         <div class="flex space-x-8 border-b border-gray-100 mb-12 overflow-x-auto scrollbar-hide">
-            <button onclick="switchTab('logic')" id="tab-btn-logic" class="active-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 border-indigo-600 text-indigo-600 font-bold">Logic & Insights Hub</button>
-            <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="inactive-tab pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400 border-b-2 border-transparent hover:text-gray-600">Portfolio & Technical Library</button>
+            <button onclick="switchTab('logic')" id="tab-btn-logic" class="tab-btn active pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all border-b-2 border-indigo-600 text-indigo-600 font-bold">Logic & Insights Hub</button>
+            <button onclick="switchTab('portfolio')" id="tab-btn-portfolio" class="tab-btn pb-3 text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap transition-all text-gray-400 border-b-2 border-transparent hover:text-gray-600">Portfolio & Technical Library</button>
         </div>
 
         <!-- PANEL 1: LOGIC & INSIGHTS HUB (Live Blog) -->
@@ -437,14 +459,6 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Environment Variables Handling
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'prajnapramana-hub';
-        
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
         // SEED ARTICLES FOR LOGIC HUB
         const seedArticles = [
             {
@@ -473,85 +487,9 @@
         let globalArticles = [];
         let editingId = null;
 
-        // CACHE-FIRST LOGIC (Modified to include seeds if cache empty)
-        const localCache = localStorage.getItem('pramana_cache');
-        if (localCache) {
-            globalArticles = JSON.parse(localCache);
-        } else {
-            // Initial load with seeds if no cache
-            globalArticles = [...seedArticles];
-        }
-        
-        // Ensure initial render happens immediately
-        window.addEventListener('DOMContentLoaded', () => {
-             renderArticles();
-             if(globalArticles.length > 0) {
-                 document.getElementById('sync-spinner').style.display = 'none';
-                 document.getElementById('status-text').innerText = 'Hub Active';
-             }
-        });
-
-        // AUTHENTICATION & SYNC (Rule: Auth before Query)
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Auth Handshake Failed:", err); }
-        };
-        initAuth();
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-                onSnapshot(articlesRef, (snapshot) => {
-                    const firestoreDocs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                    
-                    // MERGE STRATEGY: Combine Firestore docs with Seed articles
-                    // Filter out seeds if they are somehow duplicated in ID (unlikely)
-                    globalArticles = [...firestoreDocs, ...seedArticles];
-                    
-                    // Sort by time (seeds will be at bottom if they have no timestamp, or top if we fake it)
-                    globalArticles.sort((a, b) => {
-                        const timeA = a.timestamp?.seconds || 0;
-                        const timeB = b.timestamp?.seconds || 0;
-                        return timeB - timeA;
-                    });
-                    
-                    localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
-                    renderArticles();
-                    
-                    // Update Status UI
-                    document.getElementById('sync-spinner').style.display = 'none';
-                    document.getElementById('status-container').innerHTML = `
-                        <div class="live-dot"></div>
-                        <span>Live</span>
-                    `;
-                }, (err) => {
-                    console.error("Firestore sync error:", err);
-                    document.getElementById('status-container').innerHTML = "<span>Sync Blocked</span>";
-                    // Still render seeds if sync fails
-                    if(globalArticles.length === 0) {
-                        globalArticles = [...seedArticles];
-                        renderArticles();
-                    }
-                });
-            }
-        });
-
-        function getBadgeStyle(type) {
-            if (type && type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
-            if (type && type.includes('Energy')) return 'text-sky-600 bg-sky-50';
-            if (type && type.includes('Biomechanics')) return 'text-amber-600 bg-amber-50';
-            if (type && type.includes('Opinion')) return 'text-gray-500 bg-slate-100';
-            if (type && type.includes('Philosophy')) return 'text-purple-600 bg-purple-50';
-            if (type && type.includes('Vision')) return 'text-pink-600 bg-pink-50';
-            return 'text-indigo-600 bg-indigo-50';
-        }
-
-        function renderArticles() {
+        // --- CORE RENDER FUNCTION ---
+        // Defined on window to be accessible if module fails partially
+        window.renderArticles = function() {
             const feed = document.getElementById('journal-feed');
             if (!feed) return;
             
@@ -584,14 +522,131 @@
                     </div>
                 </article>
             `).join('');
+        };
+
+        function getBadgeStyle(type) {
+            if (type && type.includes('Fluidics')) return 'text-indigo-600 bg-indigo-50';
+            if (type && type.includes('Energy')) return 'text-sky-600 bg-sky-50';
+            if (type && type.includes('Biomechanics')) return 'text-amber-600 bg-amber-50';
+            if (type && type.includes('Opinion')) return 'text-gray-500 bg-slate-100';
+            if (type && type.includes('Philosophy')) return 'text-purple-600 bg-purple-50';
+            if (type && type.includes('Vision')) return 'text-pink-600 bg-pink-50';
+            return 'text-indigo-600 bg-indigo-50';
         }
 
-        // GLOBAL SCOPING FOR PORTAL ACTIONS
+        // --- CACHE & OFFLINE SAFETY LOGIC ---
+        
+        // 1. Try to load from cache
+        const localCache = localStorage.getItem('pramana_cache');
+        if (localCache) {
+            try {
+                globalArticles = JSON.parse(localCache);
+            } catch(e) { console.warn("Cache corrupted"); }
+        }
+        
+        // 2. If empty (cache miss or corrupted), use seeds
+        if (!globalArticles || globalArticles.length === 0) {
+            globalArticles = [...seedArticles];
+        }
+
+        // 3. Render immediately to ensure UI is visible (Offline Mode)
+        window.renderArticles();
+        
+        // 4. Force hide spinner initially (will reshow if auth starts)
+        const spinner = document.getElementById('sync-spinner');
+        const statusText = document.getElementById('status-text');
+        if(spinner) spinner.style.display = 'none';
+        if(statusText) statusText.innerText = 'Hub Active (Offline Mode)';
+
+        // --- FIREBASE LOGIC (TRY/CATCH WRAPPED) ---
+        try {
+            // Environment Variables Handling - Safe Access
+            let firebaseConfig = null;
+            let appId = 'prajnapramana-hub'; // Default fallback
+            
+            if (typeof __firebase_config !== 'undefined') {
+                firebaseConfig = JSON.parse(__firebase_config);
+            }
+            if (typeof __app_id !== 'undefined') {
+                appId = __app_id;
+            }
+
+            if (firebaseConfig) {
+                // Only proceed if config exists
+                if(statusText) statusText.innerText = 'Connecting...';
+                if(spinner) spinner.style.display = 'block';
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                const initAuth = async () => {
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (err) { 
+                        console.error("Auth Failed, staying in Offline Mode:", err); 
+                        if(spinner) spinner.style.display = 'none';
+                        if(statusText) statusText.innerText = 'Hub Active (Offline)';
+                    }
+                };
+                initAuth();
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+                        onSnapshot(articlesRef, (snapshot) => {
+                            const firestoreDocs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                            
+                            // Merge and Sort
+                            globalArticles = [...firestoreDocs, ...seedArticles];
+                            globalArticles.sort((a, b) => {
+                                const timeA = a.timestamp?.seconds || 0;
+                                const timeB = b.timestamp?.seconds || 0;
+                                return timeB - timeA;
+                            });
+                            
+                            localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
+                            window.renderArticles();
+                            
+                            // UI Success State
+                            if(spinner) spinner.style.display = 'none';
+                            const statusContainer = document.getElementById('status-container');
+                            if(statusContainer) {
+                                statusContainer.innerHTML = `<div class="live-dot"></div><span>Live</span>`;
+                            }
+                        }, (err) => {
+                            console.error("Sync Error:", err);
+                            // Fallback UI
+                            if(spinner) spinner.style.display = 'none';
+                            if(statusText) statusText.innerText = 'Hub Active (Offline)';
+                        });
+                    }
+                });
+
+                // Expose specific firebase functions for the portal interactions
+                window.dbInstance = db;
+                window.appIdInstance = appId;
+            } else {
+                 console.warn("No Firebase Config found. Running in safe mode.");
+            }
+
+        } catch (e) {
+            console.error("Firebase Initialization Critical Failure:", e);
+            // Ensure UI is usable even if everything explodes
+            if(spinner) spinner.style.display = 'none';
+            if(statusText) statusText.innerText = 'Hub Active (Safe Mode)';
+        }
+
+        // --- GLOBAL PORTAL ACTIONS ---
+        
         window.editArticle = function(id) {
             const article = globalArticles.find(a => a.id === id);
             if (!article) return;
             
-            // Check if it's a seed article
             if(id.startsWith('seed')) {
                 alert("This is a Founder's Draft (System Seed). You can edit it to create a NEW database entry based on it.");
             }
@@ -605,7 +660,6 @@
             document.getElementById('in-trl').value = article.trl || '';
             document.getElementById('in-link-text').value = article.linkText || 'Read Narrative';
 
-            // If it's a seed, we don't set editingId so it creates a NEW doc on submit
             if(id.startsWith('seed')) {
                 editingId = null;
                 document.getElementById('form-header').innerText = "Creating Entry from Draft: " + (article.title.substring(0, 15) + "...");
@@ -637,7 +691,6 @@
             document.getElementById('form-header').innerText = "Curator Management Portal";
             document.getElementById('form-submit-btn').innerText = "Commit to Empirical Record";
             
-            // Restore button styles
             document.getElementById('form-submit-btn').classList.add('bg-indigo-600', 'hover:bg-indigo-700');
             document.getElementById('form-submit-btn').classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
             
@@ -646,6 +699,8 @@
 
         window.publishArticle = async function() {
             if (!isCurator) return;
+            if (!window.dbInstance) { alert("Database connection unavailable. Cannot save."); return; }
+            
             const fields = {
                 author: document.getElementById('in-author').value,
                 title: document.getElementById('in-title').value,
@@ -661,12 +716,12 @@
 
             try {
                 if (editingId) {
-                    const ref = doc(db, 'artifacts', appId, 'public', 'data', 'articles', editingId);
+                    const ref = doc(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles', editingId);
                     await updateDoc(ref, { ...fields, updated: serverTimestamp() });
                     alert("Entry updated.");
                     window.cancelEdit();
                 } else {
-                    const ref = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+                    const ref = collection(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles');
                     await addDoc(ref, { ...fields, timestamp: serverTimestamp() });
                     alert("Entry committed.");
                     window.cancelEdit();
@@ -676,9 +731,10 @@
 
         window.deleteArticle = async function(id) {
             if (!isCurator) return;
+            if (!window.dbInstance) { alert("Database connection unavailable."); return; }
             if (confirm("Permanently purge this technical entry?")) {
                 try {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id));
+                    await deleteDoc(doc(window.dbInstance, 'artifacts', window.appIdInstance, 'public', 'data', 'articles', id));
                 } catch (e) { alert("Delete failed."); }
             }
         };
@@ -689,41 +745,18 @@
                 isCurator = true;
                 document.getElementById('curator-portal').classList.remove('hidden');
                 document.getElementById('portal-btn').classList.add('text-indigo-600');
-                renderArticles();
+                window.renderArticles();
                 document.getElementById('curator-portal').scrollIntoView({ behavior: 'smooth' });
             } else if (pass !== null) { alert("Access Denied."); }
         };
 
         window.logoutPortal = function() {
-            window.cancelEdit(); // Ensure edit state is cleared on logout
+            window.cancelEdit(); 
             isCurator = false;
             document.getElementById('curator-portal').classList.add('hidden');
             document.getElementById('portal-btn').classList.remove('text-indigo-600');
-            renderArticles();
+            window.renderArticles();
         };
-    </script>
-
-    <script>
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
-            document.getElementById('panel-' + tabName).classList.add('active');
-            const btnPortfolio = document.getElementById('tab-btn-portfolio');
-            const btnLogic = document.getElementById('tab-btn-logic');
-
-            if (tabName === 'logic') {
-                btnLogic.classList.add('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
-                btnLogic.classList.remove('text-gray-400', 'border-transparent');
-                
-                btnPortfolio.classList.remove('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
-                btnPortfolio.classList.add('text-gray-400', 'border-transparent');
-            } else {
-                btnPortfolio.classList.add('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
-                btnPortfolio.classList.remove('text-gray-400', 'border-transparent');
-                
-                btnLogic.classList.remove('active', 'border-indigo-600', 'text-indigo-600', 'font-bold');
-                btnLogic.classList.add('text-gray-400', 'border-transparent');
-            }
-        }
     </script>
 </body>
 </html>
