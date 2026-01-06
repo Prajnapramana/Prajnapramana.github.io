@@ -57,7 +57,20 @@
             height: 18px;
             animation: spin 1s linear infinite;
         }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 2s infinite;
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
         
         /* Hide scrollbar for Chrome, Safari and Opera */
         .scrollbar-hide::-webkit-scrollbar {
@@ -111,9 +124,10 @@
                     <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] flex items-center gap-4 flex-grow">
                         The Evidence Series (Journal) <span class="h-px bg-gray-100 flex-grow"></span>
                     </h2>
-                    <div id="sync-indicator" class="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
-                        <div class="loading-spinner"></div>
-                        <span>Syncing</span>
+                    <!-- Status Indicator -->
+                    <div id="status-container" class="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
+                        <div id="sync-spinner" class="loading-spinner"></div>
+                        <span id="status-text">Connecting</span>
                     </div>
                 </div>
 
@@ -410,7 +424,10 @@
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scientific Rigor • Industrial Evidence</p>
                 <p class="text-[9px] text-gray-300 mt-1 italic">© 2025 Prajñāpramāṇa IP Studios LLP</p>
             </div>
-            <button id="portal-btn" onclick="window.loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
+            <div class="flex items-center gap-4">
+                <button onclick="localStorage.removeItem('pramana_cache'); window.location.reload();" class="text-[9px] font-bold text-gray-300 hover:text-red-400 uppercase tracking-[0.2em] transition-all">Clear Cache</button>
+                <button id="portal-btn" onclick="window.loginPortal()" class="text-[9px] font-bold text-slate-300 hover:text-indigo-600 uppercase tracking-[0.2em] transition-all">Curator Portal</button>
+            </div>
         </div>
     </footer>
 
@@ -464,9 +481,14 @@
             // Initial load with seeds if no cache
             globalArticles = [...seedArticles];
         }
-        // Ensure seeds are rendered initially
+        
+        // Ensure initial render happens immediately
         window.addEventListener('DOMContentLoaded', () => {
              renderArticles();
+             if(globalArticles.length > 0) {
+                 document.getElementById('sync-spinner').style.display = 'none';
+                 document.getElementById('status-text').innerText = 'Hub Active';
+             }
         });
 
         // AUTHENTICATION & SYNC (Rule: Auth before Query)
@@ -492,8 +514,6 @@
                     globalArticles = [...firestoreDocs, ...seedArticles];
                     
                     // Sort by time (seeds will be at bottom if they have no timestamp, or top if we fake it)
-                    // Let's keep seeds at the top for visibility or bottom? 
-                    // Let's sort simply: Firestore items first (by timestamp), then Seeds.
                     globalArticles.sort((a, b) => {
                         const timeA = a.timestamp?.seconds || 0;
                         const timeB = b.timestamp?.seconds || 0;
@@ -502,10 +522,16 @@
                     
                     localStorage.setItem('pramana_cache', JSON.stringify(globalArticles));
                     renderArticles();
-                    document.getElementById('sync-indicator').style.display = 'none';
+                    
+                    // Update Status UI
+                    document.getElementById('sync-spinner').style.display = 'none';
+                    document.getElementById('status-container').innerHTML = `
+                        <div class="live-dot"></div>
+                        <span>Live</span>
+                    `;
                 }, (err) => {
                     console.error("Firestore sync error:", err);
-                    document.getElementById('sync-indicator').innerHTML = "<span>Sync Blocked</span>";
+                    document.getElementById('status-container').innerHTML = "<span>Sync Blocked</span>";
                     // Still render seeds if sync fails
                     if(globalArticles.length === 0) {
                         globalArticles = [...seedArticles];
@@ -530,7 +556,6 @@
             if (!feed) return;
             
             if (globalArticles.length === 0) {
-                // Should not happen due to seeds, but safe fallback
                 feed.innerHTML = `<div class="col-span-full py-20 text-center text-[10px] uppercase font-bold text-gray-300">Hub Active. Awaiting curator records.</div>`;
                 return;
             }
